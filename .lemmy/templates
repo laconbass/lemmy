@@ -938,6 +938,18 @@ EJS_LAYOUT += '\n\t\t<script defer src="js/plugins.js"></script>\
 \n\t</body>\
 \n</html>'
 
+EJS_VIEW = '<article>\
+\n\t<header>\
+\n\t\t<h1>Header</h1>\
+\n\t</header>\
+\n\t<section>\
+\n\t\t<p>Body</p>\
+\n\t</section>\
+\n\t<footer>\
+\n\t\t<p>Footer</p>\
+\n\t</footer>\
+\n</article>'
+
 EJS_404 = "<!doctype html>\
 \n<html lang="en">\
 \n\t<head>\
