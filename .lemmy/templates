@@ -852,7 +852,7 @@ APP_JS = "var express = require('express');\
 \n\nvar app = express.createServer();\
 \n\napp.configure(function(){\
 \n\t//app.set('views', __dirname + '/views');\
-\n\t//app.set('view engine', 'jade');\
+\n\t//app.set('view engine', 'ejs');\
 \n\tapp.use(express.logger());\
 \n\tapp.use(express.methodOverride());\
 \n\tapp.use(express.bodyParser());\
@@ -874,7 +874,7 @@ APP_CS = "express = require 'express'\
 \n\napp = express.createServer()\
 \n\napp.configure ->\
 \n\t\#app.set 'views', __dirname + '/views'\
-\n\t\#app.set 'view engine', 'jade'\
+\n\t\#app.set 'view engine', 'ejs'\
 \n\tapp.use express.logger()\
 \n\tapp.use express.methodOverride()\
 \n\tapp.use express.bodyParser()\
