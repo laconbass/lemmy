@@ -365,6 +365,52 @@ endif
 endif
 endif
 
+ifeq "$(NAME)" ""
+view:
+	@echo "ERROR: You're required to give the NAME argument to the 'view' task to create a new view in your project."
+	@echo "SYNTAX: make view NAME=ViewName [GROUP=GroupName] [APP=AppName]"
+else
+ifeq "$(GROUP)" ""
+ifeq "$(APP)" ""
+view:
+	@if [ -d "$(VIEWS_DIRECTORY)" ]; \
+	then \
+		echo $(EJS_VIEW) > $(VIEWS_DIRECTORY)/$(NAME_CAMELIZED).ejs; \
+	else \
+		echo "ERROR: You're required to define a layout on your project to create a view inside it."; \
+	fi
+else
+view:
+	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+	then \
+		echo $(EJS_VIEW) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(NAME_CAMELIZED).ejs; \
+	else \
+		echo "ERROR: You're required to define a layout for the '$(APP)' application to create a view inside it."; \
+	fi
+endif
+else
+ifeq "$(APP)" ""
+view:
+	@if [ -d "$(VIEWS_DIRECTORY)" ]; \
+	then \
+		mkdir -p $(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED); \
+		echo $(EJS_VIEW) > $(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).ejs; \
+	else \
+		echo "ERROR: You're required to define a layout on your project to create a view inside it."; \
+	fi
+else
+view:
+	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+	then \
+		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED); \
+		echo $(EJS_VIEW) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).ejs; \
+	else \
+		echo "ERROR: You're required to define a layout for the '$(APP)' application to create a view inside it."; \
+	fi
+endif
+endif
+endif
+
 ifeq "$(APP_LANGUAGE)" "CS"
 build:
 	@$(COFFEE) --compile --output . $(SOURCE_DIRECTORY)
@@ -417,7 +463,7 @@ prepare:
 	@make move-files-to-deployment
 endif
 
-.PHONY: help version clean create update mit-license dependencies layout app module middleware route controller model build watch run test prepare
+.PHONY: help version clean create update mit-license dependencies layout app module middleware route controller model view build watch run test prepare
 
 # Helpers
 
