@@ -411,6 +411,52 @@ endif
 endif
 endif
 
+ifeq "$(NAME)" ""
+partial:
+	@echo "ERROR: You're required to give the NAME argument to the 'partial' task to create a new partial in your project."
+	@echo "SYNTAX: make partial NAME=ViewName [GROUP=GroupName] [APP=AppName]"
+else
+ifeq "$(GROUP)" ""
+ifeq "$(APP)" ""
+partial:
+	@if [ -d "$(VIEWS_DIRECTORY)" ]; \
+	then \
+		echo $(EJS_PARTIAL) > $(VIEWS_DIRECTORY)/$(PARTIAL_CAMELIZED).ejs; \
+	else \
+		echo "ERROR: You're required to define a layout on your project to create a partial inside it."; \
+	fi
+else
+partial:
+	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+	then \
+		echo $(EJS_PARTIAL) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(PARTIAL_CAMELIZED).ejs; \
+	else \
+		echo "ERROR: You're required to define a layout for the '$(APP)' application to create a partial inside it."; \
+	fi
+endif
+else
+ifeq "$(APP)" ""
+partial:
+	@if [ -d "$(VIEWS_DIRECTORY)" ]; \
+	then \
+		mkdir -p $(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED); \
+		echo $(EJS_PARTIAL) > $(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED)/$(PARTIAL_CAMELIZED).ejs; \
+	else \
+		echo "ERROR: You're required to define a layout on your project to create a view inside it."; \
+	fi
+else
+partial:
+	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+	then \
+		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED); \
+		echo $(EJS_PARTIAL) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED)/$(PARTIAL_CAMELIZED).ejs; \
+	else \
+		echo "ERROR: You're required to define a layout for the '$(APP)' application to create a partial inside it."; \
+	fi
+endif
+endif
+endif
+
 ifeq "$(APP_LANGUAGE)" "CS"
 build:
 	@$(COFFEE) --compile --output . $(SOURCE_DIRECTORY)
