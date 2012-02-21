@@ -945,7 +945,7 @@ EJS_VIEW = '<article>\
 \n\t\t<h1>Header</h1>\
 \n\t</header>\
 \n\t<section>\
-\n\t\t<p>Body</p>\
+\n\t\t<!-- <%- partial('_partial', {title: 'example', examples: examples}) %> -->\
 \n\t</section>\
 \n\t<footer>\
 \n\t\t<p>Footer</p>\
