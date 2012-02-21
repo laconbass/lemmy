@@ -952,6 +952,15 @@ EJS_VIEW = '<article>\
 \n\t</footer>\
 \n</article>'
 
+EJS_PARTIAL = '<h1><%= title %></h1>\
+\n<!--\
+\n<%for (example in examples) { %>\
+\n\t<div>\
+\n\t\t<p>Example</p>\
+\n\t</div>\
+\n<% } %>\
+\n-->'
+
 EJS_404 = "<!doctype html>\
 \n<html lang="en">\
 \n\t<head>\
