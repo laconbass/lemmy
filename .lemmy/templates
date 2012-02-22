@@ -26,7 +26,8 @@ HELPMENU = "\
 \n-> route NAME=Route [APP=App]\t\t\tGenerate a new Route Container file and its respective Test file into your project.\
 \n-> controller NAME=Controller [APP=App]\t\tGenerate a new Controller file and its respective Test file into your project.\
 \n-> model NAME=Model [APP=App]\t\t\tGenerate a new Model file and its respective Test file into your project.\
-\n-> view NAME=Model [GROUP=Group] [APP=App]\tGenerate a new View file into your project.\
+\n-> view NAME=View [GROUP=Group] [APP=App]\tGenerate a new View file into your project.\
+\n-> partial NAME=Partial [GROUP=Group] [APP=App]\tGenerate a new Partial file into your project.\
 \n-> build\t\t\t\t\tCompiles your CS code into the JS equivalent.\
 \n-> watch\t\t\t\t\tWatches any change on your CS code and automatically compiles it into its JS equivalent.\
 \n-> run\t\t\t\t\t\tRun your project on Node.JS\
