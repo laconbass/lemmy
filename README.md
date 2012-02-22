@@ -65,6 +65,7 @@ The commands __Lemmy__ provides you are:
 * *controller* : Generate a new Controller file and its respective Test file into your project.
 * *model* : Generate a new Model file and its respective Test file into your project.
 * *view* : Generate a new View file into your project.
+* *partial* : Generate a new Partial file into your project.
 * *build* : Compiles your CS code into the JS equivalent.
 * *watch* : Watches any change on your CS code and automatically compiles it into its JS equivalent.
 * *run* : Run your project on Node.JS
@@ -79,7 +80,6 @@ The commands __Lemmy__ provides you are:
 This is the list of all the features are required or would be awesome to
 implement on __Lemmy__ in the near future, in random order:
 
-* Implement the *partial* command.
 * Integrate [Twitter's Bootstrap][22] as a Layout.
 * Integrate [jQuery Mobile][23] as a layout.
 * Universal support.
