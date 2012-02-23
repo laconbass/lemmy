@@ -62,7 +62,7 @@ The commands __Lemmy__ provides you are:
 * *module* : Generate a new Module file and its respective Test file into your project.
 * *middleware* : Generate a new Middleware file and its respective Test file into your project.
 * *route* : Generate a new Route Container file and its respective Test file into your project.
-* *controller* : Generate a new Controller file and its respective Test file into your project.
+* *controller* : Generate a new Controller file and its respective Test file (and views) into your project.
 * *model* : Generate a new Model file and its respective Test file into your project.
 * *view* : Generate a new View file into your project.
 * *partial* : Generate a new Partial file into your project.
@@ -80,7 +80,9 @@ The commands __Lemmy__ provides you are:
 This is the list of all the features are required or would be awesome to
 implement on __Lemmy__ in the near future, in random order:
 
-* Integrate [Twitter's Bootstrap][22] as a Layout.
+* Add support for the [Jade][30] template engine.
+* Integrate [Mobile HTML5 boilerplate][29] as a layout.
+* Integrate [Twitter's Bootstrap][22] as a layout.
 * Integrate [jQuery Mobile][23] as a layout.
 * Universal support.
 
@@ -169,3 +171,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 [26]: http://dailyjs.com/2012/02/15/node-roundup
 [27]: http://twitter.com/#!/alex_young
 [28]: http://twitter.com/#!/YukaYoung
+[29]: http://html5boilerplate.com/mobile
+[30]: http://jade-lang.com
