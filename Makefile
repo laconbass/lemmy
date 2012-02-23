@@ -280,11 +280,46 @@ controller:
 else
 ifeq "$(APP)" ""
 ifeq "$(APP_LANGUAGE)" "CS"
+ifeq "$(WITH_VIEWS)" "YES"
+controller:
+	@if [ -d "$(VIEWS_DIRECTORY)" ]; \
+	then \
+		mkdir -p $(SOURCE_DIRECTORY)/$(CONTROLLERS_DIRECTORY); \
+		echo $(CONTROLLER_CS) > $(SOURCE_DIRECTORY)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED).coffee; \
+		mkdir -p $(TESTING_DIRECTORY)/$(CONTROLLERS_DIRECTORY); \
+		echo $(TESTCONTROLLER_CS) > $(TESTING_DIRECTORY)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED)-test.coffee; \
+		make view NAME=Index GROUP=$(NAME); \
+		make view NAME=Show GROUP=$(NAME); \
+		make view NAME=Edit GROUP=$(NAME); \
+		make view NAME=Update GROUP=$(NAME); \
+		make view NAME=Remove GROUP=$(NAME); \
+	else \
+		echo "ERROR: You're required to define a layout on your project to create a controllers with views inside it."; \
+	fi
+else
 controller:
 	@mkdir -p $(SOURCE_DIRECTORY)/$(CONTROLLERS_DIRECTORY)
 	@echo $(CONTROLLER_CS) > $(SOURCE_DIRECTORY)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED).coffee
 	@mkdir -p $(TESTING_DIRECTORY)/$(CONTROLLERS_DIRECTORY)
 	@echo $(TESTCONTROLLER_CS) > $(TESTING_DIRECTORY)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED)-test.coffee
+endif
+else
+ifeq "$(WITH_VIEWS)" "YES"
+controller:
+	@if [ -d "$(VIEWS_DIRECTORY)" ]; \
+	then \
+		mkdir -p $(CONTROLLERS_DIRECTORY); \
+		echo $(CONTROLLER_JS) > $(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED).js; \
+		mkdir -p $(TESTING_DIRECTORY)/$(CONTROLLERS_DIRECTORY); \
+		echo $(TESTCONTROLLER_JS) > $(TESTING_DIRECTORY)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED)-test.js; \
+		make view NAME=Index GROUP=$(NAME); \
+		make view NAME=Show GROUP=$(NAME); \
+		make view NAME=Edit GROUP=$(NAME); \
+		make view NAME=Update GROUP=$(NAME); \
+		make view NAME=Remove GROUP=$(NAME); \
+	else \
+		echo "ERROR: You're required to define a layout on your project to create a controllers with views inside it."; \
+	fi
 else
 controller:
 	@mkdir -p $(CONTROLLERS_DIRECTORY)
@@ -292,8 +327,29 @@ controller:
 	@mkdir -p $(TESTING_DIRECTORY)/$(CONTROLLERS_DIRECTORY)
 	@echo $(TESTCONTROLLER_JS) > $(TESTING_DIRECTORY)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED)-test.js
 endif
+endif
 else
 ifeq "$(APP_LANGUAGE)" "CS"
+ifeq "$(WITH_VIEWS)" "YES"
+controller:
+	@if [ -d "$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
+	then \
+		if [ -d "$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+			mkdir -p $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(CONTROLLERS_DIRECTORY); \
+			echo $(CONTROLLER_CS) > $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED).coffee; \
+			mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(CONTROLLERS_DIRECTORY); \
+			echo $(TESTCONTROLLER_CS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED)-test.coffee; \
+			make view NAME=Index GROUP=$(NAME) APP=$(APP); \
+			make view NAME=Show GROUP=$(NAME) AAP=$(APP); \
+			make view NAME=Edit GROUP=$(NAME) APP=$(APP); \
+			make view NAME=Update GROUP=$(NAME) APP=$(APP); \
+			make view NAME=Remove GROUP=$(NAME) APP=$(APP); \
+		else \
+			echo "ERROR: You're required to define a layout on the '$(APP)' application to create a controllers with views inside it."; \
+	else \
+		echo "ERROR: You're required to give an existing APP argument to the 'controller' task to create a new controller inside your application."; \
+	fi
+else
 controller:
 	@if [ -d "$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
@@ -301,6 +357,27 @@ controller:
 		echo $(CONTROLLER_CS) > $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED).coffee; \
 		mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(CONTROLLERS_DIRECTORY); \
 		echo $(TESTCONTROLLER_CS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED)-test.coffee; \
+	else \
+		echo "ERROR: You're required to give an existing APP argument to the 'controller' task to create a new controller inside your application."; \
+	fi
+endif
+else
+ifeq "$(WITH_VIEWS)" "YES"
+controller:
+	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
+	then \
+		if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+			mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(CONTROLLERS_DIRECTORY); \
+			echo $(CONTROLLER_JS) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED).js; \
+			mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(CONTROLLERS_DIRECTORY); \
+			echo $(TESTCONTROLLER_JS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED)-test.js; \
+			make view NAME=Index GROUP=$(NAME) APP=$(APP); \
+			make view NAME=Show GROUP=$(NAME) AAP=$(APP); \
+			make view NAME=Edit GROUP=$(NAME) APP=$(APP); \
+			make view NAME=Update GROUP=$(NAME) APP=$(APP); \
+			make view NAME=Remove GROUP=$(NAME) APP=$(APP); \
+		else \
+			echo "ERROR: You're required to define a layout on the '$(APP)' application to create a controllers with views inside it."; \
 	else \
 		echo "ERROR: You're required to give an existing APP argument to the 'controller' task to create a new controller inside your application."; \
 	fi
@@ -315,6 +392,7 @@ controller:
 	else \
 		echo "ERROR: You're required to give an existing APP argument to the 'controller' task to create a new controller inside your application."; \
 	fi
+endif
 endif
 endif
 endif
