@@ -1,15 +1,3 @@
-CAMELIZE_APP = $(APP) | sed -e 's/\([A-Z]\)/\_\1/g' -e 's/\_//' | tr '[:upper:]' '[:lower:]'
-CAMELIZE_GROUP = $(GROUP) | sed -e 's/\([A-Z]\)/\_\1/g' -e 's/\_//' | tr '[:upper:]' '[:lower:]'
-CAMELIZE_NAME = $(NAME) | sed -e 's/\([A-Z]\)/\_\1/g' -e 's/\_//' | tr '[:upper:]' '[:lower:]'
-FIRST_CHARACTER = $(shell echo $(NAME) | sed -e 's/\([A-Z]\)\(.*\)/\1/g' | tr '[:upper:]' '[:lower:]')
-REST_OF_CHARACTERS = $(shell echo $(NAME) | sed -e 's/\([A-Z]\)\(.*\)/\2/g')
-
-APP_CAMELIZED  = $(shell echo $(CAMELIZE_APP))
-GROUP_CAMELIZED = $(shell echo $(CAMELIZE_GROUP))
-PARTIAL_CAMELIZED = $(shell echo _$(CAMELIZE_NAME))
-NAME_CAMELIZED  = $(shell echo $(CAMELIZE_NAME))
-NAME_FUNCTIONALIZED = $(FIRST_CHARACTER)$(REST_OF_CHARACTERS)
-
 HELPMENU = "\
 \n---------------------------------------------------------------------------------------\
 \n| LEMMY: 49% Motherfucker | 51% Son of a Bitch JS/CS Express+Mocha+HTML5 Boilerplate. |\
