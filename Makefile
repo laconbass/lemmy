@@ -31,7 +31,7 @@ clean:
 	@rm -drf $(DEPLOYMENT_DIRECTORY)
 endif
 
-ifeq "$(APP_LANGUAGE)" "CS"
+ifeq "$(LANGUAGE)" "CS"
 setup:
 	@rm -drf .git
 	@rm README.md LICENSE .gitignore
