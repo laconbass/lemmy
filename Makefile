@@ -4,6 +4,7 @@ include .lemmy/executables
 include .lemmy/variables
 include .lemmy/templates
 include .lemmy/javascript
+include .lemmy/coffeescript
 include .lemmy/test
 include .lemmy/licenses
 
