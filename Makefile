@@ -3,6 +3,7 @@ include .lemmy/directories
 include .lemmy/executables
 include .lemmy/variables
 include .lemmy/templates
+include .lemmy/javascript
 include .lemmy/test
 include .lemmy/licenses
 
