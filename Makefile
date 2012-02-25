@@ -600,6 +600,22 @@ git-init:
 	@git commit -m "Initial commit."
 	@git checkout -b development
 
+setup-javascript-project:
+	@rm -drf .git
+	@rm README.md LICENSE .gitignore
+	@echo $(PACKAGE) > package.json
+	@echo $(GITIGNORE) | sed 's/ //g' > .gitignore
+	@echo $(APP_JS) > app.js
+
+setup-coffeescript-project:
+	@rm -drf .git
+	@rm README.md LICENSE .gitignore
+	@echo $(PACKAGE) > package.json
+	@echo $(GITIGNORE) | sed 's/ //g' > .gitignore
+	@echo "APP_LANGUAGE = CS" >> .lemmy/setup
+	@mkdir -p $(SOURCE_DIRECTORY)
+	@echo $(APP_CS) > $(SOURCE_DIRECTORY)/app.coffee
+
 move-files-to-deployment:
 	@mkdir $(DEPLOYMENT_DIRECTORY)
 	@cp $(APP_FILE) $(DEPLOYMENT_DIRECTORY)
