@@ -1,14 +1,27 @@
-APP_CS = "express = require 'express'\
-\n\napp = express.createServer()\
-\n\napp.configure ->\
-\n\t\#app.set 'views', __dirname + '/views'\
-\n\t\#app.set 'view engine', 'ejs'\
-\n\tapp.use express.logger()\
+APP_CS = "express = require 'express'"
+
+ifeq "$(APP_TYPE)" "MODULAR"
+APP_CS += "\n/#subapp = require '$(APPS_DIRECTORY)/subapp/app'"
+endif
+
+APP_CS += "\n\napp = express.createServer()\
+\n\napp.configure ->"
+
+ifeq "$(APP_ENGINE)" "EJS"
+APP_CS += "\n\tapp.set 'views', __dirname + '/views'\
+\n\tapp.set 'view engine', 'ejs'"
+endif
+
+APP_CS += "\n\tapp.use express.logger()\
 \n\tapp.use express.methodOverride()\
 \n\tapp.use express.bodyParser()\
-\n\tapp.use express.router\
-\n\t\#app.use express.static __dirname + '/public'\
-\n\treturn\
+\n\tapp.use express.router"
+
+ifeq "$(APP_ENGINE)" "EJS"
+APP_CS += "\n\t\#app.use express.static __dirname + '/public'"
+endif
+
+APP_CS += "\n\treturn\
 \n\napp.configure 'development', ->\
 \n\tapp.use express.errorHandler(\
 \n\t\tdumpExceptions: true,\
@@ -17,8 +30,13 @@ APP_CS = "express = require 'express'\
 \n\treturn\
 \n\napp.configure 'production', ->\
 \n\tapp.use express.errorHandler()\
-\n\treturn\
-\n\napp.listen 3000"
+\n\treturn"
+
+ifeq "$(APP_TYPE)" "MODULAR"
+APP_CS += "\n\napp.use '/subapp', subapp"
+endif
+
+APP_CS += "\n\napp.listen 3000"
 
 SUBAPP_CS = "express = require 'express'\
 \n\napp = express.createServer()\
