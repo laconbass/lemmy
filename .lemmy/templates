@@ -3,7 +3,7 @@ HELPMENU = "\
 \n| LEMMY: 49% Motherfucker | 51% Son of a Bitch JS/CS Express+Mocha+HTML5 Boilerplate. |\
 \n---------------------------------------------------------------------------------------\
 \n\nList of Commands you're able to use:\
-\n\n-> setup [LANGUAGE=CS] [TYPE=standard|modular]\t\t\tKick-start your JS/CS Express project for once and for all (JS is default).\
+\n\n-> setup [LANGUAGE=CS] [TYPE=standard|modular] [ENGINE=ejs]\tKick-start your JS/CS Express project for once and for all (JS is default).\
 \n-> clean\t\t\t\t\t\t\tClean-up all the generated code from your Express project.\
 \n-> update\t\t\t\t\t\t\tUpdate all the Lemmy files on your project.\
 \n-> dependencies\t\t\t\t\t\t\tInstall locally all the dependencies defined on the package JSON file.\
