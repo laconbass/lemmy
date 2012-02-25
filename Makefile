@@ -32,23 +32,93 @@ clean:
 endif
 
 ifeq "$(LANGUAGE)" "CS"
+ifeq "$(TYPE)" "standard"
+ifeq "$(ENGINE)" "ejs"
 setup:
-	@rm -drf .git
-	@rm README.md LICENSE .gitignore
-	@echo "APP_LANGUAGE = CS" >> .lemmy/setup
-	@mkdir -p $(SOURCE_DIRECTORY)
-	@echo $(APP_CS) > $(SOURCE_DIRECTORY)/app.coffee
-	@echo $(PACKAGE) > package.json
-	@echo $(GITIGNORE) | sed 's/ //g' > .gitignore
+	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
+	@echo "APP_ENGINE = EJS" >> .lemmy/setup
+	@make setup-coffeescript-project
 	@make git-init
 else
 setup:
-	@rm -drf .git
-	@rm README.md LICENSE .gitignore
-	@echo $(APP_JS) > app.js
-	@echo $(PACKAGE) > package.json
-	@echo $(GITIGNORE) | sed 's/ //g' > .gitignore
+	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
+	@make setup-coffeescript-project
 	@make git-init
+endif
+else ifeq "$(TYPE)" "modular"
+ifeq "$(ENGINE)" "ejs"
+setup:
+	@echo "APP_TYPE = MODULAR" >> .lemmy/setup
+	@echo "APP_ENGINE = EJS" >> .lemmy/setup
+	@make setup-coffeescript-project
+	@make git-init
+else
+setup:
+	@echo "APP_TYPE = MODULAR" >> .lemmy/setup
+	@make setup-coffeescript-project
+	@make git-init
+endif
+else ifeq "$(TYPE)" ""
+ifeq "$(ENGINE)" "ejs"
+setup:
+	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
+	@echo "APP_ENGINE = EJS" >> .lemmy/setup
+	@make setup-coffeescript-project
+	@make git-init
+else
+setup:
+	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
+	@make setup-coffeescript-project
+	@make git-init
+endif
+else
+setup:
+	@echo "ERROR: The TYPE you entered is unknown. Please choose between 'standard' or 'modular' types."
+endif
+else
+ifeq "$(TYPE)" "standard"
+ifeq "$(ENGINE)" "ejs"
+setup:
+	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
+	@echo "APP_ENGINE = EJS" >> .lemmy/setup
+	@make setup-javascript-project
+	@make git-init
+else
+setup:
+	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
+	@make setup-javascript-project
+	@make git-init
+endif
+else ifeq "$(TYPE)" "modular"
+ifeq "$(ENGINE)" "ejs"
+setup:
+	@echo "APP_TYPE = MODULAR" >> .lemmy/setup
+	@echo "APP_ENGINE = EJS" >> .lemmy/setup
+	@make setup-javascript-project
+	@make git-init
+else
+setup:
+	@echo "APP_TYPE = MODULAR" >> .lemmy/setup
+	@make setup-javascript-project
+	@make git-init
+endif
+else ifeq "$(TYPE)" ""
+ifeq "$(ENGINE)" "ejs"
+setup:
+	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
+	@echo "APP_ENGINE = EJS" >> .lemmy/setup
+	@make setup-javascript-project
+	@make git-init
+else
+setup:
+	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
+	@make setup-javascript-project
+	@make git-init
+endif
+else
+setup:
+	@echo "ERROR: The TYPE you entered is unknown. Please choose between 'standard' or 'modular' types."
+endif
 endif
 
 update:
