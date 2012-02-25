@@ -1,14 +1,27 @@
-APP_JS = "var express = require('express');\
-\n\nvar app = express.createServer();\
-\n\napp.configure(function(){\
-\n\t//app.set('views', __dirname + '/views');\
-\n\t//app.set('view engine', 'ejs');\
-\n\tapp.use(express.logger());\
+APP_JS = "var express = require('express');"
+
+ifeq "$(APP_TYPE)" "MODULAR"
+APP_JS += "\n//var subapp = require('$(APPS_DIRECTORY)/subapp/app');"
+endif
+
+APP_JS += "\n\nvar app = express.createServer();\
+\n\napp.configure(function(){"
+
+ifeq "$(APP_ENGINE)" "EJS"
+APP_JS += "\n\tapp.set('views', __dirname + '/views');\
+\n\tapp.set('view engine', 'ejs');"
+endif
+
+APP_JS += "\n\tapp.use(express.logger());\
 \n\tapp.use(express.methodOverride());\
 \n\tapp.use(express.bodyParser());\
-\n\tapp.use(express.router);\
-\n\t//app.use(express.static(__dirname + '/public'));\
-\n});\
+\n\tapp.use(express.router);"
+
+ifeq "$(APP_ENGINE)" "EJS"
+APP_JS += "\n\t//app.use(express.static(__dirname + '/public'));"
+endif
+
+APP_JS += "\n});\
 \n\napp.configure('development', function(){\
 \n\tapp.use(express.errorHandler({\
 \n\t\tdumpExceptions: true,\
@@ -17,8 +30,13 @@ APP_JS = "var express = require('express');\
 \n});\
 \n\napp.configure('production', function(){\
 \n\tapp.use(express.errorHandler());\
-\n});\
-\n\napp.listen(3000);"
+\n});"
+
+ifeq "$(APP_TYPE)" "MODULAR"
+APP_JS += "\n\n//app.use('/subapp', subapp);"
+endif
+
+APP_JS += "\n\napp.listen(3000);"
 
 SUBAPP_JS = "var express = require('express');\
 \n\nvar app = express.createServer();\
