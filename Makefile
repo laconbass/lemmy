@@ -191,20 +191,26 @@ endif
 ifeq "$(NAME)" ""
 app:
 	@echo "ERROR: You're required to give the NAME argument to the 'app' task to create a new app in your project."
-	@echo "SYNTAX: make app NAME=AppName"
+	@echo "SYNTAX: make app NAME=AppName [ENGINE=ejs]"
+else
+ifeq "$(ENGINE)" "ejs"
+ifeq "$(APP_LANGUAGE)" "CS"
+app:
+	@echo "$(NAME_UPPERCASED)_ENGINE = EJS" >> .lemmy/setup
+	@make create-coffeescript-app
+else
+app:
+	@echo "$(NAME_UPPERCASED)_ENGINE = EJS" >> .lemmy/setup
+	@make create-javascript-app
+endif
 else
 ifeq "$(APP_LANGUAGE)" "CS"
 app:
-	@mkdir -p $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)
-	@echo $(SUBAPP_CS) > $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app.coffee
-	@mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)
-	@echo $(TESTSUBAPP_CS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app-test.coffee
+	@make create-coffeescript-app
 else
 app:
-	@mkdir -p $(APPS_DIRECTORY)/$(NAME_CAMELIZED)
-	@echo $(SUBAPP_JS) > $(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app.js
-	@mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)
-	@echo $(TESTSUBAPP_JS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app-test.js
+	@make create-javascript-app
+endif
 endif
 endif
 
