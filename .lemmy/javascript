@@ -40,12 +40,20 @@ APP_JS += "\n\napp.listen(3000);"
 
 SUBAPP_JS = "var express = require('express');\
 \n\nvar app = express.createServer();\
-\n\napp.configure(function(){\
-\n\t//app.set('views', __dirname + '/views');\
-\n\t//app.set('view engine', 'jade');\
-\n\tapp.use(express.router);\
-\n\t//app.use(express.static(__dirname + '/public'));\
-\n});\
+\n\napp.configure(function(){"
+
+ifeq "$($(NAME_UPPERCASED)_ENGINE)" "EJS"
+SUBAPP_JS += "\n\tapp.set('views', __dirname + '/views/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)');\
+\n\tapp.set('view engine', 'jade');"
+endif
+
+SUBAPP_JS += "\n\tapp.use(express.router);"
+
+ifeq "$($(NAME_UPPERCASED)_ENGINE)" "EJS"
+SUBAPP_JS += "\n\t//app.use(express.static(__dirname + '/public'));"
+endif
+
+SUBAPP_JS += "\n});\
 \n\napp.get('(/*)?', function(request, response){\
 \n\t// ... your code goes in here ...\
 \n});"
