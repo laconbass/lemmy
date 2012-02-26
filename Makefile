@@ -686,6 +686,18 @@ setup-coffeescript-project:
 	@mkdir -p $(SOURCE_DIRECTORY)
 	@echo $(APP_CS) > $(SOURCE_DIRECTORY)/app.coffee
 
+create-javascript-app:
+	@mkdir -p $(APPS_DIRECTORY)/$(NAME_CAMELIZED)
+	@echo $(SUBAPP_JS) > $(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app.js
+	@mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)
+	@echo $(TESTSUBAPP_JS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app-test.js
+
+create-coffeescript-app:
+	@mkdir -p $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)
+	@echo $(SUBAPP_CS) > $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app.coffee
+	@mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)
+	@echo $(TESTSUBAPP_CS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app-test.coffee
+
 move-files-to-deployment:
 	@mkdir $(DEPLOYMENT_DIRECTORY)
 	@cp $(APP_FILE) $(DEPLOYMENT_DIRECTORY)
