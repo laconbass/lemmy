@@ -7,7 +7,7 @@ HELPMENU = "\
 \n-> clean\t\t\t\t\t\t\tClean-up all the generated code from your Express project.\
 \n-> update\t\t\t\t\t\t\tUpdate all the Lemmy files on your project.\
 \n-> dependencies\t\t\t\t\t\t\tInstall locally all the dependencies defined on the package JSON file.\
-\n-> app NAME=App\t\t\t\t\t\t\tGenerate a new Application file and its respective Test file into your project.\
+\n-> app NAME=App [ENGINE=ejs]\t\t\t\t\tGenerate a new Application file and its respective Test file into your project.\
 \n-> layout [APP=App]\t\t\t\t\t\tGenerate the layout and respective assets into your project or apps within the project.\
 \n-> module NAME=Module [APP=App]\t\t\t\t\tGenerate a new Module file and its respective Test file into your project.\
 \n-> middleware NAME=Middleware [APP=App]\t\t\t\tGenerate a new Middleware file and its respective Test file into your project.\
