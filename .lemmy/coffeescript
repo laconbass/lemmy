@@ -40,12 +40,20 @@ APP_CS += "\n\napp.listen 3000"
 
 SUBAPP_CS = "express = require 'express'\
 \n\napp = express.createServer()\
-\n\napp.configure ->\
-\n\t\#app.set 'views', __dirname + '/views'\
-\n\t\#app.set 'view engine', 'jade'\
-\n\tapp.use(express.router)\
-\n\t\#app.use express.static __dirname + '/public'\
-\n\treturn\
+\n\napp.configure ->"
+
+ifeq "$($(NAME_UPPERCASED)_ENGINE)" "EJS"
+SUBAPP_CS += "\n\tapp.set 'views', __dirname + '/views/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)'\
+\n\tapp.set 'view engine', 'ejs'"
+endif
+
+SUBAPP_CS += "\n\tapp.use(express.router)"
+
+ifeq "$($(NAME_UPPERCASED)_ENGINE)" "EJS"
+SUBAPP_CS += "\n\t\#app.use express.static __dirname + '/public'"
+endif 
+
+SUBAPP_CS += "\n\treturn\
 \n\napp.get '(/*)?', (request, response) ->\
 \n\t\# ... your code goes in here ...\
 \n\treturn"
