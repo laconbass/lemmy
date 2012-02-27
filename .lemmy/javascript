@@ -44,7 +44,7 @@ SUBAPP_JS = "var express = require('express');\
 
 ifeq "$($(NAME_UPPERCASED)_ENGINE)" "EJS"
 SUBAPP_JS += "\n\tapp.set('views', __dirname + '/views/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)');\
-\n\tapp.set('view engine', 'jade');"
+\n\tapp.set('view engine', 'ejs');"
 endif
 
 SUBAPP_JS += "\n\tapp.use(express.router);"
