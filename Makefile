@@ -146,6 +146,10 @@ dependencies:
 endif
 
 ifeq "$(APP)" ""
+ifeq "$(APP_ENGINE)" ""
+layout:
+	@echo "ERROR: You cannot define a layout for your project because you haven't define a template engine when creating it."
+else
 layout:
 	@git clone https://github.com/h5bp/html5-boilerplate.git $(TEMPORARY_DIRECTORY)
 	@mkdir -p $(VIEWS_DIRECTORY)
@@ -164,28 +168,40 @@ layout:
 	@mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/libs/jquery-*.min.js $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)/jquery.js
 	@mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/libs/modernizr-*.min.js $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)/modernizr.js
 	@rm -drf $(TEMPORARY_DIRECTORY)
+endif
+else
+ifeq "$(UPPERCASE_NAME)_ENGINE" ""
+layout:
+	@echo "ERROR: You cannot define a layout for the '$(APP)' application on your project because you haven't define a template engine when creating it."
 else
 layout:
 	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
 		git clone https://github.com/h5bp/html5-boilerplate.git $(TEMPORARY_DIRECTORY); \
-		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY); \
-		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(PUBLIC_DIRECTORY)/$(STYLES_DIRECTORY); \
-		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(PUBLIC_DIRECTORY)/$(IMAGES_DIRECTORY); \
-		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY); \
-		echo $(EJS_LAYOUT) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/layout.ejs; \
-		echo $(EJS_404) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/404.ejs; \
-		echo $(EJS_500) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/500.ejs; \
-		mv $(TEMPORARY_DIRECTORY)/*.txt $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(PUBLIC_DIRECTORY); \
-		mv $(TEMPORARY_DIRECTORY)/*.png $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(PUBLIC_DIRECTORY); \
-		mv $(TEMPORARY_DIRECTORY)/*.ico $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(PUBLIC_DIRECTORY); \
-		mv $(TEMPORARY_DIRECTORY)/$(STYLES_DIRECTORY)/*.css $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(PUBLIC_DIRECTORY)/$(STYLES_DIRECTORY); \
-		mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/script.js $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY); \
-		mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/plugins.js $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY); \
+		mkdir -p $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED); \
+		mkdir -p $(PUBLIC_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(STYLES_DIRECTORY); \
+		mkdir -p $(PUBLIC_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(IMAGES_DIRECTORY); \
+		mkdir -p $(PUBLIC_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(SCRIPTS_DIRECTORY); \
+		echo $(EJS_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.ejs; \
+		echo $(EJS_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.ejs; \
+		echo $(EJS_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.ejs; \
+		mv $(TEMPORARY_DIRECTORY)/*.txt $(PUBLIC_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/; \
+		mv $(TEMPORARY_DIRECTORY)/*.png $(PUBLIC_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED); \
+		mv $(TEMPORARY_DIRECTORY)/*.ico $(PUBLIC_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/; \
+		mv $(TEMPORARY_DIRECTORY)/$(STYLES_DIRECTORY)/*.css $(PUBLIC_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(STYLES_DIRECTORY); \
+		mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/script.js $(PUBLIC_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(SCRIPTS_DIRECTORY); \
+		mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/plugins.js $(PUBLIC_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(SCRIPTS_DIRECTORY); \
+		if [ ! -f "$(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)/jquery.js" ]; \
+		then \
+			mkdir -p $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY); \
+			mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/libs/jquery-*.min.js $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)/jquery.js; \
+			mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/libs/modernizr-*.min.js $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)/modernizr.js; \
+		fi; \
 		rm -drf $(TEMPORARY_DIRECTORY); \
 	else \
 		echo "ERROR: You're required to give an existing APP argument to the 'layout' task to create a new layout inside your application."; \
 	fi
+endif
 endif
 
 ifeq "$(NAME)" ""
