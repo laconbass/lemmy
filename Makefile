@@ -31,7 +31,7 @@ clean:
 	@rm -drf $(DEPLOYMENT_DIRECTORY)
 endif
 
-ifeq "$(LANGUAGE)" "CS"
+ifeq "$(LANGUAGE)" "cs"
 ifeq "$(TYPE)" "standard"
 ifeq "$(ENGINE)" "ejs"
 setup:

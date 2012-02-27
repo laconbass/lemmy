@@ -37,7 +37,7 @@ It is very easy to start using __Lemmy__. In fact, all you need to do is:
 * Setup your project and choose your language of choice
 
 ```shell
-  cd your_project_name && make setup [APP_LANGUAGE=CS]
+  cd your_project_name && make setup [LANGUAGE=cs]
 ```
 
 * Modify the *package.json* file to your requirements with your Text
