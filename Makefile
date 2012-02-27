@@ -168,9 +168,10 @@ layout:
 	@mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/libs/jquery-*.min.js $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)/jquery.js
 	@mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/libs/modernizr-*.min.js $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)/modernizr.js
 	@rm -drf $(TEMPORARY_DIRECTORY)
+	@echo "APP_LAYOUT = HTML5" >> .lemmy/setup
 endif
 else
-ifeq "$(UPPERCASE_NAME)_ENGINE" ""
+ifeq "$(APP_UPPERCASED)_ENGINE" ""
 layout:
 	@echo "ERROR: You cannot define a layout for the '$(APP)' application on your project because you haven't define a template engine when creating it."
 else
@@ -198,6 +199,7 @@ layout:
 			mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/libs/modernizr-*.min.js $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)/modernizr.js; \
 		fi; \
 		rm -drf $(TEMPORARY_DIRECTORY); \
+		echo "$(APP_UPPERCASED)_LAYOUT = HTML5" >> .lemmy/setup; \
 	else \
 		echo "ERROR: You're required to give an existing APP argument to the 'layout' task to create a new layout inside your application."; \
 	fi
