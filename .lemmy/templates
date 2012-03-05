@@ -12,7 +12,6 @@ HELPMENU = "\
 \n-> module NAME=Module [APP=App]\t\t\t\t\tGenerate a new Module file and its respective Test file into your project.\
 \n-> middleware NAME=Middleware [APP=App]\t\t\t\tGenerate a new Middleware file and its respective Test file into your project.\
 \n-> route NAME=Route [APP=App]\t\t\t\t\tGenerate a new Route Container file and its respective Test file into your project.\
-\n-> controller NAME=Controller [APP=App] [WITH_VIEWS=YES]\tGenerate a new Controller file and its respective Test file (and views) into your project.\
 \n-> model NAME=Model [APP=App]\t\t\t\t\tGenerate a new Model file and its respective Test file into your project.\
 \n-> view NAME=View [GROUP=Group] [APP=App]\t\t\tGenerate a new View file into your project.\
 \n-> partial NAME=Partial [GROUP=Group] [APP=App]\t\t\tGenerate a new Partial file into your project.\
@@ -24,6 +23,7 @@ HELPMENU = "\
 \n-> mit-license\t\t\t\t\t\t\tGenerate a MIT license for your Express project.\
 \n-> help\t\t\t\t\t\t\t\tDisplay the Help menu you're reading right now.\
 \n-> version\t\t\t\t\t\t\tDisplay the version of Lemmy that you've installed on your machine.\
+\n-> controller NAME=Controller [APP=App] [WITH_VIEWS=yes]\t\tGenerate a new Controller file and its respective Test file (and views) into your project.\
 \n"
 
 GITIGNORE = ".DS_Store\
