@@ -377,7 +377,7 @@ controller:
 else
 ifeq "$(APP)" ""
 ifeq "$(APP_LANGUAGE)" "CS"
-ifeq "$(WITH_VIEWS)" "YES"
+ifeq "$(WITH_VIEWS)" "yes"
 controller:
 	@if [ -d "$(VIEWS_DIRECTORY)" ]; \
 	then \
@@ -401,7 +401,7 @@ controller:
 	@echo $(TESTCONTROLLER_CS) > $(TESTING_DIRECTORY)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED)-test.coffee
 endif
 else
-ifeq "$(WITH_VIEWS)" "YES"
+ifeq "$(WITH_VIEWS)" "yes"
 controller:
 	@if [ -d "$(VIEWS_DIRECTORY)" ]; \
 	then \
@@ -427,7 +427,7 @@ endif
 endif
 else
 ifeq "$(APP_LANGUAGE)" "CS"
-ifeq "$(WITH_VIEWS)" "YES"
+ifeq "$(WITH_VIEWS)" "yes"
 controller:
 	@if [ -d "$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
@@ -459,7 +459,7 @@ controller:
 	fi
 endif
 else
-ifeq "$(WITH_VIEWS)" "YES"
+ifeq "$(WITH_VIEWS)" "yes"
 controller:
 	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
