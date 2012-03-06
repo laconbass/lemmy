@@ -7,9 +7,16 @@ endif
 APP_JS += "\n\nvar app = express.createServer();\
 \n\napp.configure(function(){"
 
+ifneq "$(APP_ENGINE)" ""
+APP_JS += "\n\tapp.set('views', __dirname + '/views');"
+endif
+
 ifeq "$(APP_ENGINE)" "EJS"
-APP_JS += "\n\tapp.set('views', __dirname + '/views');\
-\n\tapp.set('view engine', 'ejs');"
+APP_JS += "\n\tapp.set('view engine', 'ejs');"
+else
+ifeq "$(APP_ENGINE)" "JADE"
+APP_JS += "\n\tapp.set('view engine', 'jade');"
+endif
 endif
 
 APP_JS += "\n\tapp.use(express.logger());\
@@ -17,7 +24,7 @@ APP_JS += "\n\tapp.use(express.logger());\
 \n\tapp.use(express.bodyParser());\
 \n\tapp.use(express.router);"
 
-ifeq "$(APP_ENGINE)" "EJS"
+ifneq "$(APP_ENGINE)" ""
 APP_JS += "\n\t//app.use(express.static(__dirname + '/public'));"
 endif
 
@@ -42,15 +49,22 @@ SUBAPP_JS = "var express = require('express');\
 \n\nvar app = express.createServer();\
 \n\napp.configure(function(){"
 
+ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
+SUBAPP_JS += "\n\t//app.set('views', __dirname + '/views/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)');"
+endif
+
 ifeq "$($(NAME_UPPERCASED)_ENGINE)" "EJS"
-SUBAPP_JS += "\n\tapp.set('views', __dirname + '/views/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)');\
-\n\tapp.set('view engine', 'ejs');"
+APP_JS += "\n\tapp.set('view engine', 'ejs');"
+else
+ifeq "$($(NAME_UPPERCASED)_ENGINE)" "JADE"
+APP_JS += "\n\tapp.set('view engine', 'jade');"
+endif
 endif
 
 SUBAPP_JS += "\n\tapp.use(express.router);"
 
-ifeq "$($(NAME_UPPERCASED)_ENGINE)" "EJS"
-SUBAPP_JS += "\n\t//app.use(express.static(__dirname + '/public'));"
+ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
+SUBAPP_JS += "\n\tapp.use(express.static(__dirname + '/public'));"
 endif
 
 SUBAPP_JS += "\n});\
