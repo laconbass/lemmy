@@ -67,6 +67,11 @@ PACKAGE = '{\
 ifeq "$(APP_ENGINE)" "EJS"
 PACKAGE += ',\
 \n\t\t"ejs": ">= 0.6.1"'
+else
+ifeq "$(APP_ENGINE)" "JADE"
+PACKAGE += ',\
+\n\t\t"jade": ">= 0.20.3"'
+endif
 endif
 
 PACKAGE += '\n\t},\
