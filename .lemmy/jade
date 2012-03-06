@@ -1,0 +1,79 @@
+JADE_LAYOUT = 'doctype 5\
+\n//if lt IE 7]\
+\n\thtml(class="no-js lt-ie9 lt-ie8 lt-ie7", lang="en")\
+\n//if IE 7\
+\n\thtml(class="no-js lt-ie9 lt-ie8", lang="en")\
+\n//if IE 8\
+\n\thtml(class="no-js lt-ie9", lang="en")\
+\n//[if gt IE 8]\>\<\!\
+\n\thtml.no-js(lang="en")\
+\n//\<\![endif]\
+\n\thead\
+\n\t\tmeta(charset="utf-8")\
+\n\t\tmeta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")\
+\n\t\ttitle\
+\n\t\tmeta(name="description", content="")\
+\n\t\tmeta(name="viewport", content="width=device-width,initial-scale=1")\
+\n\t\tlink(rel="stylesheet", href="css/style.css")'
+
+ifeq "$(APP)" ""
+JADE_LAYOUT += '\n\t\tscript(src="js/modernizr.js")'
+else
+JADE_LAYOUT += '\n\t\tscript(src="/js/modernizr.js")'
+endif
+
+JADE_LAYOUT += '\n\tbody\
+\n\t\theader\
+\n\t\tdiv(role="main")!= body\
+\n\t\tfooter'
+
+ifeq "$(APP)" ""
+JADE_LAYOUT += '\n\t\tscript(src="js/jquery.js")'
+else
+JADE_LAYOUT += '\n\t\tscript(src="/js/jquery.js")'
+endif
+
+JADE_LAYOUT += '\n\t\tscript(defer src="js/plugins.js")\
+\n\t\tscript(defer src="js/script.js")\
+\n\t\tscript\
+\n\t\t\tvar _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];\
+\n\t\t\t(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];\
+\n\t\t\tg.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";\
+\n\t\t\ts.parentNode.insertBefore(g,s)}(document,"script"));'
+
+JADE_VIEW = 'article\
+\n\theader\
+\n\t\th1= Header\
+\n\tsection!= partial('_partial', {title: 'example', examples: examples})\
+\n\tfooter\
+\n\t\tp= Footer'
+
+JADE_PARTIAL = 'h1= #{title}\
+\n//\
+\n\t- for (var example in examples)\
+\n\t\tdiv\
+\n\t\t\tp Example'
+
+JADE_404 = 'doctype 5\
+\nhtml(lang="en")\
+\n\thead\
+\n\t\tmeta(charset="utf-8")\
+\n\t\ttitle Page Not Found :(\
+\n\tbody\
+\n\t\tdiv.container\
+\n\t\t\th1 Not found <span>:(</span>\
+\n\t\t\tp Sorry, but the page you were trying to view does not exist.\
+\n\t\t\tp It looks like this was the result of either:\
+\n\t\t\tul\
+\n\t\t\t\tli a mistyped address\
+\n\t\t\t\tli an out-of-date link'
+
+JADE_500 = 'doctype 5\
+\nhtml(lang="en")\
+\n\thead\
+\n\t\tmeta(charset="utf-8")\
+\n\t\ttitle Internal Server Error :(\
+\n\tbody\
+\n\t\tdiv.container\
+\n\t\t\th1 Internal Server Error <span>:(</span>\
+\n\t\t\tp Sorry, but the Web Server encountered an condition that prevented it from fulfilling your request for access to the requested URL.'
