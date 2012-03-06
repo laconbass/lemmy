@@ -5,6 +5,8 @@ include .lemmy/variables
 include .lemmy/templates
 include .lemmy/javascript
 include .lemmy/coffeescript
+include .lemmy/ejs
+include .lemmy/jade
 include .lemmy/test
 include .lemmy/licenses
 
