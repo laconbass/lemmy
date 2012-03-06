@@ -37,7 +37,7 @@ It is very easy to start using __Lemmy__. In fact, all you need to do is:
 * Setup your project and choose your language of choice
 
 ```shell
-  cd your_project_name && make setup [LANGUAGE=cs]
+  cd your_project_name && make setup [LANGUAGE=cs] [TYPE=standard|modular] [ENGINE=ejs|jade]
 ```
 
 * Modify the *package.json* file to your requirements with your Text
@@ -80,7 +80,6 @@ The commands __Lemmy__ provides you are:
 This is the list of all the features are required or would be awesome to
 implement on __Lemmy__ in the near future, in random order:
 
-* Add support for the [Jade][30] template engine.
 * Integrate [Mobile HTML5 boilerplate][29] as a layout.
 * Integrate [Twitter's Bootstrap][22] as a layout.
 * Integrate [jQuery Mobile][23] as a layout.
@@ -106,7 +105,7 @@ some of the greatest and useful tools ever created for developers:
 * [Makefile][16] by Stuart Feldman
 * [Git][7] by Linus Torvalds
 * [Node.js][8] by [Ryan Dahl][17]
-* [Express][4], [Mocha][13], and [EJS][14] by [TJ Holowaychuk][18]
+* [Express][4], [Mocha][13], [EJS][14] and [Jade][30] by [TJ Holowaychuk][18]
 * [Coffee-Script][5] by [Josh Askhenas][19]
 * [Jitter][12] by [Trevor Burham][20]
 * [HTML5 boilerplate][10] by [Paul Irish][21]
