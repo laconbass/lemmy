@@ -257,6 +257,16 @@ app:
 	@echo "$(NAME_UPPERCASED)_ENGINE = EJS" >> .lemmy/setup
 	@make create-javascript-app
 endif
+else ifeq "$(ENGINE)" "jade"
+ifeq "$(APP_LANGUAGE)" "CS"
+app:
+	@echo "$(NAME_UPPERCASED)_ENGINE = JADE" >> .lemmy/setup
+	@make create-coffeescript-app
+else
+app:
+	@echo "$(NAME_UPPERCASED)_ENGINE = JADE" >> .lemmy/setup
+	@make create-javascript-app
+endif
 else
 ifeq "$(APP_LANGUAGE)" "CS"
 app:
