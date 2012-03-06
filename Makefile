@@ -39,6 +39,12 @@ setup:
 	@echo "APP_ENGINE = EJS" >> .lemmy/setup
 	@make setup-coffeescript-project
 	@make git-init
+else ifeq "$(ENGINE)" "jade"
+setup:
+	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
+	@echo "APP_ENGINE = JADE" >> .lemmy/setup
+	@make setup-coffeescript-project
+	@make git-init
 else
 setup:
 	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
@@ -52,6 +58,12 @@ setup:
 	@echo "APP_ENGINE = EJS" >> .lemmy/setup
 	@make setup-coffeescript-project
 	@make git-init
+else ifeq "$(ENGINE)" "jade"
+setup:
+	@echo "APP_TYPE = MODULAR" >> .lemmy/setup
+	@echo "APP_ENGINE = JADE" >> .lemmy/setup
+	@make setup-coffeescript-project
+	@make git-init
 else
 setup:
 	@echo "APP_TYPE = MODULAR" >> .lemmy/setup
@@ -63,6 +75,12 @@ ifeq "$(ENGINE)" "ejs"
 setup:
 	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
 	@echo "APP_ENGINE = EJS" >> .lemmy/setup
+	@make setup-coffeescript-project
+	@make git-init
+else ifeq "$(ENGINE)" "jade"
+setup:
+	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
+	@echo "APP_ENGINE = JADE" >> .lemmy/setup
 	@make setup-coffeescript-project
 	@make git-init
 else
@@ -83,6 +101,12 @@ setup:
 	@echo "APP_ENGINE = EJS" >> .lemmy/setup
 	@make setup-javascript-project
 	@make git-init
+else ifeq "$(ENGINE)" "jade"
+setup:
+	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
+	@echo "APP_ENGINE = JADE" >> .lemmy/setup
+	@make setup-javascript-project
+	@make git-init
 else
 setup:
 	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
@@ -96,6 +120,12 @@ setup:
 	@echo "APP_ENGINE = EJS" >> .lemmy/setup
 	@make setup-javascript-project
 	@make git-init
+else ifeq "$(ENGINE)" "jade"
+setup:
+	@echo "APP_TYPE = MODULAR" >> .lemmy/setup
+	@echo "APP_ENGINE = JADE" >> .lemmy/setup
+	@make setup-javascript-project
+	@make git-init
 else
 setup:
 	@echo "APP_TYPE = MODULAR" >> .lemmy/setup
@@ -107,6 +137,12 @@ ifeq "$(ENGINE)" "ejs"
 setup:
 	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
 	@echo "APP_ENGINE = EJS" >> .lemmy/setup
+	@make setup-javascript-project
+	@make git-init
+else ifeq "$(ENGINE)" "jade"
+setup:
+	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
+	@echo "APP_ENGINE = JADE" >> .lemmy/setup
 	@make setup-javascript-project
 	@make git-init
 else
