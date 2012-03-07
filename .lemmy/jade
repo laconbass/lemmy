@@ -44,7 +44,7 @@ JADE_LAYOUT += '\n\t\tscript(defer src="js/plugins.js")\
 JADE_VIEW = 'article\
 \n\theader\
 \n\t\th1= Header\
-\n\tsection!= partial('_partial', {title: 'example', examples: examples})\
+\n\t//section!= partial('_partial', {title: 'example', examples: examples})\
 \n\tfooter\
 \n\t\tp= Footer'
 
