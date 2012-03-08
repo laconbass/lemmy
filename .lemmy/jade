@@ -5,9 +5,9 @@ JADE_LAYOUT = 'doctype 5\
 \n\thtml(class="no-js lt-ie9 lt-ie8", lang="en")\
 \n//if IE 8\
 \n\thtml(class="no-js lt-ie9", lang="en")\
-\n//[if gt IE 8]\>\<\!\
-\n\thtml.no-js(lang="en")\
-\n//\<\![endif]\
+\n//[if gt IE 8]><!\
+\nhtml(class="no-js", lang="en")\
+\n\t//<![endif]\
 \n\thead\
 \n\t\tmeta(charset="utf-8")\
 \n\t\tmeta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")\
