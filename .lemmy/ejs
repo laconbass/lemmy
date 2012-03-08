@@ -1,4 +1,4 @@
-EJS_LAYOUT = '<!doctype html>\
+EJS_HTML5_LAYOUT = '<!doctype html>\
 \n<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->\
 \n<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->\
 \n<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->\
@@ -12,12 +12,12 @@ EJS_LAYOUT = '<!doctype html>\
 \n\t\t<link rel="stylesheet" href="css/style.css">'
 
 ifeq "$(APP)" ""
-EJS_LAYOUT += '\n\t\t<script src="js/modernizr.js"></script>'
+EJS_HTML5_LAYOUT += '\n\t\t<script src="js/modernizr.js"></script>'
 else
-EJS_LAYOUT += '\n\t\t<script src="/js/modernizr.js"></script>'
+EJS_HTML5_LAYOUT += '\n\t\t<script src="/js/modernizr.js"></script>'
 endif
 
-EJS_LAYOUT += '\n\t</head>\
+EJS_HTML5_LAYOUT += '\n\t</head>\
 \n\t<body>\
 \n\t\t<header>\
 \n\t\t</header>\
@@ -28,12 +28,12 @@ EJS_LAYOUT += '\n\t</head>\
 \n\t\t</footer>'
 
 ifeq "$(APP)" ""
-EJS_LAYOUT += '\n\t\t<script src="js/jquery.js"></script>'
+EJS_HTML5_LAYOUT += '\n\t\t<script src="js/jquery.js"></script>'
 else
-EJS_LAYOUT += '\n\t\t<script src="/js/jquery.js"></script>'
+EJS_HTML5_LAYOUT += '\n\t\t<script src="/js/jquery.js"></script>'
 endif
 
-EJS_LAYOUT += '\n\t\t<script defer src="js/plugins.js"></script>\
+EJS_HTML5_LAYOUT += '\n\t\t<script defer src="js/plugins.js"></script>\
 \n\t\t<script defer src="js/script.js"></script>\
 \n\t\t<script>\
 \n\t\t\tvar _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];\
