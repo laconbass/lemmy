@@ -1,4 +1,4 @@
-JADE_LAYOUT = 'doctype 5\
+JADE_HTML5_LAYOUT = 'doctype 5\
 \n//if lt IE 7]\
 \n\thtml(class="no-js lt-ie9 lt-ie8 lt-ie7", lang="en")\
 \n//if IE 7\
@@ -17,23 +17,23 @@ JADE_LAYOUT = 'doctype 5\
 \n\t\tlink(rel="stylesheet", href="css/style.css")'
 
 ifeq "$(APP)" ""
-JADE_LAYOUT += '\n\t\tscript(src="js/modernizr.js")'
+JADE_HTML5_LAYOUT += '\n\t\tscript(src="js/modernizr.js")'
 else
-JADE_LAYOUT += '\n\t\tscript(src="/js/modernizr.js")'
+JADE_HTML5_LAYOUT += '\n\t\tscript(src="/js/modernizr.js")'
 endif
 
-JADE_LAYOUT += '\n\tbody\
+JADE_HTML5_LAYOUT += '\n\tbody\
 \n\t\theader\
 \n\t\tdiv(role="main")!= body\
 \n\t\tfooter'
 
 ifeq "$(APP)" ""
-JADE_LAYOUT += '\n\t\tscript(src="js/jquery.js")'
+JADE_HTML5_LAYOUT += '\n\t\tscript(src="js/jquery.js")'
 else
-JADE_LAYOUT += '\n\t\tscript(src="/js/jquery.js")'
+JADE_HTML5_LAYOUT += '\n\t\tscript(src="/js/jquery.js")'
 endif
 
-JADE_LAYOUT += '\n\t\tscript(defer src="js/plugins.js")\
+JADE_HTML5_LAYOUT += '\n\t\tscript(defer src="js/plugins.js")\
 \n\t\tscript(defer src="js/script.js")\
 \n\t\tscript\
 \n\t\t\tvar _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];\
