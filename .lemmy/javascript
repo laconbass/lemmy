@@ -22,7 +22,7 @@ endif
 APP_JS += "\n\tapp.use(express.logger());\
 \n\tapp.use(express.methodOverride());\
 \n\tapp.use(express.bodyParser());\
-\n\tapp.use(express.router);"
+\n\t//app.use(express.router);"
 
 ifneq "$(APP_ENGINE)" ""
 APP_JS += "\n\t//app.use(express.static(__dirname + '/public'));"
