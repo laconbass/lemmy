@@ -244,7 +244,19 @@ layout:
 endif
 endif
 else
+ifeq "$(TYPE)" "mobile"
 # ...
+else
+ifeq "$(TYPE)" "bootstrap"
+# ...
+else
+ifeq "$(TYPE)" "jquery"
+# ...
+else
+# ...
+endif
+endif
+endif
 endif
 endif
 else
@@ -288,7 +300,19 @@ layout:
 endif
 endif
 else
+ifeq "$(TYPE)" "mobile"
 # ...
+else
+ifeq "$(TYPE)" "bootstrap"
+# ...
+else
+ifeq "$(TYPE)" "jquery"
+# ...
+else
+# ...
+endif
+endif
+endif
 endif
 endif
 endif
