@@ -204,17 +204,18 @@ dependencies:
 endif
 
 ifeq "$(APP)" ""
+ifeq "$(TYPE)" ""
 ifeq "$(APP_ENGINE)" "EJS"
 layout:
 	@make create-html5-app-layout
-	@echo $(EJS_LAYOUT) > $(VIEWS_DIRECTORY)/layout.ejs
+	@echo $(EJS_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/layout.ejs
 	@echo $(EJS_404) > $(VIEWS_DIRECTORY)/404.ejs
 	@echo $(EJS_500) > $(VIEWS_DIRECTORY)/500.ejs
 else
 ifeq "$(APP_ENGINE)" "JADE"
 layout:
 	@make create-html5-app-layout
-	@echo $(JADE_LAYOUT) > $(VIEWS_DIRECTORY)/layout.jade
+	@echo $(JADE_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/layout.jade
 	@echo $(JADE_404) > $(VIEWS_DIRECTORY)/404.jade
 	@echo $(JADE_500) > $(VIEWS_DIRECTORY)/500.jade
 else
@@ -223,22 +224,71 @@ layout:
 endif
 endif
 else
+ifeq "$(TYPE)" "html5"
+ifeq "$(APP_ENGINE)" "EJS"
+layout:
+	@make create-html5-app-layout
+	@echo $(EJS_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/layout.ejs
+	@echo $(EJS_404) > $(VIEWS_DIRECTORY)/404.ejs
+	@echo $(EJS_500) > $(VIEWS_DIRECTORY)/500.ejs
+else
+ifeq "$(APP_ENGINE)" "JADE"
+layout:
+	@make create-html5-app-layout
+	@echo $(JADE_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/layout.jade
+	@echo $(JADE_404) > $(VIEWS_DIRECTORY)/404.jade
+	@echo $(JADE_500) > $(VIEWS_DIRECTORY)/500.jade
+else
+layout:
+	@echo "ERROR: You cannot define a layout for your project because you haven't define a template engine when creating it."
+endif
+endif
+else
+# ...
+endif
+endif
+else
+ifeq "$(TYPE)" ""
 ifeq "$(APP_UPPERCASED)_ENGINE" "EJS"
 layout:
 	@make create-html5-subapp-layout
-	@echo $(EJS_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.ejs
+	@echo $(EJS_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.ejs
 	@echo $(EJS_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.ejs
 	@echo $(EJS_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.ejs
 else 
 ifeq "$(APP_UPPERCASED)_ENGINE" "JADE"
 layout:
 	@make create-html5-subapp-layout
-	@echo $(JADE_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.jade
+	@echo $(JADE_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.jade
 	@echo $(JADE_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.jade
 	@echo $(JADE_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.jade
 else
 layout:
 	@echo "ERROR: You cannot define a layout for the '$(APP)' application on your project because you haven't define a template engine when creating it."
+endif
+endif
+else
+ifeq "$(TYPE)" "html5"
+ifeq "$(APP_UPPERCASED)_ENGINE" "EJS"
+layout:
+	@make create-html5-subapp-layout
+	@echo $(EJS_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.ejs
+	@echo $(EJS_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.ejs
+	@echo $(EJS_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.ejs
+else 
+ifeq "$(APP_UPPERCASED)_ENGINE" "JADE"
+layout:
+	@make create-html5-subapp-layout
+	@echo $(JADE_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.jade
+	@echo $(JADE_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.jade
+	@echo $(JADE_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.jade
+else
+layout:
+	@echo "ERROR: You cannot define a layout for the '$(APP)' application on your project because you haven't define a template engine when creating it."
+endif
+endif
+else
+# ...
 endif
 endif
 endif
