@@ -46,7 +46,7 @@ endif
 APP_JS += "\n\napp.listen(3000);"
 
 SUBAPP_JS = "var express = require('express');\
-\n\nvar app = express.createServer();\
+\n\nvar app = module.exports = express.createServer();\
 \n\napp.configure(function() {"
 
 ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
@@ -68,7 +68,7 @@ SUBAPP_JS += "\n\tapp.use(express.static(__dirname + '/public'));"
 endif
 
 SUBAPP_JS += "\n});\
-\n\napp.get('(/*)?', function(request, response) {\
+\n\napp.get('/?', function(request, response) {\
 \n\t// ... your code goes in here ...\
 \n});"
 
