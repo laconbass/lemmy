@@ -46,7 +46,7 @@ endif
 APP_CS += "\n\napp.listen 3000"
 
 SUBAPP_CS = "express = require 'express'\
-\n\napp = express.createServer()\
+\n\napp = module.exports = express.createServer()\
 \n\napp.configure ->"
 
 ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
@@ -54,21 +54,21 @@ SUBAPP_CS += "\n\t\#app.set 'views', __dirname + '/views/$(APPS_DIRECTORY)/$(NAM
 endif
 
 ifeq "$($(NAME_UPPERCASED)_ENGINE)" "EJS"
-APP_CS += "\n\tapp.set 'view engine', 'ejs'"
+SUBAPP_CS += "\n\tapp.set 'view engine', 'ejs'"
 else
 ifeq "$($(NAME_UPPERCASED)_ENGINE)" "JADE"
-APP_CS += "\n\tapp.set 'view engine', 'jade'"
+SUBAPP_CS += "\n\tapp.set 'view engine', 'jade'"
 endif
 endif
 
-SUBAPP_CS += "\n\tapp.use(express.router)"
+SUBAPP_CS += "\n\t\#app.use(express.router)"
 
 ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
 SUBAPP_CS += "\n\t\#app.use express.static __dirname + '/public'"
 endif 
 
 SUBAPP_CS += "\n\treturn\
-\n\napp.get '(/*)?', (request, response) ->\
+\n\napp.get '/?', (request, response) ->\
 \n\t\# ... your code goes in here ...\
 \n\treturn"
 
