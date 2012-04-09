@@ -154,8 +154,8 @@ TESTMODULE_CS += "\n\n\tdescribe '\#example', ->\
 \n\t\t\t$(NAME_CAMELIZED).should.have.property 'method1'\
 \n\t\t\tdone()\
 \n\t\t\treturn\
-\n\n\tdescribe '\#method2()', (done) ->\
-\n\t\tit 'should exist', ->\
+\n\n\tdescribe '\#method2()', ->\
+\n\t\tit 'should exist', (done) ->\
 \n\t\t\t$(NAME_CAMELIZED).should.have.property 'method2'\
 \n\t\t\tdone()\
 \n\t\t\treturn"
