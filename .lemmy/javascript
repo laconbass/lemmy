@@ -5,7 +5,7 @@ APP_JS += "\n//var subapp = require('$(APPS_DIRECTORY)/subapp/app');"
 endif
 
 APP_JS += "\n\nvar app = express.createServer();\
-\n\napp.configure(function(){"
+\n\napp.configure(function() {"
 
 ifneq "$(APP_ENGINE)" ""
 APP_JS += "\n\tapp.set('views', __dirname + '/views');"
@@ -29,13 +29,13 @@ APP_JS += "\n\t//app.use(express.static(__dirname + '/public'));"
 endif
 
 APP_JS += "\n});\
-\n\napp.configure('development', function(){\
-\n\tapp.use(express.errorHandler({\
+\n\napp.configure('development', function() {\
+\n\tapp.use(express.errorHandler( {\
 \n\t\tdumpExceptions: true,\
 \n\t\tshowStack: true\
 \n\t}));\
 \n});\
-\n\napp.configure('production', function(){\
+\n\napp.configure('production', function() {\
 \n\tapp.use(express.errorHandler());\
 \n});"
 
