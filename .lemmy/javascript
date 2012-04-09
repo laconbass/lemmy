@@ -54,10 +54,10 @@ SUBAPP_JS += "\n\t//app.set('views', __dirname + '/views/$(APPS_DIRECTORY)/$(NAM
 endif
 
 ifeq "$($(NAME_UPPERCASED)_ENGINE)" "EJS"
-APP_JS += "\n\tapp.set('view engine', 'ejs');"
+SUBAPP_JS += "\n\tapp.set('view engine', 'ejs');"
 else
 ifeq "$($(NAME_UPPERCASED)_ENGINE)" "JADE"
-APP_JS += "\n\tapp.set('view engine', 'jade');"
+SUBAPP_JS += "\n\tapp.set('view engine', 'jade');"
 endif
 endif
 
