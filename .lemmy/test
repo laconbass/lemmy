@@ -2,5 +2,6 @@ TEST_DEPENDENCY = should
 TEST_REPORTER = spec
 TEST_INTERFACE = bdd
 TEST_THRESHOLD = 20
+TEST_COMPILERS_CS = coffee:coffee-script
 TEST_FILES_JS = $(shell find $(TESTING_DIRECTORY) -name '*-test.js' -type f)
 TEST_FILES_CS = $(shell find $(TESTING_DIRECTORY) -name '*-test.coffee' -type f)

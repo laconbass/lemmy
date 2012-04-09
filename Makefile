@@ -865,6 +865,7 @@ test:
 		--reporter $(TEST_REPORTER) \
 		--ui $(TEST_INTERFACE) \
 		--slow $(TEST_THRESHOLD) \
+		--compilers $(TEST_COMPILERS_CS) \
 		--colors \
 		$(TEST_FILES_CS)
 else
