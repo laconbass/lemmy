@@ -79,7 +79,7 @@ PACKAGE += '\n\t},\
 \n\t\t"mocha": ">= 0.13.0",\
 \n\t\t"should": ">= 0.5.1"'
 
-ifeq "$(APP_LANGUAGE)" "CS"
+ifeq "$(LANGUAGE)" "cs"
 PACKAGE += ',\
 \n\t\t"coffee-script": ">= 1.2.0",\
 \n\t\t"jitter": ">= 1.1.1"'
