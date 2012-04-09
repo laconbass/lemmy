@@ -30,7 +30,7 @@ endif
 
 APP_JS += "\n});\
 \n\napp.configure('development', function() {\
-\n\tapp.use(express.errorHandler( {\
+\n\tapp.use(express.errorHandler({\
 \n\t\tdumpExceptions: true,\
 \n\t\tshowStack: true\
 \n\t}));\
@@ -86,9 +86,12 @@ TESTSUBAPP_JS = "describe('App > $(NAME)', function() {\
 \n\n\tapp.listen(3000);\
 \n\n\tdescribe('\'/$(NAME_CAMELIZED)/\' route', function() {\
 \n\t\tit('should exist.', function(done) {\
-\n\t\t\tapp.stack[1].route.should.eql('$(NAME_CAMELIZED)/');\
-\n\t\t\tapp.stack[1].handle.should.be.a('function');\
-\n\t\t\tdone();\
+\n\t\t\thttp.request(options, function(response) {\
+\n\t\t\t\tapp.stack[1].route.should.eql('$(NAME_CAMELIZED)/');\
+\n\t\t\t\tapp.stack[1].handle.should.be.a('function');\
+\n\t\t\t\tresponse.statusCode.should.eql(200);\
+\n\t\t\t\tdone();\
+\n\t\t\t});
 \n\t\t});\
 \n\t});\
 \n});"
