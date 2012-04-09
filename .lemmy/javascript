@@ -72,7 +72,7 @@ SUBAPP_JS += "\n});\
 \n\t// ... your code goes in here ...\
 \n});"
 
-TESTSUBAPP_JS = "describe('$(NAME)', function() {\
+TESTSUBAPP_JS = "describe('App > $(NAME)', function() {\
 \n\tvar $(NAME_CAMELIZED) = require('../../../$(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app');\
 \n\tvar app = require('express').createServer();\
 \n\tvar http = require('http');\
