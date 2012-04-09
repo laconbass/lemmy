@@ -76,20 +76,22 @@ TESTSUBAPP_CS = "describe '$(NAME)', ->\
 \n\t$(NAME_CAMELIZED) = require '../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app'\
 \n\tapp = require('express').createServer()\
 \n\thttp = require 'http'\
+\n\n\toptions = {\
+\n\t\thost: 'localhost',\
+\n\t\tport: 3000,\
+\n\t\tpath: '/$(NAME_CAMELIZED)',\
+\n\t\tmethod: 'GET'\
+\n\t}\
 \n\n\tapp.use '/$(NAME_CAMELIZED)', $(NAME_CAMELIZED)\
-\n\n\tapp.listen 3000\
-\n\n\tit '\'/test_app\' route should exist', (done) ->\
-\n\t\toptions = {\
-\n\t\t\thost: 'localhost',\
-\n\t\t\tport: 3000,\
-\n\t\t\tpath: '/$(NAME_CAMELIZED)',\
-\n\t\t\tmethod: 'GET'\
-\n\t\t}\
-\n\n\t\thttp.request options, (response) ->\
-\n\t\t\tresponse.statusCode.should.eql 200\
-\n\t\t\tdone()\
-\n\t\t\treturn\
-\n\t\treturn"
+\n\tapp.listen 3000\
+\n\n\tdescribe '\'/$(NAME_CAMELIZED)\' route', ->\
+\n\t\tit 'should exist.', (done) ->\
+\n\t\t\thttp.request options, (response) ->\
+\n\t\t\t\tapp.stack[1].route.should.eql '/$(NAME_CAMELIZED)'\
+\n\t\t\t\tapp.stack[1].handle.should.be.a 'function'\
+\n\t\t\t\tresponse.statusCode.should.eql 200\
+\n\t\t\t\tdone()\
+\n\t\t\treturn"
 
 MIDDLEWARE_CS = "\#example = require 'example'\
 \n\n$(NAME_FUNCTIONALIZED) = module.exports = (request, response, next) ->\
