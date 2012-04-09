@@ -72,21 +72,22 @@ SUBAPP_JS += "\n});\
 \n\t// ... your code goes in here ...\
 \n});"
 
-TESTSUBAPP_JS = "describe('$(NAME)', function(){\
+TESTSUBAPP_JS = "describe('App > $(NAME)', function() {\
 \n\tvar $(NAME_CAMELIZED) = require('../../../$(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app');\
 \n\tvar app = require('express').createServer();\
 \n\tvar http = require('http');\
+\n\n\tvar options = {\
+\n\thost: 'localhost',\
+\n\tport: 3000,\
+\n\tpath: '/$(NAME_CAMELIZED)',\
+\n\tmethod: 'GET'\
+\n};\
 \n\n\tapp.use('/$(NAME_CAMELIZED)', $(NAME_CAMELIZED));\
 \n\n\tapp.listen(3000);\
-\n\n\tit('\'/$(NAME_CAMELIZED)\' route should exist', function(done){\
-\n\t\tvar options = {\
-\n\t\t\thost: 'localhost',\
-\n\t\t\tport: 3000,\
-\n\t\t\tpath: '/$(NAME_CAMELIZED)',\
-\n\t\t\tmethod: 'GET'\
-\n\t\t};\
-\n\n\t\thttp.request(options, function(response){\
-\n\t\t\tresponse.statusCode.should.eql(200);\
+\n\n\tdescribe('\'/$(NAME_CAMELIZED)/\' route', function() {\
+\n\t\tit('should exist.', function(done) {\
+\n\t\t\tapp.stack[1].route.should.eql('$(NAME_CAMELIZED)/');\
+\n\t\t\tapp.stack[1].handle.should.be.a('function');\
 \n\t\t\tdone();\
 \n\t\t});\
 \n\t});\
