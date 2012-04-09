@@ -47,7 +47,7 @@ APP_JS += "\n\napp.listen(3000);"
 
 SUBAPP_JS = "var express = require('express');\
 \n\nvar app = express.createServer();\
-\n\napp.configure(function(){"
+\n\napp.configure(function() {"
 
 ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
 SUBAPP_JS += "\n\t//app.set('views', __dirname + '/views/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)');"
@@ -61,14 +61,14 @@ APP_JS += "\n\tapp.set('view engine', 'jade');"
 endif
 endif
 
-SUBAPP_JS += "\n\tapp.use(express.router);"
+SUBAPP_JS += "\n\t//app.use(express.router);"
 
 ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
 SUBAPP_JS += "\n\tapp.use(express.static(__dirname + '/public'));"
 endif
 
 SUBAPP_JS += "\n});\
-\n\napp.get('(/*)?', function(request, response){\
+\n\napp.get('(/*)?', function(request, response) {\
 \n\t// ... your code goes in here ...\
 \n});"
 
