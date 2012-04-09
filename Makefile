@@ -906,6 +906,7 @@ setup-javascript-project:
 	@rm README.md LICENSE .gitignore
 	@echo $(PACKAGE) > package.json
 	@echo $(GITIGNORE) | sed 's/ //g' > .gitignore
+	@mkdir -p $(TESTING_DIRECTORY)
 	@echo $(APP_JS) > app.js
 
 setup-coffeescript-project:
@@ -915,6 +916,7 @@ setup-coffeescript-project:
 	@echo $(GITIGNORE) | sed 's/ //g' > .gitignore
 	@echo "APP_LANGUAGE = CS" >> .lemmy/setup
 	@mkdir -p $(SOURCE_DIRECTORY)
+	@mkdir -p $(TESTING_DIRECTORY)
 	@echo $(APP_CS) > $(SOURCE_DIRECTORY)/app.coffee
 
 create-javascript-app:
