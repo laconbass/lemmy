@@ -77,7 +77,8 @@ endif
 PACKAGE += '\n\t},\
 \n\t"devDependencies": {\
 \n\t\t"mocha": ">= 0.13.0",\
-\n\t\t"should": ">= 0.5.1"'
+\n\t\t"should": ">= 0.5.1",\
+\n\t\t"request": ">= 2.9.200"'
 
 ifeq "$(LANGUAGE)" "cs"
 PACKAGE += ',\
