@@ -70,26 +70,27 @@ endif
 SUBAPP_CS += "\n\treturn\
 \n\napp.get '/?', (request, response) ->\
 \n\t\# ... your code goes in here ...\
+\n\tresponse.end()\
 \n\treturn"
 
 TESTSUBAPP_CS = "describe 'App > $(NAME)', ->\
 \n\t$(NAME_CAMELIZED) = require '../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app'\
 \n\tapp = require('express').createServer()\
-\n\thttp = require 'http'\
-\n\n\toptions = {\
-\n\t\thost: 'localhost',\
-\n\t\tport: 3000,\
-\n\t\tpath: '/$(NAME_CAMELIZED)',\
-\n\t\tmethod: 'GET'\
-\n\t}\
+\n\trequest = require 'request'\
+\n\tshould = require 'should'\
 \n\n\tapp.use '/$(NAME_CAMELIZED)', $(NAME_CAMELIZED)\
 \n\tapp.listen 3000\
 \n\n\tdescribe '\'/$(NAME_CAMELIZED)\' route', ->\
 \n\t\tit 'should exist.', (done) ->\
-\n\t\t\thttp.request options, (response) ->\
-\n\t\t\t\tapp.stack[1].route.should.eql '/$(NAME_CAMELIZED)'\
-\n\t\t\t\tapp.stack[1].handle.should.be.a 'function'\
+\n\t\t\tapp.stack[1].route.should.eql '/$(NAME_CAMELIZED)'\
+\n\t\t\tapp.stack[1].handle.should.be.a 'function'\
+\n\t\t\tdone()\
+\n\t\t\treturn\
+\n\n\t\tit 'should return a 200 status code.', (done) ->\
+\n\t\t\trequest.get 'http://localhost:3000/$(NAME_CAMELIZED)', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 200\
+\n\t\t\t\tshould.not.exist error\
+\n\t\t\t\tshould.not.exist body\
 \n\t\t\t\tdone()\
 \n\t\t\treturn"
 
