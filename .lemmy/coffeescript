@@ -80,12 +80,12 @@ TESTSUBAPP_CS = "describe 'App > $(NAME)', ->\
 \n\tshould = require 'should'\
 \n\n\tapp.use '/$(NAME_CAMELIZED)', $(NAME_CAMELIZED)\
 \n\tapp.listen 3000\
+\n\n\tit 'should be mounted on the application stack.', (done) ->\
+\n\t\tapp.stack[1].route.should.eql '/$(NAME_CAMELIZED)'\
+\n\t\tapp.stack[1].handle.should.be.a 'function'\
+\n\t\tdone()\
+\n\t\treturn\
 \n\n\tdescribe '\'/$(NAME_CAMELIZED)\' route', ->\
-\n\t\tit 'should exist.', (done) ->\
-\n\t\t\tapp.stack[1].route.should.eql '/$(NAME_CAMELIZED)'\
-\n\t\t\tapp.stack[1].handle.should.be.a 'function'\
-\n\t\t\tdone()\
-\n\t\t\treturn\
 \n\n\t\tit 'should return a 200 status code.', (done) ->\
 \n\t\t\trequest.get 'http://localhost:3000/$(NAME_CAMELIZED)', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 200\
