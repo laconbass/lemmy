@@ -20,17 +20,17 @@ ifeq "$(APP_LANGUAGE)" "CS"
 clean:
 	@rm -f *.log
 	@rm -f $(APP_FILE)
-	@rm -drf $(APPS_DIRECTORY)
-	@rm -drf $(MODULES_DIRECTORY)
-	@rm -drf $(MIDDLEWARES_DIRECTORY)
-	@rm -drf $(ROUTES_DIRECTORY)
-	@rm -drf $(CONTROLLERS_DIRECTORY)
-	@rm -drf $(MODELS_DIRECTORY)
-	@rm -drf $(DEPLOYMENT_DIRECTORY)
+	@rm -rf $(APPS_DIRECTORY)
+	@rm -rf $(MODULES_DIRECTORY)
+	@rm -rf $(MIDDLEWARES_DIRECTORY)
+	@rm -rf $(ROUTES_DIRECTORY)
+	@rm -rf $(CONTROLLERS_DIRECTORY)
+	@rm -rf $(MODELS_DIRECTORY)
+	@rm -rf $(DEPLOYMENT_DIRECTORY)
 else
 clean:
 	@rm -f *.log
-	@rm -drf $(DEPLOYMENT_DIRECTORY)
+	@rm -rf $(DEPLOYMENT_DIRECTORY)
 endif
 
 ifeq "$(LANGUAGE)" "cs"
@@ -182,24 +182,24 @@ endif
 update:
 	@git clone https://github.com/rock-n-code/lemmy $(TEMPORARY_DIRECTORY)
 	@mv .lemmy/setup $(TEMPORARY_DIRECTORY)
-	@rm -drf .lemmy
+	@rm -rf .lemmy
 	@rm Makefile
 	@mv $(TEMPORARY_DIRECTORY)/.lemmy .
 	@rm .lemmy/setup
 	@mv $(TEMPORARY_DIRECTORY)/setup .lemmy
 	@mv $(TEMPORARY_DIRECTORY)/Makefile .
-	@rm -drf $(TEMPORARY_DIRECTORY)
+	@rm -rf $(TEMPORARY_DIRECTORY)
 
 mit-license:
 	@echo $(MIT_LICENSE) > LICENSE
 
 ifeq "$(APP_ENVIRONMENT)" "production"
 dependencies:
-	@if [ -d "$(DEPENDENCIES_DIRECTORY)" ]; then rm -drf $(DEPENDENCIES_DIRECTORY); fi
+	@if [ -d "$(DEPENDENCIES_DIRECTORY)" ]; then rm -rf $(DEPENDENCIES_DIRECTORY); fi
 	@npm install --production
 else
 dependencies:
-	@if [ -d "$(DEPENDENCIES_DIRECTORY)" ]; then rm -drf $(DEPENDENCIES_DIRECTORY); fi
+	@if [ -d "$(DEPENDENCIES_DIRECTORY)" ]; then rm -rf $(DEPENDENCIES_DIRECTORY); fi
 	@npm install
 endif
 
@@ -903,7 +903,7 @@ git-init:
 	@git checkout -b development
 
 setup-javascript-project:
-	@rm -drf .git
+	@rm -rf .git
 	@rm README.md LICENSE .gitignore
 	@echo $(PACKAGE) > package.json
 	@echo $(GITIGNORE) | sed 's/ //g' > .gitignore
@@ -911,7 +911,7 @@ setup-javascript-project:
 	@echo $(APP_JS) > app.js
 
 setup-coffeescript-project:
-	@rm -drf .git
+	@rm -rf .git
 	@rm README.md LICENSE .gitignore
 	@echo $(PACKAGE) > package.json
 	@echo $(GITIGNORE) | sed 's/ //g' > .gitignore
@@ -946,7 +946,7 @@ create-html5-app-layout:
 	@mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/plugins.js $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)
 	@mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/libs/jquery-*.min.js $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)/jquery.js
 	@mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/libs/modernizr-*.min.js $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)/modernizr.js
-	@rm -drf $(TEMPORARY_DIRECTORY)
+	@rm -rf $(TEMPORARY_DIRECTORY)
 	@echo "APP_LAYOUT = HTML5" >> .lemmy/setup
 
 create-html5-subapp-layout:
@@ -969,7 +969,7 @@ create-html5-subapp-layout:
 			mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/libs/jquery-*.min.js $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)/jquery.js; \
 			mv $(TEMPORARY_DIRECTORY)/$(SCRIPTS_DIRECTORY)/libs/modernizr-*.min.js $(PUBLIC_DIRECTORY)/$(SCRIPTS_DIRECTORY)/modernizr.js; \
 		fi; \
-		rm -drf $(TEMPORARY_DIRECTORY); \
+		rm -rf $(TEMPORARY_DIRECTORY); \
 		echo "$(APP_UPPERCASED)_LAYOUT = HTML5" >> .lemmy/setup; \
 	else \
 		echo "ERROR: You're required to give an existing APP argument to the 'layout' task to create a new layout inside your application."; \
