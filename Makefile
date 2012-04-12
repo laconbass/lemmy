@@ -858,6 +858,9 @@ endif
 run:
 	NODE_ENV=development node app.js
 
+run-as-production:
+	NODE_ENV=production node app.js
+
 ifeq "$(APP_LANGUAGE)" "CS"
 test:
 	@NODE_ENV=test $(MOCHA) \
@@ -892,7 +895,7 @@ prepare:
 	@make move-files-to-deployment
 endif
 
-.PHONY: help version clean create update mit-license dependencies layout app module middleware route controller model view build watch run test prepare
+.PHONY: help version clean create update mit-license dependencies layout app module middleware route controller model view build watch run run-as-production test prepare
 
 # Helpers
 
