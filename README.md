@@ -5,7 +5,7 @@ This bomber boilerplate is a humble tribute to __The Man__ himself, the Godfathe
  
 Perhaps you may have heard of him as the trust-worthy roadie of *[Jimi Hendrix][1]*, 
 the raw base of the 70's space rock powerhouse *[Hawkwind][2]* or, most 
-probably, as the relentless force behind the all-mighty *[Motörhead][3]*. If you have not had the distinct pleasure of listening to ripping, mean, and kick-ass rock'n'roll he makes you might want to check it out! Meanwhile, forget about the typical web framework development overkill and take Lemmy for a spin! It could be your project's ace of spades! 
+probably, as the relentless force behind the all-mighty *[Motörhead][3]*. If you have not had the distinct pleasure of listening to ripping, mean, and kick-ass rock'n'roll he makes you might want to check it out! Meanwhile, forget about the typical web framework development overkill and take Lemmy for a spin! It could be your rocking ace of spades! 
 
 
 ### Purpose
@@ -98,6 +98,7 @@ The following people are helping to make __Lemmy__ an essential tool
 for every [Express][4] developer:
 
 * [Javier Cicchelli][11]
+* [Mariela Dimitrova][31]
 
 No matter how small or big your contribution to this project is, you'll be
 added to this list by default.
@@ -179,3 +180,4 @@ OTHER DEALINGS IN THE SOFTWARE.
 [28]: http://twitter.com/#!/YukaYoung
 [29]: http://html5boilerplate.com/mobile
 [30]: http://jade-lang.com
+[31]: https://github.com/dream-warrior
