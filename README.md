@@ -1,28 +1,34 @@
 # LEMMY. 
 ## 49% Motherfucker | 51% Son of a Bitch JS/CS Express+Mocha+HTML5 boilerplate that kicks your ass.
 
-A humble homage to __The Man__ himself, the Godfather of Heavy Metal: __[Lemmy Kilmister][0]__.
+This bomber boilerplate is a humble tribute to __The Man__ himself, the Godfather of Heavy Metal, the Hellraiser: __[Lemmy Kilmister][0]__.
  
 Perhaps you may have heard of him as the trust-worthy roadie of *[Jimi Hendrix][1]*, 
 the raw base of the 70's space rock powerhouse *[Hawkwind][2]* or, most 
-probably, as the relentless force behind the all-mighty *[Motörhead][3]*.
+probably, as the relentless force behind the all-mighty *[Motörhead][3]*. If you have not had the distinct pleasure of listening to ripping, mean, and kick-ass rock'n'roll he makes you might want to check it out! Meanwhile, forget about the typical web framework development overkill and take Lemmy for a spin! It could be your project's ace of spades! 
+
 
 ### Purpose
 
-The idea is simple: __Express.js development on speed!__
+The idea behind Lemmy is simple: __Express.js development on speed!__
 
 Designed from scratch to kick-start your *[Express][4]* application in 
 either *Javascript* or *[Coffee-Script][5]* in no time and agilize the 
 management of the most common tasks during the development, testing, and
 deployment of your project by just using Makefile and a couple of Bash commands
 available on your Linux/OSX system without imposing any convention or creating 
-any web framework.
+any web framework, Lemmy is the iron fist that can motorize your development.
+
+Dedicated to all the beer drinkers and Hell raisers out there! 	
+
 
 ### Pre-Requisites
 
-You're required to use a BSD-like system that support Makefiles, uses
-[Bash shell][6], have [Git source code management system][7] and [Node.js][8] installed 
+You have to use a UNIX-like or a BSD-like system that supports Makefiles and uses
+[Bash shell][6]. You also need [Git source code management system][7] and [Node.js][8] installed 
 on your machine. That's all you need!
+
+Optional: You might want to have a bottle of **Jack Daniel's** at hand! 
 
 ### Quick Start
 
@@ -53,33 +59,33 @@ It is very easy to start using __Lemmy__. In fact, all you need to do is:
 
 The commands __Lemmy__ provides you are:
 
-* *setup* : Kick-start your JS/CS Express project for once and for all.
-* *clean* : Clean-up all the generated code from your Express project.
-* *update* : Update all the Lemmy files on your project.
-* *dependencies* : Install locally all the dependencies defined on the package JSON file.
-* *app* : Generate a new Application file and its respective Test file into your project.
-* *layout* : Generate the layout and respective assets into your project or apps within the project.
-* *module* : Generate a new Module file and its respective Test file into your project.
-* *middleware* : Generate a new Middleware file and its respective Test file into your project.
-* *route* : Generate a new Route Container file and its respective Test file into your project.
-* *controller* : Generate a new Controller file and its respective Test file (and views) into your project.
-* *model* : Generate a new Model file and its respective Test file into your project.
-* *view* : Generate a new View file into your project.
-* *partial* : Generate a new Partial file into your project.
+* *setup* : Kick-starts your JS/CS Express project for once and for all.
+* *clean* : Cleans up all the generated code from your Express project.
+* *update* : Updates all the Lemmy files on your project.
+* *dependencies* : Installs locally all the dependencies defined on the package JSON file.
+* *app* : Generates a new Application file and its respective Test file into your project.
+* *layout* : Generates the layout and respective assets into your project or apps within the project.
+* *module* : Generates a new Module file and its respective Test file into your project.
+* *middleware* : Generates a new Middleware file and its respective Test file into your project.
+* *route* : Generates a new Route Container file and its respective Test file into your project.
+* *controller* : Generates a new Controller file and its respective Test file (and views) into your project.
+* *model* : Generates a new Model file and its respective Test file into your project.
+* *view* : Generates a new View file into your project.
+* *partial* : Generates a new Partial file into your project.
 * *build* : Compiles your CS code into the JS equivalent.
 * *watch* : Watches any change on your CS code and automatically compiles it into its JS equivalent.
-* *run* : Run your project on Development environment.
-* *run-as-production* : Run your project on Production environment.
-* *test* : Test your Express project using Mocha.
+* *run* : Runs your project on Development environment.
+* *run-as-production* : Runs your project on Production environment.
+* *test* : Tests your Express project using Mocha.
 * *prepare* : Prepares your Express project for deployment.
-* *mit-license* : Generate a MIT license for your Express project.
-* *help* : Display the Help menu you're reading right now.
-* *version* : Display the version of Lemmy that you've installed on your machine.
+* *mit-license* : Generates a MIT license for your Express project.
+* *help* : Displays the Help menu you're reading right now.
+* *version* : Displays the version of Lemmy that you've installed on your machine.
 
 ### ToDos
 
-This is the list of all the features are required or would be awesome to
-implement on __Lemmy__ in the near future, in random order:
+This is the list of all the required and/or wish 
+features that will be implemented on __Lemmy__ in the near future, in random order:
 
 * Integrate [Mobile HTML5 boilerplate][29] as a layout.
 * Integrate [Twitter's Bootstrap][22] as a layout.
@@ -88,19 +94,19 @@ implement on __Lemmy__ in the near future, in random order:
 
 ### Contributors
 
-The following people are helping to make of __Lemmy__ an essential tool
+The following people are helping to make __Lemmy__ an essential tool
 for every [Express][4] developer:
 
 * [Javier Cicchelli][11]
 
-No matter how small or big your contribution to this project, you'll be
+No matter how small or big your contribution to this project is, you'll be
 added to this list by default.
 
 ### Thanks
 
 __Lemmy__ relies on the invaluable contribution done by the Open Source 
-community and, in particular, to certain individuals who have kick-started 
-some of the greatest and useful tools ever created for developers:
+community and, in particular, the immense contribution of certain individuals who have kick-started 
+some of the greatest and most useful tools ever created for developers:
 
 * Javascript by [Brendan Eich][15]
 * [Makefile][16] by Stuart Feldman
@@ -117,7 +123,7 @@ Moreover, I also would like to thank the following blogs and sites for featuring
 
 ### More Information
 
-Follow [Rock & Code][24] and/or [Javier Cicchelli][25] on Twitter for updates or direct contact.
+Follow [Rock & Code][24] and/or [Javier Cicchelli][25] on Twitter for updates or a direct contact.
 
 ![Lemmy Kilmister][9]
 
