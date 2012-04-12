@@ -18,7 +18,8 @@ HELPMENU = "\
 \n-> partial NAME=Partial [GROUP=Group] [APP=App]\t\t\t\tGenerate a new Partial file into your project.\
 \n-> build\t\t\t\t\t\t\t\tCompiles your CS code into the JS equivalent.\
 \n-> watch\t\t\t\t\t\t\t\tWatches any change on your CS code and automatically compiles it into its JS equivalent.\
-\n-> run\t\t\t\t\t\t\t\t\tRun your project on Node.JS\
+\n-> run\t\t\t\t\t\t\t\t\tRun your project on Development environment.\
+\n-> run-as-production\t\t\t\t\t\t\tRun your project on Production environment.\
 \n-> test\t\t\t\t\t\t\t\t\tTest your Express project using Mocha.\
 \n-> prepare\t\t\t\t\t\t\t\tPrepares your Express project for deployment.\
 \n-> mit-license\t\t\t\t\t\t\t\tGenerate a MIT license for your Express project.\
