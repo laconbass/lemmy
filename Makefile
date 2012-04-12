@@ -856,10 +856,10 @@ watch:
 endif
 
 run:
-	NODE_ENV=development node app.js
+	@NODE_ENV=development node app.js
 
 run-as-production:
-	NODE_ENV=production node app.js
+	@NODE_ENV=production node app.js
 
 ifeq "$(APP_LANGUAGE)" "CS"
 test:
