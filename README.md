@@ -68,7 +68,8 @@ The commands __Lemmy__ provides you are:
 * *partial* : Generate a new Partial file into your project.
 * *build* : Compiles your CS code into the JS equivalent.
 * *watch* : Watches any change on your CS code and automatically compiles it into its JS equivalent.
-* *run* : Run your project on Node.JS
+* *run* : Run your project on Development environment.
+* *run-as-production* : Run your project on Production environment.
 * *test* : Test your Express project using Mocha.
 * *prepare* : Prepares your Express project for deployment.
 * *mit-license* : Generate a MIT license for your Express project.
