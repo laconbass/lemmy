@@ -102,10 +102,10 @@ MIDDLEWARE_CS = "\#example = require 'example'\
 \n\treturn"
 
 ifeq "$(APP)" ""
-TESTMIDDLEWARE_CS = "describe '$(NAME)', ->\
+TESTMIDDLEWARE_CS = "describe 'Middleware > $(NAME)', ->\
 \n\t$(NAME_FUNCTIONALIZED) = require '../../$(SOURCE_DIRECTORY)/$(MIDDLEWARES_DIRECTORY)/$(NAME_CAMELIZED)'"
 else
-TESTMIDDLEWARE_CS = "describe '$(APP) > $(NAME)', ->\
+TESTMIDDLEWARE_CS = "describe '$(APP) > Middleware > $(NAME)', ->\
 \n\t$(NAME_FUNCTIONALIZED) = require '../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MIDDLEWARES_DIRECTORY)/$(NAME_CAMELIZED)'"
 endif
 
@@ -138,10 +138,10 @@ MODULE_CS = "module.exports = {\
 \n}"
 
 ifeq "$(APP)" ""
-TESTMODULE_CS = "describe '$(NAME)', ->\
+TESTMODULE_CS = "describe 'Module > $(NAME)', ->\
 \n\t$(NAME_CAMELIZED) = require '../../$(SOURCE_DIRECTORY)/$(MODULES_DIRECTORY)/$(NAME_CAMELIZED)'"
 else
-TESTMODULE_CS = "describe '$(APP) > $(NAME)', ->\
+TESTMODULE_CS = "describe '$(APP) > Module > $(NAME)', ->\
 \n\t$(NAME_CAMELIZED) = require '../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(NAME_CAMELIZED)'"
 endif
 
@@ -247,12 +247,12 @@ ROUTE_CS = "\#example = require 'example'\
 \n\t\treturn"
 
 ifeq "$(APP)" ""
-TESTROUTE_CS = "describe '$(NAME)', ->\
+TESTROUTE_CS = "describe 'Route > $(NAME)', ->\
 \n\tapp = require('express').createServer()\
 \n\thttp = require 'http'\
 \n\n\trequire('../../$(SOURCE_DIRECTORY)/$(ROUTES_DIRECTORY)/$(NAME_CAMELIZED)')(app)"
 else
-TESTROUTE_CS = "describe '$(APP) > $(NAME)', ->\
+TESTROUTE_CS = "describe '$(APP) > Route > $(NAME)', ->\
 \n\tapp = require('express').createServer()\
 \n\thttp = require 'http'\
 \n\n\trequire('../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(ROUTES_DIRECTORY)/$(NAME_CAMELIZED)')(app)"
@@ -471,10 +471,10 @@ CONTROLLER_CS += "\n\n\tindex: (request, response) ->\
 endif
 
 ifeq "$(APP)" ""
-TESTCONTROLLER_CS = "describe '$(NAME)', ->\
+TESTCONTROLLER_CS = "describe 'Controller > $(NAME)', ->\
 \n\t$(NAME) = require '../../$(SOURCE_DIRECTORY)/$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED)'"
 else
-TESTCONTROLLER_CS = "describe '$(APP) > $(NAME)', ->\
+TESTCONTROLLER_CS = "describe '$(APP) > Controller > $(NAME)', ->\
 \n\t$(NAME) = require '../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)//$(CONTROLLERS_DIRECTORY)/$(NAME_CAMELIZED)'"
 endif
 
@@ -519,10 +519,10 @@ MODEL_CS = "$(NAME) = exports = module.exports = ->\
 \n\t\ttext"
 
 ifeq "$(APP)" ""
-TESTMODEL_CS = "describe '$(NAME)', ->\
+TESTMODEL_CS = "describe 'Model > $(NAME)', ->\
 \n\t$(NAME) = require '../../$(SOURCE_DIRECTORY)/$(MODELS_DIRECTORY)/$(NAME_CAMELIZED)'"
 else
-TESTMODEL_CS = "describe '$(APP) > $(NAME)', ->\
+TESTMODEL_CS = "describe '$(APP) > Model > $(NAME)', ->\
 \n\t$(NAME) = require '../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(NAME_CAMELIZED)'"
 endif
 
