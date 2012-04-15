@@ -22,6 +22,7 @@ clean:
 	@rm -f $(APP_FILE)
 	@rm -rf $(APPS_DIRECTORY)
 	@rm -rf $(MODULES_DIRECTORY)
+	@rm -rf $(HELPERS_DIRECTORY)
 	@rm -rf $(MIDDLEWARES_DIRECTORY)
 	@rm -rf $(ROUTES_DIRECTORY)
 	@rm -rf $(CONTROLLERS_DIRECTORY)
