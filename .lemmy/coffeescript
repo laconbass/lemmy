@@ -117,17 +117,18 @@ TESTMIDDLEWARE_CS += "\n\tapp = require('express').createServer()\
 \n\n\tapp.get '/', (request, response) ->\
 \n\t\tresponse.end()\
 \n\t\treturn\
-\n\n\tapp.listen 3000\
+\n\n\tbefore (done) ->\
+\n\t\tapp.listen 3000\
+\n\t\tdone()\
+\n\t\treturn\
 \n\n\tit 'should exist', (done) ->\
-\n\t\toptions = {\
-\n\t\t\thost: 'localhost',\
-\n\t\t\tport : 3000,\
-\n\t\t\tpath: '/'\
-\n\t\t}\
-\n\n\t\thttp.get options, (response) ->\
-\n\t\t\tapp.stack[1]['handle'].name.should.eql($(NAME_FUNCTIONALIZED).name)\
-\n\t\t\tdone()\
-\n\t\t\treturn"
+\n\t\tapp.stack[1]['handle'].name.should.eql($(NAME_FUNCTIONALIZED).name)\
+\n\t\tdone()\
+\n\t\treturn\
+\n\n\tafter (done) ->\
+\n\t\tapp.close()\
+\n\t\tdone()\
+\n\t\treturn"
 
 MODULE_CS = "module.exports = {\
 \n\t\#example = 0\
@@ -197,15 +198,9 @@ ROUTE_CS = "\#example = require 'example'\
 \n\nmodule.exports = (app) ->\
 \n\tapp.all '/$(NAME_CAMELIZED)(/*)?', (request, response, next) ->\
 \n\t\t\# ... your code goes in here ...\
-\n\t\t\# options = {\
-\n\t\t\#\t layout: 'layout',\
-\n\t\t\#\t locals: {\
-\n\t\t\#\t\t foo: 'bar'\
-\n\t\t\#\t }\
-\n\t\t\# }\
-\n\t\t\# response.render 'group/view', options\
+\n\t\tnext()\
 \n\t\treturn\
-\n\n\tapp.get '/$(NAME_CAMELIZED)', (request, response, next) ->\
+\n\n\tapp.get '/$(NAME_CAMELIZED)/?', (request, response) ->\
 \n\t\t\# ... your code goes in here ...\
 \n\t\t\# options = {\
 \n\t\t\#\t layout: 'layout',\
@@ -214,8 +209,9 @@ ROUTE_CS = "\#example = require 'example'\
 \n\t\t\#\t }\
 \n\t\t\# }\
 \n\t\t\# response.render 'group/view', options\
+\n\n\t\tresponse.end()\
 \n\t\treturn\
-\n\n\tapp.post '/$(NAME_CAMELIZED)', (request, response, next) ->\
+\n\n\tapp.post '/$(NAME_CAMELIZED)', (request, response) ->\
 \n\t\t\# ... your code goes in here ...\
 \n\t\t\# options = {\
 \n\t\t\#\t layout: 'layout',\
@@ -224,8 +220,9 @@ ROUTE_CS = "\#example = require 'example'\
 \n\t\t\#\t }\
 \n\t\t\# }\
 \n\t\t\# response.render 'group/view', options\
+\n\n\t\tresponse.end()\
 \n\t\treturn\
-\n\n\tapp.put '/$(NAME_CAMELIZED)', (request, response, next) ->\
+\n\n\tapp.put '/$(NAME_CAMELIZED)', (request, response) ->\
 \n\t\t\# ... your code goes in here ...\
 \n\t\t\# options = {\
 \n\t\t\#\t layout: 'layout',\
@@ -234,8 +231,9 @@ ROUTE_CS = "\#example = require 'example'\
 \n\t\t\#\t }\
 \n\t\t\# }\
 \n\t\t\# response.render 'group/view', options\
+\n\n\t\tresponse.end()\
 \n\t\treturn\
-\n\n\tapp.del '/$(NAME_CAMELIZED)', (request, response, next) ->\
+\n\n\tapp.del '/$(NAME_CAMELIZED)', (request, response) ->\
 \n\t\t\# ... your code goes in here ...\
 \n\t\t\# options = {\
 \n\t\t\#\t layout: 'layout',\
@@ -244,158 +242,113 @@ ROUTE_CS = "\#example = require 'example'\
 \n\t\t\#\t }\
 \n\t\t\# }\
 \n\t\t\# response.render 'group/view', options\
+\n\n\t\tresponse.end()\
 \n\t\treturn"
 
 ifeq "$(APP)" ""
 TESTROUTE_CS = "describe 'Route > $(NAME)', ->\
 \n\tapp = require('express').createServer()\
-\n\thttp = require 'http'\
+\n\trequest = require 'request'\
 \n\n\trequire('../../$(SOURCE_DIRECTORY)/$(ROUTES_DIRECTORY)/$(NAME_CAMELIZED)')(app)"
 else
 TESTROUTE_CS = "describe '$(APP) > Route > $(NAME)', ->\
 \n\tapp = require('express').createServer()\
-\n\thttp = require 'http'\
+\n\trequest = require 'request'\
 \n\n\trequire('../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(ROUTES_DIRECTORY)/$(NAME_CAMELIZED)')(app)"
 endif
 
-TESTROUTE_CS += "\n\n\tapp.listen 3000\
+TESTROUTE_CS += "\n\n\tbefore (done) ->\
+\n\t\tapp.listen 3000\
+\n\t\tdone()\
+\n\t\treturn\
 \n\n\tdescribe '\#get()', ->\
 \n\t\tit '\'/$(NAME_CAMELIZED)\' route should exist', (done) ->\
-\n\t\t\toptions = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)',\
-\n\t\t\t\tmethod: 'GET'\
-\n\t\t\t}\
-\n\n\t\t\thttp.request options, (response) ->\
+\n\t\t\trequest.get 'http://localhost:3000/$(NAME_CAMELIZED)', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 200\
 \n\t\t\t\tdone()\
 \n\t\t\t\treturn\
-\n\n\t\tit '\'/$(NAME_CAMELIZED)/xxx/\' route should exist', (done) ->\
-\n\t\t\toptions = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)/xxx/',\
-\n\t\t\t\tmethod: 'GET'\
-\n\t\t\t}\
-\n\n\t\t\thttp.request options, (response) ->\
+\n\t\tit '\'/$(NAME_CAMELIZED)/\' route should exist', (done) ->\
+\n\t\t\trequest.get 'http://localhost:3000/$(NAME_CAMELIZED)/', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 200\
 \n\t\t\t\tdone()\
 \n\t\t\t\treturn\
-\n\n\t\tit '\'/testing\' route should exist', (done) ->\
-\n\t\t\toptions = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/testing',\
-\n\t\t\t\tmethod: 'GET'\
-\n\t\t\t}\
-\n\n\t\t\thttp.request options, (response) ->\
+\n\n\t\tit '\'/$(NAME_CAMELIZED)/xxx/\' route should not exist', (done) ->\
+\n\t\t\trequest.get 'http://localhost:3000/$(NAME_CAMELIZED)/xxx/', (error, response, body) ->\
+\n\t\t\t\tresponse.statusCode.should.eql 404\
+\n\t\t\t\tdone()\
+\n\t\t\t\treturn\
+\n\n\t\tit '\'/testing\' route should not exist', (done) ->\
+\n\t\t\trequest.get 'http://localhost:3000/testing', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 404\
 \n\t\t\t\tdone()\
 \n\t\t\t\treturn\
 \n\n\tdescribe '\#post()', ->\
 \n\t\tit '\'/$(NAME_CAMELIZED)\' route should exist', (done) ->\
-\n\t\t\toptions = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)',\
-\n\t\t\t\tmethod: 'POST'\
-\n\t\t\t}\
-\n\n\t\t\thttp.request options, (response) ->\
+\n\t\t\trequest.post 'http://localhost:3000/$(NAME_CAMELIZED)', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 200\
 \n\t\t\t\tdone()\
 \n\t\t\t\treturn\
-\n\n\t\tit '\'/$(NAME_CAMELIZED)/xxx/\' route should exist', (done) ->\
-\n\t\t\toptions = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)/xxx/',\
-\n\t\t\t\tmethod: 'POST'\
-\n\t\t\t}\
-\n\n\t\t\thttp.request options, (response) ->\
+\n\t\tit '\'/$(NAME_CAMELIZED)/\' route should exist', (done) ->\
+\n\t\t\trequest.post 'http://localhost:3000/$(NAME_CAMELIZED)/', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 200\
 \n\t\t\t\tdone()\
 \n\t\t\t\treturn\
-\n\n\t\tit '\'/testing\' route should exist', (done) ->\
-\n\t\t\toptions = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/testing',\
-\n\t\t\t\tmethod: 'POST'\
-\n\t\t\t}\
-\n\n\t\t\thttp.request options, (response) ->\
+\n\n\t\tit '\'/$(NAME_CAMELIZED)/xxx/\' route should not exist', (done) ->\
+\n\t\t\trequest.post 'http://localhost:3000/$(NAME_CAMELIZED)/xxx/', (error, response, body) ->\
+\n\t\t\t\tresponse.statusCode.should.eql 404\
+\n\t\t\t\tdone()\
+\n\t\t\t\treturn\
+\n\n\t\tit '\'/testing\' route should not exist', (done) ->\
+\n\t\t\trequest.post 'http://localhost:3000/testing', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 404\
 \n\t\t\t\tdone()\
 \n\t\t\t\treturn\
 \n\n\tdescribe '\#put()', ->\
 \n\t\tit '\'/$(NAME_CAMELIZED)\' route should exist', (done) ->\
-\n\t\t\toptions = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)',\
-\n\t\t\t\tmethod: 'PUT'\
-\n\t\t\t}\
-\n\n\t\t\thttp.request options, (response) ->\
+\n\t\t\trequest.put 'http://localhost:3000/$(NAME_CAMELIZED)', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 200\
 \n\t\t\t\tdone()\
 \n\t\t\t\treturn\
-\n\n\t\tit '\'/$(NAME_CAMELIZED)/xxx/\' route should exist', (done) ->\
-\n\t\t\toptions = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)/xxx/',\
-\n\t\t\t\tmethod: 'PUT'\
-\n\t\t\t}\
-\n\n\t\t\thttp.request options, (response) ->\
+\n\t\tit '\'/$(NAME_CAMELIZED)/\' route should exist', (done) ->\
+\n\t\t\trequest.put 'http://localhost:3000/$(NAME_CAMELIZED)/', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 200\
 \n\t\t\t\tdone()\
 \n\t\t\t\treturn\
-\n\n\t\tit '\'/testing\' route should exist', (done) ->\
-\n\t\t\toptions = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/testing',\
-\n\t\t\t\tmethod: 'PUT'\
-\n\t\t\t}\
-\n\n\t\t\thttp.request options, (response) ->\
+\n\n\t\tit '\'/$(NAME_CAMELIZED)/xxx/\' route should not exist', (done) ->\
+\n\t\t\trequest.put 'http://localhost:3000/$(NAME_CAMELIZED)/xxx/', (error, response, body) ->\
+\n\t\t\t\tresponse.statusCode.should.eql 404\
+\n\t\t\t\tdone()\
+\n\t\t\t\treturn\
+\n\n\t\tit '\'/testing\' route should not exist', (done) ->\
+\n\t\t\trequest.put 'http://localhost:3000/testing', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 404\
 \n\t\t\t\tdone()\
 \n\t\t\t\treturn\
 \n\n\tdescribe '\#del()', ->\
 \n\t\tit '\'/$(NAME_CAMELIZED)\' route should exist', (done) ->\
-\n\t\t\toptions = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)',\
-\n\t\t\t\tmethod: 'DELETE'\
-\n\t\t\t}\
-\n\n\t\t\thttp.request options, (response) ->\
+\n\t\t\trequest.del 'http://localhost:3000/$(NAME_CAMELIZED)', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 200\
 \n\t\t\t\tdone()\
 \n\t\t\t\treturn\
-\n\n\t\tit '\'/$(NAME_CAMELIZED)/xxx/\' route should exist', (done) ->\
-\n\t\t\t\treturn\
-\n\t\t\toptions = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)/xxx/',\
-\n\t\t\t\tmethod: 'DELETE'\
-\n\t\t\t}\
-\n\n\t\t\thttp.request options, (response) ->\
+\n\t\tit '\'/$(NAME_CAMELIZED)/\' route should exist', (done) ->\
+\n\t\t\trequest.del 'http://localhost:3000/$(NAME_CAMELIZED)/', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 200\
 \n\t\t\t\tdone()\
 \n\t\t\t\treturn\
-\n\n\t\tit '\'/testing\' route should exist', (done) ->\
-\n\t\t\toptions = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/testing',\
-\n\t\t\t\tmethod: 'DELETE'\
-\n\t\t\t}\
-\n\n\t\t\thttp.request options, (response) ->\
+\n\n\t\tit '\'/$(NAME_CAMELIZED)/xxx/\' route should not exist', (done) ->\
+\n\t\t\trequest.del 'http://localhost:3000/$(NAME_CAMELIZED)/xxx/', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 404\
 \n\t\t\t\tdone()\
-\n\t\t\t\treturn"
+\n\t\t\t\treturn\
+\n\n\t\tit '\'/testing\' route should not exist', (done) ->\
+\n\t\t\trequest.del 'http://localhost:3000/testing', (error, response, body) ->\
+\n\t\t\t\tresponse.statusCode.should.eql 404\
+\n\t\t\t\tdone()\
+\n\t\t\t\treturn\
+\n\n\tafter (done) ->\
+\n\t\tapp.close()\
+\n\t\tdone()\
+\n\t\treturn"
 
 CONTROLLER_CS = "\#Example = require 'example'\
 \n\n$(NAME) = exports = module.exports = ->\
