@@ -79,7 +79,10 @@ TESTSUBAPP_JS = "describe('App > $(NAME)', function() {\
 \n\tvar request = require('request');\
 \n\tvar should = require('should');\
 \n\n\tapp.use('/$(NAME_CAMELIZED)', $(NAME_CAMELIZED));\
-\n\tapp.listen(3000);\
+\n\n\tbefore(function(done) {\
+\n\t\tapp.listen(3000);\
+\n\t\tdone();\
+\n\t});\
 \n\n\tit('should be mounted on the application stack', function(done) {\
 \n\t\tapp.stack[1].route.should.eql('/$(NAME_CAMELIZED)');\
 \n\t\tapp.stack[1].handle.should.be.a('function');\
@@ -94,6 +97,10 @@ TESTSUBAPP_JS = "describe('App > $(NAME)', function() {\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
+\n\t});\
+\n\n\tafter(function(done) {\
+\n\t\tapp.close();\
+\n\t\tdone();\
 \n\t});\
 \n});"
 

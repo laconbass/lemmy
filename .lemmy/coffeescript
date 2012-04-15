@@ -79,7 +79,10 @@ TESTSUBAPP_CS = "describe 'App > $(NAME)', ->\
 \n\trequest = require 'request'\
 \n\tshould = require 'should'\
 \n\n\tapp.use '/$(NAME_CAMELIZED)', $(NAME_CAMELIZED)\
-\n\tapp.listen 3000\
+\n\n\tbefore (done) ->\
+\n\t\tapp.listen 3000\
+\n\t\tdone()\
+\n\t\treturn\
 \n\n\tit 'should be mounted on the application stack.', (done) ->\
 \n\t\tapp.stack[1].route.should.eql '/$(NAME_CAMELIZED)'\
 \n\t\tapp.stack[1].handle.should.be.a 'function'\
@@ -92,7 +95,11 @@ TESTSUBAPP_CS = "describe 'App > $(NAME)', ->\
 \n\t\t\t\tshould.not.exist error\
 \n\t\t\t\tshould.not.exist body\
 \n\t\t\t\tdone()\
-\n\t\t\treturn"
+\n\t\t\treturn\
+\n\n\tafter (done) ->\
+\n\t\tapp.close()\
+\n\t\tdone()\
+\n\t\treturn"
 
 MIDDLEWARE_CS = "\#example = require 'example'\
 \n\n$(NAME_FUNCTIONALIZED) = module.exports = (request, response, next) ->\
