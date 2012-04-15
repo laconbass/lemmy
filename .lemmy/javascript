@@ -154,18 +154,38 @@ endif
 
 TESTMODULE_JS += "\n\n\tdescribe('\#example', function(){\
 \n\t\tit('should not exist', function(done){\
+HELPER_JS = "module.exports = {\
+\n\t//var example = 0;\
+\n\n\tmethod1: function() {\
+\n\t\t// ... your code goes in here ...\
+\n\t},\
+\n\tmethod2: function() {\
+\n\t\t// ... your code goes in here ...\
+\n\t}\
+\n};"
+
+ifeq "$(APP)" ""
+TESTHELPER_JS = "describe('Helper > $(NAME)', function() {\
+\n\tvar $(NAME_CAMELIZED) = require('../../$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED)');"
+else
+TESTHELPER_JS = "describe('$(APP) > Helper > $(NAME)', function() {\
+\n\tvar $(NAME_CAMELIZED) = require('../../../../$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED)');"
+endif
+
+TESTHELPER_JS += "\n\n\tdescribe('\#example', function() {\
+\n\t\tit('should not exist', function(done) {\
 \n\t\t\t$(NAME_CAMELIZED).should.not.have.property('example');\
 \n\t\t\tdone();\
 \n\t\t});\
 \n\t});\
-\n\n\tdescribe('\#method1()', function(){\
-\n\t\tit('should exist.', function(done){\
+\n\n\tdescribe('\#method1()', function() {\
+\n\t\tit('should exist.', function(done) {\
 \n\t\t\t$(NAME_CAMELIZED).should.have.property('method1');\
 \n\t\t\tdone();\
 \n\t\t});\
 \n\t});\
-\n\n\tdescribe('\#method2()', function(){\
-\n\t\tit('should exist.', function(done){\
+\n\n\tdescribe('\#method2()', function() {\
+\n\t\tit('should exist.', function(done) {\
 \n\t\t\t$(NAME_CAMELIZED).should.have.property('method2');\
 \n\t\t\tdone();\
 \n\t\t});\
