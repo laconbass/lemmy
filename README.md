@@ -66,6 +66,7 @@ The commands __Lemmy__ provides you are:
 * *app* : Generates a new Application file and its respective Test file into your project.
 * *layout* : Generates the layout and respective assets into your project or apps within the project.
 * *module* : Generates a new Module file and its respective Test file into your project.
+* *helper* : Generates a new Helper file and its respective Test file into your project. 
 * *middleware* : Generates a new Middleware file and its respective Test file into your project.
 * *route* : Generates a new Route Container file and its respective Test file into your project.
 * *controller* : Generates a new Controller file and its respective Test file (and views) into your project.
