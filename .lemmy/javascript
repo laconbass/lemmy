@@ -113,24 +113,24 @@ TESTMIDDLEWARE_JS = "describe('$(APP) > Middleware > $(NAME)', function() {\
 endif
 
 TESTMIDDLEWARE_JS += "\n\tvar app = require('express').createServer();\
-\n\tvar http = require('http');\
+\n\tvar request = require('request');\
 \n\n\tapp.configure(function() {\
 \n\t\tapp.use($(NAME_FUNCTIONALIZED));\
 \n\t});\
 \n\n\tapp.get('/', function(request, response) {\
 \n\t\tresponse.end();\
 \n\t});\
-\n\n\tapp.listen(3000);\
+\n\n\tbefore(function(done) {\
+\n\t\tapp.listen(3000);\
+\n\t\tdone();\
+\n\t});\
 \n\n\tit('should exist', function(done) {\
-\n\t\tvar options = {\
-\n\t\t\thost: 'localhost',\
-\n\t\t\tport : 3000,\
-\n\t\t\tpath: '/'\
-\n\t\t};\
-\n\n\t\thttp.get(options, function(response) {\
-\n\t\t\tapp.stack[1]['handle'].name.should.eql($(NAME_FUNCTIONALIZED).name);\
-\n\t\t\tdone();\
-\n\t\t});\
+\n\t\tapp.stack[1]['handle'].name.should.eql($(NAME_FUNCTIONALIZED).name);\
+\n\t\tdone();\
+\n\t});\
+\n\n\tafter(function(done) {\
+\n\t\tapp.close();\
+\n\t\tdone();\
 \n\t});\
 \n});"
 
@@ -214,15 +214,9 @@ ROUTE_JS = "//var example = require('example');\
 \n\nmodule.exports = function(app) {\
 \n\tapp.all('/$(NAME_CAMELIZED)(/*)?', function(request, response, next) {\
 \n\t\t// ... your code goes in here ...\
-\n\t\t// var options = {\
-\n\t\t//\t layout: 'layout',\
-\n\t\t//\t locals: {\
-\n\t\t//\t\t foo: 'bar'\
-\n\t\t//\t }\
-\n\t\t// };\
-\n\t\t// response.render('group/view', options);\
+\n\t\tnext();\
 \n\t});\
-\n\tapp.get('/$(NAME_CAMELIZED)', function(request, response, next) {\
+\n\tapp.get('/$(NAME_CAMELIZED)/?', function(request, response) {\
 \n\t\t// ... your code goes in here ...\
 \n\t\t// var options = {\
 \n\t\t//\t layout: 'layout',\
@@ -231,8 +225,9 @@ ROUTE_JS = "//var example = require('example');\
 \n\t\t//\t }\
 \n\t\t// };\
 \n\t\t// response.render('group/view', options);\
+\n\t\tresponse.end();\
 \n\t});\
-\n\tapp.post('/$(NAME_CAMELIZED)', function(request, response, next) {\
+\n\tapp.post('/$(NAME_CAMELIZED)/?', function(request, response) {\
 \n\t\t// ... your code goes in here ...\
 \n\t\t// var options = {\
 \n\t\t//\t layout: 'layout',\
@@ -241,8 +236,9 @@ ROUTE_JS = "//var example = require('example');\
 \n\t\t//\t }\
 \n\t\t// };\
 \n\t\t// response.render('group/view', options);\
+\n\t\tresponse.end();\
 \n\t});\
-\n\tapp.put('/$(NAME_CAMELIZED)', function(request, response, next) {\
+\n\tapp.put('/$(NAME_CAMELIZED)/?', function(request, response) {\
 \n\t\t// ... your code goes in here ...\
 \n\t\t// var options = {\
 \n\t\t//\t layout: 'layout',\
@@ -251,8 +247,9 @@ ROUTE_JS = "//var example = require('example');\
 \n\t\t//\t }\
 \n\t\t// };\
 \n\t\t// response.render('group/view', options);\
+\n\t\tresponse.end();\
 \n\t});\
-\n\tapp.del('/$(NAME_CAMELIZED)', function(request, response, next) {\
+\n\tapp.del('/$(NAME_CAMELIZED)/?', function(request, response) {\
 \n\t\t// ... your code goes in here ...\
 \n\t\t// var options = {\
 \n\t\t//\t layout: 'layout',\
@@ -261,173 +258,133 @@ ROUTE_JS = "//var example = require('example');\
 \n\t\t//\t }\
 \n\t\t// };\
 \n\t\t// response.render('group/view', options);\
+\n\t\tresponse.end();\
 \n\t});\
 \n};"
 
 ifeq "$(APP)" ""
 TESTROUTE_JS = "describe('Route > $(NAME)', function() {\
 \n\tvar app = require('express').createServer();\
-\n\tvar http = require('http');\
+\n\tvar request = require('request');\
 \n\n\trequire('../../$(ROUTES_DIRECTORY)/$(NAME_CAMELIZED)')(app);"
 else
 TESTROUTE_JS = "describe('$(APP) > Route > $(NAME)', function() {\
 \n\tvar app = require('express').createServer();\
-\n\tvar http = require('http');\
+\n\tvar request = require('request');\
 \n\n\trequire('../../../../$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(ROUTES_DIRECTORY)/$(NAME_CAMELIZED)')(app);"
 endif
 
-TESTROUTE_JS += "\n\n\tapp.listen(3000);\
+TESTROUTE_JS += "\n\n\tbefore(function(done) {\
+\n\t\tapp.listen(3000);\
+\n\t\tdone();\
+\n\t});\
 \n\n\tdescribe('\#get()', function() {\
 \n\t\tit('\'/$(NAME_CAMELIZED)\' route should exist', function(done) {\
-\n\t\t\tvar options = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)',\
-\n\t\t\t\tmethod: 'GET'\
-\n\t\t\t};\
-\n\n\t\t\thttp.request(options, function(response) {\
+\n\t\t\trequest.get('http://localhost:3000/$(NAME_CAMELIZED)', function(error, response, body) {\
 \n\t\t\t\tresponse.statusCode.should.eql(200);\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
-\n\n\t\tit('\'/$(NAME_CAMELIZED)/xxx/\' route should exist', function(done) {\
-\n\t\t\tvar options = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)/xxx/',\
-\n\t\t\t\tmethod: 'GET'\
-\n\t\t\t};\
-\n\n\t\t\thttp.request(options, function(response) {\
+\n\t\tit('\'/$(NAME_CAMELIZED)/\' route should exist', function(done) {\
+\n\t\t\trequest.get('http://localhost:3000/$(NAME_CAMELIZED)/', function(error, response, body) {\
 \n\t\t\t\tresponse.statusCode.should.eql(200);\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
-\n\n\t\tit('\'/testing\' route should exist', function(done) {\
-\n\t\t\tvar options = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/testing',\
-\n\t\t\t\tmethod: 'GET'\
-\n\t\t\t};\
-\n\n\t\t\thttp.request(options, function(response) {\
-\n\t\t\t\tresponse.statusCode.should.eql(200);\
+\n\n\t\tit('\'/$(NAME_CAMELIZED)/xxx/\' route should not exist', function(done) {\
+\n\t\t\trequest.get('http://localhost:3000/$(NAME_CAMELIZED)/xxx', function(error, response, body) {\
+\n\t\t\t\tresponse.statusCode.should.eql(404);\
+\n\t\t\t\tdone();\
+\n\t\t\t});\
+\n\t\t});\
+\n\n\t\tit('\'/testing\' route should not exist', function(done) {\
+\n\t\t\trequest.get('http://localhost:3000/testing', function(error, response, body) {\
+\n\t\t\t\tresponse.statusCode.should.eql(404);\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
 \n\t});\
 \n\n\tdescribe('\#post()', function() {\
 \n\t\tit('\'/$(NAME_CAMELIZED)\' route should exist', function(done) {\
-\n\t\t\tvar options = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)',\
-\n\t\t\t\tmethod: 'POST'\
-\n\t\t\t};\
-\n\n\t\t\thttp.request(options, function(response) {\
+\n\t\t\trequest.post('http://localhost:3000/$(NAME_CAMELIZED)', function(error, response, body) {\
 \n\t\t\t\tresponse.statusCode.should.eql(200);\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
-\n\n\t\tit('\'/$(NAME_CAMELIZED)/xxx/\' route should exist', function(done) {\
-\n\t\t\tvar options = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)/xxx/',\
-\n\t\t\t\tmethod: 'POST'\
-\n\t\t\t};\
-\n\n\t\t\thttp.request(options, function(response) {\
+\n\t\tit('\'/$(NAME_CAMELIZED)/\' route should exist', function(done) {\
+\n\t\t\trequest.post('http://localhost:3000/$(NAME_CAMELIZED)/', function(error, response, body) {\
 \n\t\t\t\tresponse.statusCode.should.eql(200);\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
-\n\n\t\tit('\'/testing\' route should exist', function(done) {\
-\n\t\t\tvar options = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/testing',\
-\n\t\t\t\tmethod: 'POST'\
-\n\t\t\t};\
-\n\n\t\t\thttp.request(options, function(response) {\
-\n\t\t\t\tresponse.statusCode.should.eql(200);\
+\n\n\t\tit('\'/$(NAME_CAMELIZED)/xxx/\' route should not exist', function(done) {\
+\n\t\t\trequest.post('http://localhost:3000/$(NAME_CAMELIZED)/xxx', function(error, response, body) {\
+\n\t\t\t\tresponse.statusCode.should.eql(404);\
+\n\t\t\t\tdone();\
+\n\t\t\t});\
+\n\t\t});\
+\n\n\t\tit('\'/testing\' route should not exist', function(done) {\
+\n\t\t\trequest.post('http://localhost:3000/testing', function(error, response, body) {\
+\n\t\t\t\tresponse.statusCode.should.eql(404);\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
 \n\t});\
 \n\n\tdescribe('\#put()', function() {\
 \n\t\tit('\'/$(NAME_CAMELIZED)\' route should exist', function(done) {\
-\n\t\t\tvar options = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)',\
-\n\t\t\t\tmethod: 'PUT'\
-\n\t\t\t};\
-\n\n\t\t\thttp.request(options, function(response) {\
+\n\t\t\trequest.put('http://localhost:3000/$(NAME_CAMELIZED)', function(error, response, body) {\
 \n\t\t\t\tresponse.statusCode.should.eql(200);\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
-\n\n\t\tit('\'/$(NAME_CAMELIZED)/xxx/\' route should exist', function(done) {\
-\n\t\t\tvar options = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)/xxx/',\
-\n\t\t\t\tmethod: 'PUT'\
-\n\t\t\t};\
-\n\n\t\t\thttp.request(options, function(response) {\
+\n\t\tit('\'/$(NAME_CAMELIZED)/\' route should exist', function(done) {\
+\n\t\t\trequest.put('http://localhost:3000/$(NAME_CAMELIZED)/', function(error, response, body) {\
 \n\t\t\t\tresponse.statusCode.should.eql(200);\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
-\n\n\t\tit('\'/testing\' route should exist', function(done) {\
-\n\t\t\tvar options = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/testing',\
-\n\t\t\t\tmethod: 'PUT'\
-\n\t\t\t};\
-\n\n\t\t\thttp.request(options, function(response) {\
-\n\t\t\t\tresponse.statusCode.should.eql(200);\
+\n\n\t\tit('\'/$(NAME_CAMELIZED)/xxx/\' route should not exist', function(done) {\
+\n\t\t\trequest.put('http://localhost:3000/$(NAME_CAMELIZED)/xxx', function(error, response, body) {\
+\n\t\t\t\tresponse.statusCode.should.eql(404);\
+\n\t\t\t\tdone();\
+\n\t\t\t});\
+\n\t\t});\
+\n\n\t\tit('\'/testing\' route should not exist', function(done) {\
+\n\t\t\trequest.put('http://localhost:3000/testing', function(error, response, body) {\
+\n\t\t\t\tresponse.statusCode.should.eql(404);\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
 \n\t});\
 \n\n\tdescribe('\#del()', function() {\
 \n\t\tit('\'/$(NAME_CAMELIZED)\' route should exist', function(done) {\
-\n\t\t\tvar options = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)',\
-\n\t\t\t\tmethod: 'DELETE'\
-\n\t\t\t};\
-\n\n\t\t\thttp.request(options, function(response) {\
+\n\t\t\trequest.del('http://localhost:3000/$(NAME_CAMELIZED)', function(error, response, body) {\
 \n\t\t\t\tresponse.statusCode.should.eql(200);\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
-\n\n\t\tit('\'/$(NAME_CAMELIZED)/xxx/\' route should exist', function() {\
-\n\t\t\tvar options = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/$(NAME_CAMELIZED)/xxx/',\
-\n\t\t\t\tmethod: 'DELETE'\
-\n\t\t\t};\
-\n\n\t\t\thttp.request(options, function(response) {\
+\n\t\tit('\'/$(NAME_CAMELIZED)/\' route should exist', function(done) {\
+\n\t\t\trequest.del('http://localhost:3000/$(NAME_CAMELIZED)/', function(error, response, body) {\
 \n\t\t\t\tresponse.statusCode.should.eql(200);\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
-\n\n\t\tit('\'/testing\' route should exist', function(done) {\
-\n\t\t\tvar options = {\
-\n\t\t\t\thost: 'localhost',\
-\n\t\t\t\tport: 3000,\
-\n\t\t\t\tpath: '/testing',\
-\n\t\t\t\tmethod: 'DELETE'\
-\n\t\t\t};\
-\n\n\t\t\thttp.request(options, function(response) {\
-\n\t\t\t\tresponse.statusCode.should.eql(200);\
+\n\n\t\tit('\'/$(NAME_CAMELIZED)/xxx/\' route should not exist', function(done) {\
+\n\t\t\trequest.del('http://localhost:3000/$(NAME_CAMELIZED)/xxx', function(error, response, body) {\
+\n\t\t\t\tresponse.statusCode.should.eql(404);\
 \n\t\t\t\tdone();\
 \n\t\t\t});\
 \n\t\t});\
+\n\n\t\tit('\'/testing\' route should not exist', function(done) {\
+\n\t\t\trequest.del('http://localhost:3000/testing', function(error, response, body) {\
+\n\t\t\t\tresponse.statusCode.should.eql(404);\
+\n\t\t\t\tdone();\
+\n\t\t\t});\
+\n\t\t});\
+\n\t});\
+\n\n\tafter(function(done) {\
+\n\t\tapp.close();\
+\n\t\tdone();\
 \n\t});\
 \n});"
 
