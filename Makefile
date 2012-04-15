@@ -402,6 +402,52 @@ endif
 endif
 
 ifeq "$(NAME)" ""
+helper:
+	@echo "ERROR: You're required to give the NAME argument to the 'helper' task to create a new helper in your project."
+	@echo "SYNTAX: make helper NAME=HelperName [APP=AppName]"
+else
+ifeq "$(APP)" ""
+ifeq "$(APP_LANGUAGE)" "CS"
+helper:
+	@mkdir -p $(SOURCE_DIRECTORY)/$(HELPERS_DIRECTORY)
+	@echo $(HELPER_CS) > $(SOURCE_DIRECTORY)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED).coffee
+	@mkdir -p $(TESTING_DIRECTORY)/$(HELPERS_DIRECTORY)
+	@echo $(TESTHELPER_CS) > $(TESTING_DIRECTORY)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED)-test.coffee
+else
+helper:
+	@mkdir -p $(HELPERS_DIRECTORY)
+	@echo $(HELPER_JS) > $(HELPERS_DIRECTORY)/$(NAME_CAMELIZED).js
+	@mkdir -p $(TESTING_DIRECTORY)/$(HELPERS_DIRECTORY)
+	@echo $(TESTHELPER_JS) > $(TESTING_DIRECTORY)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED)-test.js
+endif
+else
+ifeq "$(APP_LANGUAGE)" "CS"
+helper:
+	@if [ -d "$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
+	then \
+		mkdir -p $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY); \
+		echo $(HELPER_CS) > $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED).coffee; \
+		mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY); \
+		echo $(TESTHELPER_CS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED)-test.coffee; \
+	else \
+		echo "ERROR: You're required to give an existing APP argument to the 'helper' task to create a new helper inside your application."; \
+	fi
+else
+helper:
+	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
+	then \
+		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY); \
+		echo $(HELPER_JS) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED).js; \
+		mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY); \
+		echo $(TESTHELPER_JS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED)-test.js; \
+	else \
+		echo "ERROR: You're required to give an existing APP argument to the 'helper' task to create a new helper inside your application."; \
+	fi
+endif
+endif
+endif
+
+ifeq "$(NAME)" ""
 middleware:
 	@echo "ERROR: You're required to give the NAME argument to the 'middleware' task to create a new middleware in your project."
 	@echo "SYNTAX: make middleware NAME=MiddlewareName [APP=AppName]"
