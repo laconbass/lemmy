@@ -10,6 +10,7 @@ HELPMENU = "\
 \n-> app NAME=App [ENGINE=ejs|jade]\t\t\t\t\tGenerate a new Application file and its respective Test file into your project.\
 \n-> layout [APP=App]\t\t\t\t\t\t\tGenerate the layout and respective assets into your project or apps within the project.\
 \n-> module NAME=Module [APP=App]\t\t\t\t\t\tGenerate a new Module file and its respective Test file into your project.\
+\n-> helper NAME=Helper [APP=App]\t\t\t\t\t\tGenerate a new Helper file and its respective Test file into your project.\
 \n-> middleware NAME=Middleware [APP=App]\t\t\t\t\tGenerate a new Middleware file and its respective Test file into your project.\
 \n-> route NAME=Route [APP=App]\t\t\t\t\t\tGenerate a new Route Container file and its respective Test file into your project.\
 \n-> controller NAME=Controller [APP=App] [WITH_VIEWS=yes]\t\tGenerate a new Controller file and its respective Test file (and views) into your project.\
