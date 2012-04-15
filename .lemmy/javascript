@@ -136,10 +136,10 @@ TESTMIDDLEWARE_JS += "\n\tvar app = require('express').createServer();\
 
 MODULE_JS = "module.exports = {\
 \n\t//var example = 0;\
-\n\n\tmethod1: function(){\
+\n\n\tmethod1: function() {\
 \n\t\t// ... your code goes in here ...\
 \n\t},\
-\n\tmethod2: function(){\
+\n\tmethod2: function() {\
 \n\t\t// ... your code goes in here ...\
 \n\t}\
 \n};"
@@ -193,8 +193,8 @@ TESTHELPER_JS += "\n\n\tdescribe('\#example', function() {\
 \n})"
 
 ROUTE_JS = "//var example = require('example');\
-\n\nmodule.exports = function(app){\
-\n\tapp.all('/$(NAME_CAMELIZED)(/*)?', function(request, response, next){\
+\n\nmodule.exports = function(app) {\
+\n\tapp.all('/$(NAME_CAMELIZED)(/*)?', function(request, response, next) {\
 \n\t\t// ... your code goes in here ...\
 \n\t\t// var options = {\
 \n\t\t//\t layout: 'layout',\
@@ -204,7 +204,7 @@ ROUTE_JS = "//var example = require('example');\
 \n\t\t// };\
 \n\t\t// response.render('group/view', options);\
 \n\t});\
-\n\tapp.get('/$(NAME_CAMELIZED)', function(request, response, next){\
+\n\tapp.get('/$(NAME_CAMELIZED)', function(request, response, next) {\
 \n\t\t// ... your code goes in here ...\
 \n\t\t// var options = {\
 \n\t\t//\t layout: 'layout',\
@@ -214,7 +214,7 @@ ROUTE_JS = "//var example = require('example');\
 \n\t\t// };\
 \n\t\t// response.render('group/view', options);\
 \n\t});\
-\n\tapp.post('/$(NAME_CAMELIZED)', function(request, response, next){\
+\n\tapp.post('/$(NAME_CAMELIZED)', function(request, response, next) {\
 \n\t\t// ... your code goes in here ...\
 \n\t\t// var options = {\
 \n\t\t//\t layout: 'layout',\
@@ -224,7 +224,7 @@ ROUTE_JS = "//var example = require('example');\
 \n\t\t// };\
 \n\t\t// response.render('group/view', options);\
 \n\t});\
-\n\tapp.put('/$(NAME_CAMELIZED)', function(request, response, next){\
+\n\tapp.put('/$(NAME_CAMELIZED)', function(request, response, next) {\
 \n\t\t// ... your code goes in here ...\
 \n\t\t// var options = {\
 \n\t\t//\t layout: 'layout',\
@@ -234,7 +234,7 @@ ROUTE_JS = "//var example = require('example');\
 \n\t\t// };\
 \n\t\t// response.render('group/view', options);\
 \n\t});\
-\n\tapp.del('/$(NAME_CAMELIZED)', function(request, response, next){\
+\n\tapp.del('/$(NAME_CAMELIZED)', function(request, response, next) {\
 \n\t\t// ... your code goes in here ...\
 \n\t\t// var options = {\
 \n\t\t//\t layout: 'layout',\
@@ -414,11 +414,11 @@ TESTROUTE_JS += "\n\n\tapp.listen(3000);\
 \n});"
 
 CONTROLLER_JS = "//var Example = require('example');\
-\n\nvar $(NAME) = exports = module.exports = function(){\
+\n\nvar $(NAME) = exports = module.exports = function() {\
 \n\t//var model = new Example();"
 
 ifeq "$(WITH_VIEWS)" "YES"
-CONTROLLER_JS += "\n\n\tfunction index(request, response){\
+CONTROLLER_JS += "\n\n\tfunction index(request, response) {\
 \n\t\t// ... your code goes in here ...\
 \n\n\t\tvar options = {\
 \n\t\t\tlayout: 'layout',\
@@ -428,7 +428,7 @@ CONTROLLER_JS += "\n\n\tfunction index(request, response){\
 \n\t\t};\
 \n\n\t\tresponse.render('$(GROUP_CAMELIZED)/index', options);\
 \n\t}\
-\n\n\tfunction show(request, response){\
+\n\n\tfunction show(request, response) {\
 \n\t\t// ... your code goes in here ...\
 \n\n\t\tvar options = {\
 \n\t\t\tlayout: 'layout',\
@@ -438,7 +438,7 @@ CONTROLLER_JS += "\n\n\tfunction index(request, response){\
 \n\t\t};\
 \n\n\t\tresponse.render('$(GROUP_CAMELIZED)/show', options);\
 \n\t}\
-\n\n\tfunction edit(request, response){\
+\n\n\tfunction edit(request, response) {\
 \n\t\t// ... your code goes in here ...\
 \n\n\t\tvar options = {\
 \n\t\t\tlayout: 'layout',\
@@ -448,7 +448,7 @@ CONTROLLER_JS += "\n\n\tfunction index(request, response){\
 \n\t\t};\
 \n\n\t\tresponse.render('$(GROUP_CAMELIZED)/edit', options);\
 \n\t}\
-\n\n\tfunction update(request, response){\
+\n\n\tfunction update(request, response) {\
 \n\t\t// ... your code goes in here ...\
 \n\n\t\tvar options = {\
 \n\t\t\tlayout: 'layout',\
@@ -458,7 +458,7 @@ CONTROLLER_JS += "\n\n\tfunction index(request, response){\
 \n\t\t};\
 \n\n\t\tresponse.render('$(GROUP_CAMELIZED)/update', options);\
 \n\t}\
-\n\n\tfunction remove(request, response){\
+\n\n\tfunction remove(request, response) {\
 \n\t\t// ... your code goes in here ...\
 \n\n\t\tvar options = {\
 \n\t\t\tlayout: 'layout',\
@@ -469,19 +469,19 @@ CONTROLLER_JS += "\n\n\tfunction index(request, response){\
 \n\n\t\tresponse.render('$(GROUP_CAMELIZED)/remove', options);\
 \n\t}"
 else
-CONTROLLER_JS += "\n\n\tfunction index(request, response){\
+CONTROLLER_JS += "\n\n\tfunction index(request, response) {\
 \n\t\t// ... your code goes in here ...\
 \n\t}\
-\n\n\tfunction show(request, response, next){\
+\n\n\tfunction show(request, response, next) {\
 \n\t\t// ... your code goes in here ...\
 \n\t}\
-\n\n\tfunction edit(request, response, next){\
+\n\n\tfunction edit(request, response, next) {\
 \n\t\t// ... your code goes in here ...\
 \n\t}\
-\n\n\tfunction update(request, response, next){\
+\n\n\tfunction update(request, response, next) {\
 \n\t\t// ... your code goes in here ...\
 \n\t}\
-\n\n\tfunction remove(request, response, next){\
+\n\n\tfunction remove(request, response, next) {\
 \n\t\t// ... your code goes in here ...\
 \n\t}"
 endif
@@ -542,13 +542,13 @@ TESTCONTROLLER_JS += "\n\tvar controller = new $(NAME)();\
 \n\t});\
 \n});"
 
-MODEL_JS = "var $(NAME) = exports = module.exports = function $(NAME)(){\
+MODEL_JS = "var $(NAME) = exports = module.exports = function $(NAME)() {\
 \n\tvar counter = -1;\
 \n\tvar index = 0;\
-\n\n\tfunction method1(){\
+\n\n\tfunction method1() {\
 \n\t\treturn '\#method1()';\
 \n\t}\
-\n\n\tfunction method2(text){\
+\n\n\tfunction method2(text) {\
 \n\t\treturn text;\
 \n\t}\
 \n\n\treturn {\
