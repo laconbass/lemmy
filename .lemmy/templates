@@ -80,7 +80,7 @@ PACKAGE += '\n\t\t"$(DEPENDENCIES_DIRECTORY)": "./$(DEPENDENCIES_DIRECTORY)",\
 \n\t\t"$(TESTING_DIRECTORY)": "./$(TESTING_DIRECTORY)"\
 \n\t},\
 \n\t"dependencies": {\
-\n\t\t"express": ">= 2.5.8 < 3.0.0"'
+\n\t\t"express": ">= 2.5.8 < 3.0.0alpha1"'
 
 ifeq "$(APP_ENGINE)" "EJS"
 PACKAGE += ',\
