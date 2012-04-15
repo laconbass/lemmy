@@ -161,6 +161,38 @@ TESTMODULE_CS += "\n\n\tdescribe '\#example', ->\
 \n\t\t\tdone()\
 \n\t\t\treturn"
 
+HELPER_CS = "module.exports = {\
+\n\t\#example = 0\
+\n\n\tmethod1: ->\
+\n\t\t\# ... your code goes in here ...\
+\n\n\tmethod2: ->\
+\n\t\t\# ... your code goes in here ...\
+\n}"
+
+ifeq "$(APP)" ""
+TESTHELPER_CS = "describe 'Helper > $(NAME)', ->\
+\n\t$(NAME_CAMELIZED) = require '../../$(SOURCE_DIRECTORY)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED)'"
+else
+TESTHELPER_CS = "describe '$(APP) > Helper > $(NAME)', ->\
+\n\t$(NAME_CAMELIZED) = require '../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED)'"
+endif
+
+TESTHELPER_CS += "\n\n\tdescribe '\#example', ->\
+\n\t\tit 'should not exist', (done) ->\
+\n\t\t\t$(NAME_CAMELIZED).should.not.have.property 'example'\
+\n\t\t\tdone()\
+\n\t\t\treturn\
+\n\n\tdescribe '\#method1()', ->\
+\n\t\tit 'should exist', (done) ->\
+\n\t\t\t$(NAME_CAMELIZED).should.have.property 'method1'\
+\n\t\t\tdone()\
+\n\t\t\treturn\
+\n\n\tdescribe '\#method2()', ->\
+\n\t\tit 'should exist', (done) ->\
+\n\t\t\t$(NAME_CAMELIZED).should.have.property 'method2'\
+\n\t\t\tdone()\
+\n\t\t\treturn"
+
 ROUTE_CS = "\#example = require 'example'\
 \n\nmodule.exports = (app) ->\
 \n\tapp.all '/$(NAME_CAMELIZED)(/*)?', (request, response, next) ->\
