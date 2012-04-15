@@ -39,6 +39,7 @@ GITIGNORE = ".DS_Store\
 ifeq "$(APP_LANGUAGE)" "CS"
 GITIGNORE += "\n$(APPS_DIRECTORY)/\
 \n$(MODULES_DIRECTORY)/\
+\n$(HELPERS_DIRECTORY)/\
 \n$(MIDDLEWARES_DIRECTORY)/\
 \n$(ROUTES_DIRECTORY)/\
 \n$(CONTROLLERS_DIRECTORY)/\
@@ -57,11 +58,26 @@ PACKAGE = '{\
 \n\t"engines": {\
 \n\t\t"node": ">= 0.4.0 < 0.7.0"\
 \n\t},\
-\n\t"directories": {\
-\n\t\t"lib": "./lib",\
-\n\t\t"modules": "./modules",\
-\n\t\t"node_modules": "./node_modules",\
-\n\t\t"test": "./test"\
+\n\t"directories": {'
+
+ifeq "$(LANGUAGE)" "cs"
+PACKAGE += '\n\t\t"$(SOURCE_DIRECTORY)": "./$(SOURCE_DIRECTORY)", '
+else
+PACKAGE += '\n\t\t"$(MODULES_DIRECTORY)": "./$(MODULES_DIRECTORY)",\
+\n\t\t"$(HELPERS_DIRECTORY)": "./$(HELPERS_DIRECTORY)",\
+\n\t\t"$(MIDDLEWARES_DIRECTORY)": "./$(MIDDLEWARES_DIRECTORY)",\
+\n\t\t"$(ROUTES_DIRECTORY)": "./$(ROUTES_DIRECTORY)",\
+\n\t\t"$(CONTROLLERS_DIRECTORY)": "./$(CONTROLLERS_DIRECTORY)",\
+\n\t\t"$(MODELS_DIRECTORY)": "./$(MODELS_DIRECTORY)",'
+endif
+
+ifneq "$(ENGINE)" ""
+PACKAGE += '\n\t\t"$(VIEWS_DIRECTORY)": "./$(VIEWS_DIRECTORY),"\
+\n\t\t"$(PUBLIC_DIRECTORY)": "./$(PUBLIC_DIRECTORY)",'
+endif
+
+PACKAGE += '\n\t\t"$(DEPENDENCIES_DIRECTORY)": "./$(DEPENDENCIES_DIRECTORY)",\
+\n\t\t"$(TESTING_DIRECTORY)": "./$(TESTING_DIRECTORY)"\
 \n\t},\
 \n\t"dependencies": {\
 \n\t\t"express": ">= 2.5.8 < 3.0.0"'
