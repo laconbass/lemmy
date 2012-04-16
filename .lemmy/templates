@@ -72,7 +72,7 @@ PACKAGE += '\n\t\t"$(MODULES_DIRECTORY)": "./$(MODULES_DIRECTORY)",\
 endif
 
 ifneq "$(ENGINE)" ""
-PACKAGE += '\n\t\t"$(VIEWS_DIRECTORY)": "./$(VIEWS_DIRECTORY),"\
+PACKAGE += '\n\t\t"$(VIEWS_DIRECTORY)": "./$(VIEWS_DIRECTORY)",\
 \n\t\t"$(PUBLIC_DIRECTORY)": "./$(PUBLIC_DIRECTORY)",'
 endif
 
