@@ -935,12 +935,12 @@ ifeq "$(APP_LANGUAGE)" "CS"
 prepare:
 	@make build
 	@make dependencies APP_ENVIRONMENT=production
-	@make move_files-to-deployment
+	@make move_files-to-deployment-folder
 else
 prepare:
 	@make clean
 	@make dependencies APP_ENVIRONMENT=production
-	@make move-files-to-deployment
+	@make move-files-to-deployment-folder
 endif
 
 .PHONY: help version clean create update mit-license dependencies layout app module middleware route controller model view build watch run run-as-production test prepare
@@ -1027,6 +1027,7 @@ create-html5-subapp-layout:
 	fi
 
 move-files-to-deployment:
+move-files-to-deployment-folder:
 	@mkdir $(DEPLOYMENT_DIRECTORY)
 	@cp $(APP_FILE) $(DEPLOYMENT_DIRECTORY)
 	@if [ -d "$(APPS_DIRECTORY)" ]; then cp -r $(APPS_DIRECTORY) $(DEPLOYMENT_DIRECTORY); fi
