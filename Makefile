@@ -34,6 +34,30 @@ clean:
 	@rm -rf $(DEPLOYMENT_DIRECTORY)
 endif
 
+update:
+	@git clone https://github.com/rock-n-code/lemmy $(TEMPORARY_DIRECTORY)
+	@mv .lemmy/setup $(TEMPORARY_DIRECTORY)
+	@rm -rf .lemmy
+	@rm Makefile
+	@mv $(TEMPORARY_DIRECTORY)/.lemmy .
+	@rm .lemmy/setup
+	@mv $(TEMPORARY_DIRECTORY)/setup .lemmy
+	@mv $(TEMPORARY_DIRECTORY)/Makefile .
+	@rm -rf $(TEMPORARY_DIRECTORY)
+
+ifeq "$(APP_ENVIRONMENT)" "production"
+dependencies:
+	@if [ -d "$(DEPENDENCIES_DIRECTORY)" ]; then rm -rf $(DEPENDENCIES_DIRECTORY); fi
+	@npm install --production
+else
+dependencies:
+	@if [ -d "$(DEPENDENCIES_DIRECTORY)" ]; then rm -rf $(DEPENDENCIES_DIRECTORY); fi
+	@npm install
+endif
+
+mit-license:
+	@echo $(MIT_LICENSE) > LICENSE
+
 ifeq "$(LANGUAGE)" "cs"
 ifeq "$(TYPE)" "standard"
 ifeq "$(ENGINE)" "ejs"
@@ -178,30 +202,6 @@ setup:
 endif
 endif
 endif
-endif
-
-update:
-	@git clone https://github.com/rock-n-code/lemmy $(TEMPORARY_DIRECTORY)
-	@mv .lemmy/setup $(TEMPORARY_DIRECTORY)
-	@rm -rf .lemmy
-	@rm Makefile
-	@mv $(TEMPORARY_DIRECTORY)/.lemmy .
-	@rm .lemmy/setup
-	@mv $(TEMPORARY_DIRECTORY)/setup .lemmy
-	@mv $(TEMPORARY_DIRECTORY)/Makefile .
-	@rm -rf $(TEMPORARY_DIRECTORY)
-
-mit-license:
-	@echo $(MIT_LICENSE) > LICENSE
-
-ifeq "$(APP_ENVIRONMENT)" "production"
-dependencies:
-	@if [ -d "$(DEPENDENCIES_DIRECTORY)" ]; then rm -rf $(DEPENDENCIES_DIRECTORY); fi
-	@npm install --production
-else
-dependencies:
-	@if [ -d "$(DEPENDENCIES_DIRECTORY)" ]; then rm -rf $(DEPENDENCIES_DIRECTORY); fi
-	@npm install
 endif
 
 ifeq "$(APP)" ""
