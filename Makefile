@@ -1026,7 +1026,12 @@ create-html5-subapp-layout:
 		echo "ERROR: You're required to give an existing APP argument to the 'layout' task to create a new layout inside your application."; \
 	fi
 
-move-files-to-deployment:
+download-1140-css-grid:
+	@curl -C - -O http://download.cssgrid.net/1140_CssGrid_2.zip
+	@mkdir -p $(TEMPORARY_1140_DIRECTORY)
+	@unzip 1140_CssGrid_2.zip -d $(TEMPORARY_1140_DIRECTORY)
+	@rm 1140_CssGrid_2.zip
+
 move-files-to-deployment-folder:
 	@mkdir $(DEPLOYMENT_DIRECTORY)
 	@cp $(APP_FILE) $(DEPLOYMENT_DIRECTORY)
