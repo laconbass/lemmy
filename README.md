@@ -117,7 +117,9 @@ some of the greatest and most useful tools ever created for developers:
 * [Express][4], [Mocha][13], [EJS][14] and [Jade][30] by [TJ Holowaychuk][18]
 * [Coffee-Script][5] by [Josh Askhenas][19]
 * [Jitter][12] by [Trevor Burham][20]
+* [Request][32] by [Mikeal Rogers][33]
 * [HTML5 boilerplate][10] by [Paul Irish][21]
+* [1140 CSS Grid][34] by [Andy Taylor][35]
 
 Moreover, I also would like to thank the following blogs and sites for featuring __Lemmy__:
 
@@ -182,3 +184,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 [29]: http://html5boilerplate.com/mobile
 [30]: http://jade-lang.com
 [31]: https://github.com/dream-warrior
+[32]: https://github.com/mikeal/request
+[33]: http://www.mikealrogers.com
+[34]: http://cssgrid.net
+[35]: http://twitter.com/#!/andytlr
