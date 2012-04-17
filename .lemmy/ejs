@@ -9,12 +9,16 @@ EJS_HTML5_LAYOUT = '<!doctype html>\
 \n\t\t<title></title>\
 \n\t\t<meta name="description" content="">\
 \n\t\t<meta name="viewport" content="width=device-width,initial-scale=1">\
+\n\t\t<!--[if lte IE 9]><link rel="stylesheet" href="css/ie.css" media="screen"><![endif]-->\
+\n\t\t<link rel="stylesheet" href="css/1140.css" media="screen">\
 \n\t\t<link rel="stylesheet" href="css/style.css">'
 
 ifeq "$(APP)" ""
-EJS_HTML5_LAYOUT += '\n\t\t<script src="js/modernizr.js"></script>'
+EJS_HTML5_LAYOUT += '\n\t\t<script src="js/modernizr.js"></script>\
+\n\t\t<script src="js/css3-queries.js"></script>'
 else
-EJS_HTML5_LAYOUT += '\n\t\t<script src="/js/modernizr.js"></script>'
+EJS_HTML5_LAYOUT += '\n\t\t<script src="/js/modernizr.js"></script>\
+\n\t\t<script src="/js/css3-queries.js"></script>'
 endif
 
 EJS_HTML5_LAYOUT += '\n\t</head>\
@@ -34,7 +38,7 @@ EJS_HTML5_LAYOUT += '\n\t\t<script src="/js/jquery.js"></script>'
 endif
 
 EJS_HTML5_LAYOUT += '\n\t\t<script defer src="js/plugins.js"></script>\
-\n\t\t<script defer src="js/script.js"></script>\
+\n\t\t<script defer src="js/main.js"></script>\
 \n\t\t<script>\
 \n\t\t\tvar _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];\
 \n\t\t\t(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];\

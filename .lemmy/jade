@@ -14,12 +14,17 @@ JADE_HTML5_LAYOUT = 'doctype 5\
 \n\t\ttitle\
 \n\t\tmeta(name="description", content="")\
 \n\t\tmeta(name="viewport", content="width=device-width,initial-scale=1")\
+\n\t\t//if lte IE 9]\
+\n\t\t\tlink(rel="stylesheet", href="css/ie.css", media="screen")\
+\n\t\tlink(rel="stylesheet", href="css/1140.css")\
 \n\t\tlink(rel="stylesheet", href="css/style.css")'
 
 ifeq "$(APP)" ""
-JADE_HTML5_LAYOUT += '\n\t\tscript(src="js/modernizr.js")'
+JADE_HTML5_LAYOUT += '\n\t\tscript(src="js/modernizr.js")\
+\n\t\tscript(src="js/css3-queries.js")'
 else
-JADE_HTML5_LAYOUT += '\n\t\tscript(src="/js/modernizr.js")'
+JADE_HTML5_LAYOUT += '\n\t\tscript(src="/js/modernizr.js")\
+\n\t\tscript(src="/js/css3-queries.js")'
 endif
 
 JADE_HTML5_LAYOUT += '\n\tbody\
@@ -34,7 +39,7 @@ JADE_HTML5_LAYOUT += '\n\t\tscript(src="/js/jquery.js")'
 endif
 
 JADE_HTML5_LAYOUT += '\n\t\tscript(defer src="js/plugins.js")\
-\n\t\tscript(defer src="js/script.js")\
+\n\t\tscript(defer src="js/main.js")\
 \n\t\tscript\
 \n\t\t\tvar _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];\
 \n\t\t\t(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];\
