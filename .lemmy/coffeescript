@@ -21,11 +21,10 @@ endif
 
 APP_CS += "\n\tapp.use express.logger()\
 \n\tapp.use express.methodOverride()\
-\n\tapp.use express.bodyParser()\
-\n\t\#app.use express.router"
+\n\tapp.use express.bodyParser()"
 
 ifneq "$(APP_ENGINE)" ""
-APP_CS += "\n\t\#app.use express.static __dirname + '/public'"
+APP_CS += "\n\tapp.use express.static __dirname + '/public'"
 endif
 
 APP_CS += "\n\treturn\
@@ -40,7 +39,20 @@ APP_CS += "\n\treturn\
 \n\treturn"
 
 ifeq "$(APP_TYPE)" "MODULAR"
-APP_CS += "\n\napp.use '/subapp', subapp"
+APP_CS += "\n\n\#app.use '/subapp', subapp"
+else
+ifneq "$(APP_ENGINE)" ""
+APP_CS += "\n\n\#app.get '/?', (request, response) ->\
+\n\t\# ... your code goes in here ...\
+\n\n\t\# options = {\
+\n\t\#\t layout: 'layout',\
+\n\t\#\t locals: {\
+\n\t\#\t\t foo: 'bar'\
+\n\t\#\t }\
+\n\n\t\# response.render 'index', options\
+\n\t\# response.end()\
+\n\t\# return"
+endif
 endif
 
 APP_CS += "\n\napp.listen 3000"

@@ -21,11 +21,10 @@ endif
 
 APP_JS += "\n\tapp.use(express.logger());\
 \n\tapp.use(express.methodOverride());\
-\n\tapp.use(express.bodyParser());\
-\n\t//app.use(express.router);"
+\n\tapp.use(express.bodyParser());"
 
 ifneq "$(APP_ENGINE)" ""
-APP_JS += "\n\t//app.use(express.static(__dirname + '/public'));"
+APP_JS += "\n\tapp.use(express.static(__dirname + '/public'));"
 endif
 
 APP_JS += "\n});\
@@ -41,6 +40,20 @@ APP_JS += "\n});\
 
 ifeq "$(APP_TYPE)" "MODULAR"
 APP_JS += "\n\n//app.use('/subapp', subapp);"
+else
+ifneq "$(APP_ENGINE)" ""
+APP_JS += "\n\n//app.get('/?', function(request, response) {\
+\n\t// ... your code goes in here ...\
+\n\n\t// var options = {\
+\n\t//\t layout: 'layout',\
+\n\t//\t locals: {\
+\n\t//\t\t foo: 'bar'\
+\n\t//\t }\
+\n\t// };\
+\n\n\t// response.render('index', options);\
+\n\t// response.end();\
+\n//});"
+endif
 endif
 
 APP_JS += "\n\napp.listen(3000);"
