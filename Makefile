@@ -262,14 +262,14 @@ endif
 endif
 else
 ifeq "$(TYPE)" ""
-ifeq "$(APP_UPPERCASED)_ENGINE" "EJS"
+ifeq "$($(APP_UPPERCASED)_ENGINE)" "EJS"
 layout:
 	@make create-html5-subapp-layout
 	@echo $(EJS_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.ejs
 	@echo $(EJS_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.ejs
 	@echo $(EJS_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.ejs
 else 
-ifeq "$(APP_UPPERCASED)_ENGINE" "JADE"
+ifeq "$($(APP_UPPERCASED)_ENGINE)" "JADE"
 layout:
 	@make create-html5-subapp-layout
 	@echo $(JADE_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.jade
@@ -282,14 +282,14 @@ endif
 endif
 else
 ifeq "$(TYPE)" "html5"
-ifeq "$(APP_UPPERCASED)_ENGINE" "EJS"
+ifeq "$($(APP_UPPERCASED)_ENGINE)" "EJS"
 layout:
 	@make create-html5-subapp-layout
 	@echo $(EJS_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.ejs
 	@echo $(EJS_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.ejs
 	@echo $(EJS_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.ejs
 else 
-ifeq "$(APP_UPPERCASED)_ENGINE" "JADE"
+ifeq "$($(APP_UPPERCASED)_ENGINE)" "JADE"
 layout:
 	@make create-html5-subapp-layout
 	@echo $(JADE_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.jade
