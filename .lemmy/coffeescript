@@ -74,8 +74,8 @@ endif
 endif
 
 ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
-SUBAPP_CS += "\n\tapp.use express.static process.cwd() + '/public'"
-endif 
+SUBAPP_CS += "\n\tapp.use express.static process.cwd() + '/public/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)'"
+endif
 
 SUBAPP_CS += "\n\treturn"
 
@@ -89,7 +89,6 @@ SUBAPP_JS += "\n\napp.get '/?', (request, response) ->\
 \n\t\#\t }\
 \n\t\# }\
 \n\n\t\# response.render 'index', options\
-\n\tresponse.end()\
 \n\treturn"
 else
 SUBAPP_CS += "\n\napp.get '/?', (request, response) ->\

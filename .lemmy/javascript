@@ -75,13 +75,13 @@ endif
 endif
 
 ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
-SUBAPP_JS += "\n\tapp.use(express.static(process.cwd() + '/public'));"
+SUBAPP_JS += "\n\tapp.use(express.static(process.cwd() + '/public/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)'));"
 endif
 
 SUBAPP_JS += "\n});"
 
 ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
-SUBAPP_JS += "\n\n//app.get('/?', function(request, response) {\
+SUBAPP_JS += "\n\napp.get('/?', function(request, response) {\
 \n\t// ... your code goes in here ...\
 \n\n\t// var options = {\
 \n\t//\t layout: 'layout',\
@@ -90,8 +90,7 @@ SUBAPP_JS += "\n\n//app.get('/?', function(request, response) {\
 \n\t//\t }\
 \n\t// };\
 \n\n\t// response.render('index', options);\
-\n\t// response.end();\
-\n//});"
+\n});"
 else
 SUBAPP_JS += "\n\napp.get('/?', function(request, response) {\
 \n\t// ... your code goes in here ...\
