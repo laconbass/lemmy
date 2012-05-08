@@ -80,7 +80,7 @@ endif
 SUBAPP_CS += "\n\treturn"
 
 ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
-SUBAPP_JS += "\n\napp.get '/?', (request, response) ->\
+SUBAPP_CS += "\n\napp.get '/?', (request, response) ->\
 \n\t\# ... your code goes in here ...\
 \n\n\t\# options = {\
 \n\t\#\t layout: 'layout',\
