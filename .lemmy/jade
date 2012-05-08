@@ -13,32 +13,20 @@ JADE_HTML5_LAYOUT = 'doctype 5\
 \n\t\tmeta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")\
 \n\t\ttitle\
 \n\t\tmeta(name="description", content="")\
-\n\t\tmeta(name="viewport", content="width=device-width,initial-scale=1")\
+\n\t\tmeta(name="viewport", content="width=device-width,initial-scale=1.0")\
 \n\t\t//if lte IE 9]\
 \n\t\t\tlink(rel="stylesheet", href="css/ie.css", media="screen")\
 \n\t\tlink(rel="stylesheet", href="css/1140.css")\
-\n\t\tlink(rel="stylesheet", href="css/style.css")'
-
-ifeq "$(APP)" ""
-JADE_HTML5_LAYOUT += '\n\t\tscript(src="js/modernizr.js")\
-\n\t\tscript(src="js/css3-queries.js")'
-else
-JADE_HTML5_LAYOUT += '\n\t\tscript(src="/js/modernizr.js")\
-\n\t\tscript(src="/js/css3-queries.js")'
-endif
-
-JADE_HTML5_LAYOUT += '\n\tbody\
+\n\t\tlink(rel="stylesheet", href="css/style.css")\
+\n\t\tlink(rel="stylesheet", href=|"css/app.css")\
+\n\t\tscript(src="js/modernizr.js")\
+\n\t\tscript(src="js/css3-queries.js")\
+\n\tbody\
 \n\t\theader\
 \n\t\tdiv(role="main")!= body\
-\n\t\tfooter'
-
-ifeq "$(APP)" ""
-JADE_HTML5_LAYOUT += '\n\t\tscript(src="js/jquery.js")'
-else
-JADE_HTML5_LAYOUT += '\n\t\tscript(src="/js/jquery.js")'
-endif
-
-JADE_HTML5_LAYOUT += '\n\t\tscript(defer src="js/plugins.js")\
+\n\t\tfooter\
+\n\t\tscript(src="js/jquery.js")
+\n\t\tscript(defer src="js/plugins.js")\
 \n\t\tscript(defer src="js/main.js")\
 \n\t\tscript\
 \n\t\t\tvar _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];\
