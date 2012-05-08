@@ -1005,7 +1005,7 @@ create-html5-app-layout:
 	@echo "APP_LAYOUT = HTML5" >> .lemmy/setup
 
 create-html5-subapp-layout:
-	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
+	@if [ -d "./$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
 		make download-1140-css-grid; \
 		git clone https://github.com/h5bp/html5-boilerplate.git $(TEMPORARY_HTML5_DIRECTORY); \
