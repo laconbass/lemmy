@@ -1,7 +1,7 @@
 APP_JS = "var express = require('express');"
 
 ifeq "$(APP_TYPE)" "MODULAR"
-APP_JS += "\n//var subapp = require('$(APPS_DIRECTORY)/subapp/app');"
+APP_JS += "\n//var subapp = require('./$(APPS_DIRECTORY)/subapp/app');"
 endif
 
 APP_JS += "\n\nvar app = express.createServer();\
@@ -63,7 +63,7 @@ SUBAPP_JS = "var express = require('express');\
 \n\napp.configure(function() {"
 
 ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
-SUBAPP_JS += "\n\t//app.set('views', __dirname + '/views/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)');"
+SUBAPP_JS += "\n\tapp.set('views', process.cwd() + '/views/$(APPS_DIRECTORY)/$(NAME_CAMELIZED)');"
 endif
 
 ifeq "$($(NAME_UPPERCASED)_ENGINE)" "EJS"
@@ -74,17 +74,30 @@ SUBAPP_JS += "\n\tapp.set('view engine', 'jade');"
 endif
 endif
 
-SUBAPP_JS += "\n\t//app.use(express.router);"
-
 ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
-SUBAPP_JS += "\n\tapp.use(express.static(__dirname + '/public'));"
+SUBAPP_JS += "\n\tapp.use(express.static(process.cwd() + '/public'));"
 endif
 
-SUBAPP_JS += "\n});\
-\n\napp.get('/?', function(request, response) {\
+SUBAPP_JS += "\n});"
+
+ifneq "$($(NAME_UPPERCASED)_ENGINE)" ""
+SUBAPP_JS += "\n\n//app.get('/?', function(request, response) {\
 \n\t// ... your code goes in here ...\
-\n\tresponse.end();\
+\n\n\t// var options = {\
+\n\t//\t layout: 'layout',\
+\n\t//\t locals: {\
+\n\t//\t\t foo: 'bar'\
+\n\t//\t }\
+\n\t// };\
+\n\n\t// response.render('index', options);\
+\n\t// response.end();\
+\n//});"
+else
+SUBAPP_JS += "\n\napp.get('/?', function(request, response) {\
+\n\t// ... your code goes in here ...\
+\n\n\tresponse.end();\
 \n});"
+endif
 
 TESTSUBAPP_JS = "describe('App > $(NAME)', function() {\
 \n\tvar $(NAME_CAMELIZED) = require('../../../$(APPS_DIRECTORY)/$(NAME_CAMELIZED)/app');\
