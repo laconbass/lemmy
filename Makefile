@@ -735,7 +735,7 @@ view:
 	fi
 endif
 else
-ifeq "$(APP_UPPERCASED)_ENGINE" "EJS"
+ifeq "$($(APP_UPPERCASED)_ENGINE)" "EJS"
 view:
 	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
 	then \
@@ -775,7 +775,7 @@ view:
 	fi
 endif
 else
-ifeq "$(APP_UPPERCASED)_ENGINE" "EJS"
+ifeq "$($(APP_UPPERCASED)_ENGINE)" "EJS"
 view:
 	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
 	then \
@@ -823,7 +823,7 @@ partial:
 	fi
 endif
 else
-ifeq "$(APP_UPPERCASED)_ENGINE" "EJS"
+ifeq "$($(APP_UPPERCASED)_ENGINE)" "EJS"
 partial:
 	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
 	then \
@@ -863,7 +863,7 @@ partial:
 	fi
 endif
 else
-ifeq "$(APP_UPPERCASED)_ENGINE" "EJS"
+ifeq "$($(APP_UPPERCASED)_ENGINE)" "EJS"
 partial:
 	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
 	then \
