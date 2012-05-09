@@ -737,17 +737,17 @@ endif
 else
 ifeq "$($(APP_UPPERCASED)_ENGINE)" "EJS"
 view:
-	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+	@if [ -d "$(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
-		echo $(EJS_VIEW) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(NAME_CAMELIZED).ejs; \
+		echo $(EJS_VIEW) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(NAME_CAMELIZED).ejs; \
 	else \
 		echo "ERROR: You're required to define a layout for the '$(APP)' application to create a view inside it."; \
 	fi
 else
 view:
-	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+	@if [ -d "$(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
-		echo $(JADE_VIEW) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(NAME_CAMELIZED).jade; \
+		echo $(JADE_VIEW) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(NAME_CAMELIZED).jade; \
 	else \
 		echo "ERROR: You're required to define a layout for the '$(APP)' application to create a view inside it."; \
 	fi
@@ -777,19 +777,19 @@ endif
 else
 ifeq "$($(APP_UPPERCASED)_ENGINE)" "EJS"
 view:
-	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+	@if [ -d "$(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
-		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED); \
-		echo $(EJS_VIEW) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).ejs; \
+		mkdir -p $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(GROUP_CAMELIZED); \
+		echo $(EJS_VIEW) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).ejs; \
 	else \
 		echo "ERROR: You're required to define a layout for the '$(APP)' application to create a view inside it."; \
 	fi
 else
 view:
-	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+	@if [ -d "$(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
-		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED); \
-		echo $(JADE_VIEW) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).jade; \
+		mkdir -p $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(GROUP_CAMELIZED); \
+		echo $(JADE_VIEW) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).jade; \
 	else \
 		echo "ERROR: You're required to define a layout for the '$(APP)' application to create a view inside it."; \
 	fi
@@ -825,17 +825,17 @@ endif
 else
 ifeq "$($(APP_UPPERCASED)_ENGINE)" "EJS"
 partial:
-	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+	@if [ -d "$(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
-		echo $(EJS_PARTIAL) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(PARTIAL_CAMELIZED).ejs; \
+		echo $(EJS_PARTIAL) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(PARTIAL_CAMELIZED).ejs; \
 	else \
 		echo "ERROR: You're required to define a layout for the '$(APP)' application to create a partial inside it."; \
 	fi
 else
 partial:
-	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+	@if [ -d "$(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
-		echo $(JADE_PARTIAL) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(PARTIAL_CAMELIZED).jade; \
+		echo $(JADE_PARTIAL) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(PARTIAL_CAMELIZED).jade; \
 	else \
 		echo "ERROR: You're required to define a layout for the '$(APP)' application to create a partial inside it."; \
 	fi
@@ -865,19 +865,19 @@ endif
 else
 ifeq "$($(APP_UPPERCASED)_ENGINE)" "EJS"
 partial:
-	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+	@if [ -d "$(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
-		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED); \
-		echo $(EJS_PARTIAL) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED)/$(PARTIAL_CAMELIZED).ejs; \
+		mkdir -p $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(GROUP_CAMELIZED); \
+		echo $(EJS_PARTIAL) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(GROUP_CAMELIZED)/$(PARTIAL_CAMELIZED).ejs; \
 	else \
 		echo "ERROR: You're required to define a layout for the '$(APP)' application to create a partial inside it."; \
 	fi
 else
 partial:
-	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)" ]; \
+	@if [ -d "$(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
 	then \
-		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED); \
-		echo $(JADE_PARTIAL) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(VIEWS_DIRECTORY)/$(GROUP_CAMELIZED)/$(PARTIAL_CAMELIZED).jade; \
+		mkdir -p $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(GROUP_CAMELIZED); \
+		echo $(JADE_PARTIAL) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(GROUP_CAMELIZED)/$(PARTIAL_CAMELIZED).jade; \
 	else \
 		echo "ERROR: You're required to define a layout for the '$(APP)' application to create a partial inside it."; \
 	fi
