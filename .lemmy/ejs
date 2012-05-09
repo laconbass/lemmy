@@ -36,6 +36,40 @@ EJS_HTML5_LAYOUT = '<!doctype html>\
 \n\t</body>\
 \n</html>'
 
+EJS_HTML5_ERROR = '<!doctype html>\
+\n<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->\
+\n<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->\
+\n<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->\
+\n<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->\
+\n\t<head>\
+\n\t\t<meta charset="utf-8" />\
+\n\t\t<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />\
+\n\t\t<title></title>\
+\n\t\t<meta name="description" content="" />\
+\n\t\t<meta name="viewport" content="width=device-width,initial-scale=1.0" />\
+\n\t\t<!--[if lte IE 9]><link rel="stylesheet" href="css/ie.css" media="screen" /><![endif]-->\
+\n\t\t<link rel="stylesheet" href="css/1140.css" media="screen" />\
+\n\t\t<link rel="stylesheet" href="css/style.css" />\
+\n\t\t<link rel="stylesheet" href="css/app.css" />\
+\n\t\t<script src="js/modernizr.js"></script>\
+\n\t\t<script src="js/css3-queries.js"></script>\
+\n\t</head>\
+\n\t<body>\
+\n\t\t<div class="container">\
+\n\t\t\t<%- body -%>\
+\n\t\t</div>\
+\n\t\t<script src="js/jquery.js"></script>\
+\n\t\t<script defer src="js/plugins.js"></script>\
+\n\t\t<script defer src="js/main.js"></script>\
+\n\t\t<script>\
+\n\t\t\tvar _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];\
+\n\t\t\t(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];\
+\n\t\t\tg.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";\
+\n\t\t\ts.parentNode.insertBefore(g,s)}(document,"script"));\
+\n\t\t</script>\
+\n\t</body>\
+\n</html>'
+
 EJS_VIEW = '<article>\
 \n\t<header>\
 \n\t\t<h1>Header</h1>\
