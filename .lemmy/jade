@@ -23,7 +23,7 @@ JADE_HTML5_LAYOUT = 'doctype 5\
 \n\t\tscript(src="js/css3-queries.js")\
 \n\tbody\
 \n\t\theader\
-\n\t\tdiv(role="main")!= body\
+\n\t\tdiv.container!= body\
 \n\t\tfooter\
 \n\t\tscript(src="js/jquery.js")
 \n\t\tscript(defer src="js/plugins.js")\
@@ -47,26 +47,12 @@ JADE_PARTIAL = 'h1= #{title}\
 \n\t\tdiv\
 \n\t\t\tp Example'
 
-JADE_404 = 'doctype 5\
-\nhtml(lang="en")\
-\n\thead\
-\n\t\tmeta(charset="utf-8")\
-\n\t\ttitle Page Not Found :(\
-\n\tbody\
-\n\t\tdiv.container\
-\n\t\t\th1 Not found <span>:(</span>\
-\n\t\t\tp Sorry, but the page you were trying to view does not exist.\
-\n\t\t\tp It looks like this was the result of either:\
-\n\t\t\tul\
-\n\t\t\t\tli a mistyped address\
-\n\t\t\t\tli an out-of-date link'
+JADE_404 = 'h1 Page Not found <span>:(</span>\
+\np Sorry, but the page you were trying to view does not exist.\
+\np It looks like this was the result of either:\
+\nul\
+\n\tli a mistyped address\
+\n\tli an out-of-date link'
 
-JADE_500 = 'doctype 5\
-\nhtml(lang="en")\
-\n\thead\
-\n\t\tmeta(charset="utf-8")\
-\n\t\ttitle Internal Server Error :(\
-\n\tbody\
-\n\t\tdiv.container\
-\n\t\t\th1 Internal Server Error <span>:(</span>\
-\n\t\t\tp Sorry, but the Web Server encountered an condition that prevented it from fulfilling your request for access to the requested URL.'
+JADE_500 = 'h1 Internal Server Error <span>:(</span>\
+\np Sorry, but the Web Server encountered an condition that prevented it from fulfilling your request for access to the requested URL.'
