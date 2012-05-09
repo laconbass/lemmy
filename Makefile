@@ -210,6 +210,7 @@ ifeq "$(APP_ENGINE)" "EJS"
 layout:
 	@make create-html5-app-layout
 	@echo $(EJS_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/layout.ejs
+	@echo $(EJS_HTML5_ERROR) > $(VIEWS_DIRECTORY)/error.ejs
 	@echo $(EJS_404) > $(VIEWS_DIRECTORY)/404.ejs
 	@echo $(EJS_500) > $(VIEWS_DIRECTORY)/500.ejs
 else
@@ -217,6 +218,7 @@ ifeq "$(APP_ENGINE)" "JADE"
 layout:
 	@make create-html5-app-layout
 	@echo $(JADE_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/layout.jade
+	@echo $(JADE_HTML5_ERROR) > $(VIEWS_DIRECTORY)/error.jade
 	@echo $(JADE_404) > $(VIEWS_DIRECTORY)/404.jade
 	@echo $(JADE_500) > $(VIEWS_DIRECTORY)/500.jade
 else
@@ -230,6 +232,7 @@ ifeq "$(APP_ENGINE)" "EJS"
 layout:
 	@make create-html5-app-layout
 	@echo $(EJS_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/layout.ejs
+	@echo $(EJS_HTML5_ERROR) > $(VIEWS_DIRECTORY)/error.ejs
 	@echo $(EJS_404) > $(VIEWS_DIRECTORY)/404.ejs
 	@echo $(EJS_500) > $(VIEWS_DIRECTORY)/500.ejs
 else
@@ -237,6 +240,7 @@ ifeq "$(APP_ENGINE)" "JADE"
 layout:
 	@make create-html5-app-layout
 	@echo $(JADE_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/layout.jade
+	@echo $(JADE_HTML5_ERROR) > $(VIEWS_DIRECTORY)/error.jade
 	@echo $(JADE_404) > $(VIEWS_DIRECTORY)/404.jade
 	@echo $(JADE_500) > $(VIEWS_DIRECTORY)/500.jade
 else
@@ -266,6 +270,7 @@ ifeq "$($(APP_UPPERCASED)_ENGINE)" "EJS"
 layout:
 	@make create-html5-subapp-layout
 	@echo $(EJS_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.ejs
+	@echo $(EJS_HTML5_ERROR) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/error.ejs
 	@echo $(EJS_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.ejs
 	@echo $(EJS_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.ejs
 else 
@@ -273,6 +278,7 @@ ifeq "$($(APP_UPPERCASED)_ENGINE)" "JADE"
 layout:
 	@make create-html5-subapp-layout
 	@echo $(JADE_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.jade
+	@echo $(JADE_HTML5_ERROR) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/error.jade
 	@echo $(JADE_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.jade
 	@echo $(JADE_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.jade
 else
@@ -286,6 +292,7 @@ ifeq "$($(APP_UPPERCASED)_ENGINE)" "EJS"
 layout:
 	@make create-html5-subapp-layout
 	@echo $(EJS_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.ejs
+	@echo $(EJS_HTML5_ERROR) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/error.ejs
 	@echo $(EJS_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.ejs
 	@echo $(EJS_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.ejs
 else 
@@ -293,6 +300,7 @@ ifeq "$($(APP_UPPERCASED)_ENGINE)" "JADE"
 layout:
 	@make create-html5-subapp-layout
 	@echo $(JADE_HTML5_LAYOUT) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/layout.jade
+	@echo $(JADE_HTML5_ERROR) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/error.jade
 	@echo $(JADE_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.jade
 	@echo $(JADE_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.jade
 else
