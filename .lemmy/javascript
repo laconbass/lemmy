@@ -90,6 +90,7 @@ SUBAPP_JS += "\n\napp.get('/?', function(request, response) {\
 \n\t//\t }\
 \n\t// };\
 \n\n\t// response.render('index', options);\
+\n\tresponse.end();\
 \n});"
 else
 SUBAPP_JS += "\n\napp.get('/?', function(request, response) {\
@@ -114,7 +115,7 @@ TESTSUBAPP_JS = "describe('App > $(NAME)', function() {\
 \n\t\tdone();\
 \n\t});\
 \n\n\tdescribe('\'/$(NAME_CAMELIZED)/\' route', function() {\
-\n\n\t\tit('should return a 200 status code.', function(done) {\
+\n\t\tit('should return a 200 status code.', function(done) {\
 \n\t\t\trequest.get('http://localhost:3000/$(NAME_CAMELIZED)', function(error, response, body) {\
 \n\t\t\t\tresponse.statusCode.should.eql(200);\
 \n\t\t\t\tshould.not.exist(error);\
