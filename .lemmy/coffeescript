@@ -89,6 +89,7 @@ SUBAPP_CS += "\n\napp.get '/?', (request, response) ->\
 \n\t\#\t }\
 \n\t\# }\
 \n\n\t\# response.render 'index', options\
+\n\tresponse.end()\
 \n\treturn"
 else
 SUBAPP_CS += "\n\napp.get '/?', (request, response) ->\
@@ -113,7 +114,7 @@ TESTSUBAPP_CS = "describe 'App > $(NAME)', ->\
 \n\t\tdone()\
 \n\t\treturn\
 \n\n\tdescribe '\'/$(NAME_CAMELIZED)\' route', ->\
-\n\n\t\tit 'should return a 200 status code.', (done) ->\
+\n\t\tit 'should return a 200 status code.', (done) ->\
 \n\t\t\trequest.get 'http://localhost:3000/$(NAME_CAMELIZED)', (error, response, body) ->\
 \n\t\t\t\tresponse.statusCode.should.eql 200\
 \n\t\t\t\tshould.not.exist error\
