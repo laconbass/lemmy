@@ -171,11 +171,21 @@ MODULE_CS = "module.exports = {\
 \n}"
 
 ifeq "$(APP)" ""
+ifeq "$(GROUP)" ""
 TESTMODULE_CS = "describe 'Module > $(NAME)', ->\
 \n\t$(NAME_CAMELIZED) = require '../../$(SOURCE_DIRECTORY)/$(MODULES_DIRECTORY)/$(NAME_CAMELIZED)'"
 else
+TESTMODULE_CS = "describe 'Module > $(GROUP) > $(NAME)', ->\
+\n\t$(NAME_CAMELIZED) = require '../../../$(SOURCE_DIRECTORY)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)'"
+endif
+else
+ifeq "$(GROUP)" ""
 TESTMODULE_CS = "describe '$(APP) > Module > $(NAME)', ->\
 \n\t$(NAME_CAMELIZED) = require '../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(NAME_CAMELIZED)'"
+else
+TESTMODULE_CS = "describe '$(APP) > Module > $(GROUP) > $(NAME)', ->\
+\n\t$(NAME_CAMELIZED) = require '../../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)'"
+endif
 endif
 
 TESTMODULE_CS += "\n\n\tdescribe '\#example', ->\

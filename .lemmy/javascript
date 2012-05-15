@@ -178,11 +178,21 @@ MODULE_JS = "module.exports = {\
 \n};"
 
 ifeq "$(APP)" ""
+ifeq "$(GROUP)" ""
 TESTMODULE_JS = "describe('Module > $(NAME)', function() {\
 \n\tvar $(NAME_CAMELIZED) = require('../../$(MODULES_DIRECTORY)/$(NAME_CAMELIZED)');"
 else
+TESTMODULE_JS = "describe('Module > $(GROUP) > $(NAME)', function() {\
+\n\tvar $(NAME_CAMELIZED) = require('../../../$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)');"
+endif
+else
+ifeq "$(GROUP)" ""
 TESTMODULE_JS = "describe('$(APP) > Module > $(NAME)', function() {\
 \n\tvar $(NAME_CAMELIZED) = require('../../../../$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(NAME_CAMELIZED)');"
+else
+TESTMODULE_JS = "describe('$(APP) > Module > $(GROUP) > $(NAME)', function() {\
+\n\tvar $(NAME_CAMELIZED) = require('../../../../../$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)');"
+endif
 endif
 
 TESTMODULE_JS += "\n\n\tdescribe('\#example', function() {\
