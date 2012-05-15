@@ -14,7 +14,7 @@ help:
 	@echo $(HELPMENU)
 
 version:
-	@echo "0.5.3"
+	@echo "0.5.4"
 
 ifeq "$(APP_LANGUAGE)" "CS"
 clean:
