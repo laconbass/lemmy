@@ -762,6 +762,7 @@ model:
 	@echo "SYNTAX: make model NAME=ModelName [APP=AppName]"
 else
 ifeq "$(APP)" ""
+ifeq "$(GROUP)" ""
 ifeq "$(APP_LANGUAGE)" "CS"
 model:
 	@mkdir -p $(SOURCE_DIRECTORY)/$(MODELS_DIRECTORY)
@@ -776,6 +777,22 @@ model:
 	@echo $(TESTMODEL_JS) > $(TESTING_DIRECTORY)/$(MODELS_DIRECTORY)/$(NAME_CAMELIZED)-test.js
 endif
 else
+ifeq "$(APP_LANGUAGE)" "CS"
+model:
+	@mkdir -p $(SOURCE_DIRECTORY)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)
+	@echo $(MODEL_CS) > $(SOURCE_DIRECTORY)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).coffee
+	@mkdir -p $(TESTING_DIRECTORY)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)
+	@echo $(TESTMODEL_CS) > $(TESTING_DIRECTORY)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)-test.coffee
+else
+model:
+	@mkdir -p $(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)
+	@echo $(MODEL_JS) > $(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).js
+	@mkdir -p $(TESTING_DIRECTORY)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)
+	@echo $(TESTMODEL_JS) > $(TESTING_DIRECTORY)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)-test.js
+endif
+endif
+else
+ifeq "$(GROUP)" ""
 ifeq "$(APP_LANGUAGE)" "CS"
 model:
 	@if [ -d "$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
@@ -798,6 +815,31 @@ model:
 	else \
 		echo "ERROR: You're required to give an existing APP argument to the 'model' task to create a new model inside your application."; \
 	fi
+endif
+else
+ifeq "$(APP_LANGUAGE)" "CS"
+model:
+	@if [ -d "$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
+	then \
+		mkdir -p $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED); \
+		echo $(MODEL_CS) > $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).coffee; \
+		mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED); \
+		echo $(TESTMODEL_CS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)-test.coffee; \
+	else \
+		echo "ERROR: You're required to give an existing APP argument to the 'model' task to create a new model inside your application."; \
+	fi
+else
+model:
+	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
+	then \
+		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED); \
+		echo $(MODEL_JS) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).js; \
+		mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED); \
+		echo $(TESTMODEL_JS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)-test.js; \
+	else \
+		echo "ERROR: You're required to give an existing APP argument to the 'model' task to create a new model inside your application."; \
+	fi
+endif
 endif
 endif
 endif
