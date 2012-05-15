@@ -587,11 +587,21 @@ MODEL_JS = "var $(NAME) = exports = module.exports = function $(NAME)() {\
 \n};"
 
 ifeq "$(APP)" ""
+ifeq "$(GROUP)" ""
 TESTMODEL_JS = "describe('Model > $(NAME)', function() {\
 \n\tvar $(NAME) = require('../../$(MODELS_DIRECTORY)/$(NAME_CAMELIZED)');"
 else
+TESTMODEL_JS = "describe('Model > $(GROUP) > $(NAME)', function() {\
+\n\tvar $(NAME) = require('../../../$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)');"
+endif
+else
+ifeq "$(GROUP)"
 TESTMODEL_JS = "describe('$(APP) > Model > $(NAME)', function() {\
 \n\tvar $(NAME) = require('../../../../$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(NAME_CAMELIZED)');"
+else
+TESTMODEL_JS = "describe('$(APP) > Model > $(GROUP) > $(NAME)', function() {\
+\n\tvar $(NAME) = require('../../../../../$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)');"
+endif
 endif
 
 TESTMODEL_JS += "\n\tvar instance = new $(NAME)();\

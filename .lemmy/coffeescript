@@ -524,11 +524,21 @@ MODEL_CS = "$(NAME) = exports = module.exports = ->\
 \n\t\ttext"
 
 ifeq "$(APP)" ""
+ifeq "$(GROUP)" ""
 TESTMODEL_CS = "describe 'Model > $(NAME)', ->\
 \n\t$(NAME) = require '../../$(SOURCE_DIRECTORY)/$(MODELS_DIRECTORY)/$(NAME_CAMELIZED)'"
 else
+TESTMODEL_CS = "describe 'Model > $(GROUP) > $(NAME)', ->\
+\n\t$(NAME) = require '../../../$(SOURCE_DIRECTORY)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)'"
+endif
+else
+ifeq "$(GROUP)" ""
 TESTMODEL_CS = "describe '$(APP) > Model > $(NAME)', ->\
 \n\t$(NAME) = require '../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(NAME_CAMELIZED)'"
+else
+TESTMODEL_CS = "describe '$(APP) > Model > $(GROUP) > $(NAME)', ->\
+\n\t$(NAME) = require '../../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)'"
+endif
 endif
 
 TESTMODEL_CS += "\n\tinstance = new $(NAME)()\
