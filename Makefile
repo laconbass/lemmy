@@ -370,6 +370,7 @@ module:
 	@echo "SYNTAX: make module NAME=ModuleName [APP=AppName]"
 else
 ifeq "$(APP)" ""
+ifeq "$(GROUP)" ""
 ifeq "$(APP_LANGUAGE)" "CS"
 module:
 	@mkdir -p $(SOURCE_DIRECTORY)/$(MODULES_DIRECTORY)
@@ -384,6 +385,22 @@ module:
 	@echo $(TESTMODULE_JS) > $(TESTING_DIRECTORY)/$(MODULES_DIRECTORY)/$(NAME_CAMELIZED)-test.js
 endif
 else
+ifeq "$(APP_LANGUAGE)" "CS"
+module:
+	@mkdir -p $(SOURCE_DIRECTORY)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)
+	@echo $(MODULE_CS) > $(SOURCE_DIRECTORY)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).coffee
+	@mkdir -p $(TESTING_DIRECTORY)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)
+	@echo $(TESTMODULE_CS) > $(TESTING_DIRECTORY)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)-test.coffee
+else
+module:
+	@mkdir -p $(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)
+	@echo $(MODULE_JS) > $(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).js
+	@mkdir -p $(TESTING_DIRECTORY)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)
+	@echo $(TESTMODULE_JS) > $(TESTING_DIRECTORY)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)-test.js
+endif
+endif
+else
+ifeq "$(GROUP)" ""
 ifeq "$(APP_LANGUAGE)" "CS"
 module:
 	@if [ -d "$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
@@ -406,6 +423,31 @@ module:
 	else \
 		echo "ERROR: You're required to give an existing APP argument to the 'module' task to create a new module inside your application."; \
 	fi
+endif
+else
+ifeq "$(APP_LANGUAGE)" "CS"
+module:
+	@if [ -d "$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
+	then \
+		mkdir -p $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED); \
+		echo $(MODULE_CS) > $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).coffee; \
+		mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED); \
+		echo $(TESTMODULE_CS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)-test.coffee; \
+	else \
+		echo "ERROR: You're required to give an existing APP argument to the 'module' task to create a new module inside your application."; \
+	fi
+else
+module:
+	@if [ -d "$(APPS_DIRECTORY)/$(APP_CAMELIZED)" ]; \
+	then \
+		mkdir -p $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED); \
+		echo $(MODULE_JS) > $(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED).js; \
+		mkdir -p $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED); \
+		echo $(TESTMODULE_JS) > $(TESTING_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODULES_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)-test.js; \
+	else \
+		echo "ERROR: You're required to give an existing APP argument to the 'module' task to create a new module inside your application."; \
+	fi
+endif
 endif
 endif
 endif
