@@ -226,11 +226,21 @@ HELPER_JS = "module.exports = {\
 \n};"
 
 ifeq "$(APP)" ""
+ifeq "$(GROUP)" ""
 TESTHELPER_JS = "describe('Helper > $(NAME)', function() {\
 \n\tvar $(NAME_CAMELIZED) = require('../../$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED)');"
 else
+TESTHELPER_JS = "describe('Helper > $(GROUP) > $(NAME)', function() {\
+\n\tvar $(NAME_CAMELIZED) = require('../../../$(HELPERS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)');"
+endif
+else
+ifeq "$(GROUP)" ""
 TESTHELPER_JS = "describe('$(APP) > Helper > $(NAME)', function() {\
 \n\tvar $(NAME_CAMELIZED) = require('../../../../$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED)');"
+else
+TESTHELPER_JS = "describe('$(APP) > Helper > $(GROUP) > $(NAME)', function() {\
+\n\tvar $(NAME_CAMELIZED) = require('../../../../../$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)');"
+endif
 endif
 
 TESTHELPER_JS += "\n\n\tdescribe('\#example', function() {\

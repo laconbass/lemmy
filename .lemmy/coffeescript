@@ -213,11 +213,21 @@ HELPER_CS = "module.exports = {\
 \n}"
 
 ifeq "$(APP)" ""
+ifeq "$(GROUP)" ""
 TESTHELPER_CS = "describe 'Helper > $(NAME)', ->\
 \n\t$(NAME_CAMELIZED) = require '../../$(SOURCE_DIRECTORY)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED)'"
 else
+TESTHELPER_CS = "describe 'Helper > $(GROUP) > $(NAME)', ->\
+\n\t$(NAME_CAMELIZED) = require '../../../$(SOURCE_DIRECTORY)/$(HELPERS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)'"
+endif
+else
+ifeq "$(GROUP)" ""
 TESTHELPER_CS = "describe '$(APP) > Helper > $(NAME)', ->\
 \n\t$(NAME_CAMELIZED) = require '../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY)/$(NAME_CAMELIZED)'"
+else
+TESTHELPER_CS = "describe '$(APP) > Helper > $(GROUP) > $(NAME)', ->\
+\n\t$(NAME_CAMELIZED) = require '../../../../../$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(HELPERS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)'"
+endif
 endif
 
 TESTHELPER_CS += "\n\n\tdescribe '\#example', ->\
