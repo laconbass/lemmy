@@ -213,7 +213,7 @@ TESTMODULE_JS += "\n\n\tdescribe('\#example', function() {\
 \n\t\t\tdone();\
 \n\t\t});\
 \n\t});\
-\n})"
+\n});"
 
 HELPER_JS = "module.exports = {\
 \n\t//var example = 0;\
@@ -261,7 +261,7 @@ TESTHELPER_JS += "\n\n\tdescribe('\#example', function() {\
 \n\t\t\tdone();\
 \n\t\t});\
 \n\t});\
-\n})"
+\n});"
 
 ROUTE_JS = "//var example = require('example');\
 \n\nmodule.exports = function(app) {\
