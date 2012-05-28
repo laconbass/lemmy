@@ -595,7 +595,7 @@ TESTMODEL_JS = "describe('Model > $(GROUP) > $(NAME)', function() {\
 \n\tvar $(NAME) = require('../../../$(MODELS_DIRECTORY)/$(GROUP_CAMELIZED)/$(NAME_CAMELIZED)');"
 endif
 else
-ifeq "$(GROUP)"
+ifeq "$(GROUP)" ""
 TESTMODEL_JS = "describe('$(APP) > Model > $(NAME)', function() {\
 \n\tvar $(NAME) = require('../../../../$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(MODELS_DIRECTORY)/$(NAME_CAMELIZED)');"
 else
