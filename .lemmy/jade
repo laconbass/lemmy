@@ -25,7 +25,7 @@ JADE_HTML5_LAYOUT = 'doctype 5\
 \n\t\theader\
 \n\t\tdiv.container!= body\
 \n\t\tfooter\
-\n\t\tscript(src="js/jquery.js")
+\n\t\tscript(src="js/jquery.js")\
 \n\t\tscript(defer src="js/plugins.js")\
 \n\t\tscript(defer src="js/main.js")\
 \n\t\tscript\
@@ -59,7 +59,7 @@ JADE_HTML5_ERROR = 'doctype 5\
 \n\t\tscript(src="js/css3-queries.js")\
 \n\tbody\
 \n\t\tdiv.container!= body\
-\n\t\tscript(src="js/jquery.js")
+\n\t\tscript(src="js/jquery.js")\
 \n\t\tscript(defer src="js/plugins.js")\
 \n\t\tscript(defer src="js/main.js")\
 \n\t\tscript\
