@@ -1,6 +1,14 @@
 #!/bin/sh
 
-printf '\n%s\n' "lemmy-iai install script v1"
+echo "*********************************"
+echo "** lemmy-iai install script v1 **"
+echo "*********************************"
+
+KEYWORD="continue"
+while [ "$answer" != "$KEYWORD" ]; do
+  echo "Enter '$KEYWORD' to proceed with installation."
+  read answer
+done
 
 INSTALL_TMP_DIR=lemmy-install-tmp
 LEMMY_REPO=https://github.com/laconbass/lemmy-iai.git
