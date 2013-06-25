@@ -1,3 +1,12 @@
+This proyect is a customized version of rock-n-code's lemmy,
+hosted on https://github.com/rock-n-code/lemmy.
+
+Visit https://github.com/rock-n-code/lemmy/blob/master/LICENSE
+to view an updated version of its license.
+
+At time this project was created, the orinal lemmy project was
+licensed under the following terms:
+
 Copyright (c) 2011-2012 Rock & Code, http://rock-n-code.com 
 
 Permission is hereby granted, free of charge, to any person obtaining 
