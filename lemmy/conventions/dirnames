@@ -1,2 +1,2 @@
 # where the temporary files are stored
-TMP_DIRECTORY = $(LEMMY_DIRECTORY)/tmp
+TMP_DIRECTORY = $(LEMMY_DIRECTORY)_tmp

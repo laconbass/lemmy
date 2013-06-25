@@ -1,38 +1,10 @@
-include .lemmy/setup
-include .lemmy/directories
-include .lemmy/executables
-include .lemmy/variables
-include .lemmy/templates
-include .lemmy/javascript
-include .lemmy/coffeescript
-include .lemmy/ejs
-include .lemmy/jade
-include .lemmy/test
-include .lemmy/licenses
+include $(LEMMY_DIRECTORY)/includes
 
-help:
-	@echo $(HELPMENU)
 
-version:
-	@echo "0.5.4"
 
-ifeq "$(APP_LANGUAGE)" "CS"
-clean:
-	@rm -f *.log
-	@rm -f $(APP_FILE)
-	@rm -rf $(APPS_DIRECTORY)
-	@rm -rf $(MODULES_DIRECTORY)
-	@rm -rf $(HELPERS_DIRECTORY)
-	@rm -rf $(MIDDLEWARES_DIRECTORY)
-	@rm -rf $(ROUTES_DIRECTORY)
-	@rm -rf $(CONTROLLERS_DIRECTORY)
-	@rm -rf $(MODELS_DIRECTORY)
-	@rm -rf $(DEPLOYMENT_DIRECTORY)
-else
-clean:
-	@rm -f *.log
-	@rm -rf $(DEPLOYMENT_DIRECTORY)
-endif
+#clean:
+#	@rm -f *.log
+#	@rm -rf $(DEPLOYMENT_DIRECTORY)
 
 update:
 	@git clone https://github.com/rock-n-code/lemmy $(TEMPORARY_DIRECTORY)
@@ -66,7 +38,7 @@ setup:
 	@echo "APP_ENGINE = EJS" >> .lemmy/setup
 	@make setup-coffeescript-project
 	@make git-init
-else 
+else
 ifeq "$(ENGINE)" "jade"
 setup:
 	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
@@ -80,7 +52,7 @@ setup:
 	@make git-init
 endif
 endif
-else 
+else
 ifeq "$(TYPE)" "modular"
 ifeq "$(ENGINE)" "ejs"
 setup:
@@ -88,7 +60,7 @@ setup:
 	@echo "APP_ENGINE = EJS" >> .lemmy/setup
 	@make setup-coffeescript-project
 	@make git-init
-else 
+else
 ifeq "$(ENGINE)" "jade"
 setup:
 	@echo "APP_TYPE = MODULAR" >> .lemmy/setup
@@ -110,7 +82,7 @@ setup:
 	@echo "APP_ENGINE = EJS" >> .lemmy/setup
 	@make setup-coffeescript-project
 	@make git-init
-else 
+else
 ifeq "$(ENGINE)" "jade"
 setup:
 	@echo "APP_TYPE = STANDARD" >> .lemmy/setup
@@ -152,7 +124,7 @@ setup:
 	@make git-init
 endif
 endif
-else 
+else
 ifeq "$(TYPE)" "modular"
 ifeq "$(ENGINE)" "ejs"
 setup:
@@ -174,7 +146,7 @@ setup:
 	@make git-init
 endif
 endif
-else 
+else
 ifeq "$(TYPE)" ""
 ifeq "$(ENGINE)" "ejs"
 setup:
@@ -273,7 +245,7 @@ layout:
 	@echo $(EJS_HTML5_ERROR) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/error.ejs
 	@echo $(EJS_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.ejs
 	@echo $(EJS_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.ejs
-else 
+else
 ifeq "$($(APP_UPPERCASED)_ENGINE)" "JADE"
 layout:
 	@make create-html5-subapp-layout
@@ -295,7 +267,7 @@ layout:
 	@echo $(EJS_HTML5_ERROR) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/error.ejs
 	@echo $(EJS_404) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/404.ejs
 	@echo $(EJS_500) > $(VIEWS_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/500.ejs
-else 
+else
 ifeq "$($(APP_UPPERCASED)_ENGINE)" "JADE"
 layout:
 	@make create-html5-subapp-layout
@@ -341,7 +313,7 @@ app:
 	@echo "$(NAME_UPPERCASED)_ENGINE = EJS" >> .lemmy/setup
 	@make create-javascript-app
 endif
-else 
+else
 ifeq "$(ENGINE)" "jade"
 ifeq "$(APP_LANGUAGE)" "CS"
 app:
@@ -1025,7 +997,7 @@ build:
 	@$(COFFEE) --compile --output . $(SOURCE_DIRECTORY)
 	@if [ -d "$(SOURCE_DIRECTORY)/$(APPS_DIRECTORY)" ]; then $(COFFEE) --compile --output $(APPS_DIRECTORY) $(SOURCE_DIRECTORY)/$(APPS_DIRECTORY); fi
 	@if [ -d "$(SOURCE_DIRECTORY)/$(MODULES_DIRECTORY)" ]; then $(COFFEE) --compile --output $(MODULES_DIRECTORY) $(SOURCE_DIRECTORY)/$(MODULES_DIRECTORY); fi
-	@if [ -d "$(SOURCE_DIRECTORY)/$(HELPERS_DIRECTORY)" ]; then $(COFFEE) --compile --output $(HELPERS_DIRECTORY) $(SOURCE_DIRECTORY)/$(HELPERS_DIRECTORY); fi 
+	@if [ -d "$(SOURCE_DIRECTORY)/$(HELPERS_DIRECTORY)" ]; then $(COFFEE) --compile --output $(HELPERS_DIRECTORY) $(SOURCE_DIRECTORY)/$(HELPERS_DIRECTORY); fi
 	@if [ -d "$(SOURCE_DIRECTORY)/$(MIDDLEWARES_DIRECTORY)" ];	then $(COFFEE) --compile --output $(MIDDLEWARES_DIRECTORY) $(SOURCE_DIRECTORY)/$(MIDDLEWARES_DIRECTORY); fi
 	@if [ -d "$(SOURCE_DIRECTORY)/$(ROUTES_DIRECTORY)" ]; then $(COFFEE) --compile --output $(ROUTES_DIRECTORY) $(SOURCE_DIRECTORY)/$(ROUTES_DIRECTORY); fi
 	@if [ -d "$(SOURCE_DIRECTORY)/$(CONTROLLERS_DIRECTORY)" ]; then $(COFFEE) --compile --output $(CONTROLLERS_DIRECTORY) $(SOURCE_DIRECTORY)/$(CONTROLLERS_DIRECTORY); fi
@@ -1169,7 +1141,7 @@ prepare-html5-boilerplate-subapp:
 	@mv $(TEMPORARY_HTML5_DIRECTORY)/$(SCRIPTS_DIRECTORY)/plugins.js $(PUBLIC_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(SCRIPTS_DIRECTORY)
 	@mv $(TEMPORARY_HTML5_DIRECTORY)/$(SCRIPTS_DIRECTORY)/vendor/jquery-*.min.js $(PUBLIC_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(SCRIPTS_DIRECTORY)/jquery.js
 	@mv $(TEMPORARY_HTML5_DIRECTORY)/$(SCRIPTS_DIRECTORY)/vendor/modernizr-*.min.js $(PUBLIC_DIRECTORY)/$(APPS_DIRECTORY)/$(APP_CAMELIZED)/$(SCRIPTS_DIRECTORY)/modernizr.js
-		
+
 prepare-1140-css-grid-app:
 	@make download-1140-css-grid
 	@mv $(TEMPORARY_1140_DIRECTORY)/$(STYLES_DIRECTORY)/1140.css $(PUBLIC_DIRECTORY)/$(STYLES_DIRECTORY)

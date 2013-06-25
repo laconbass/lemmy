@@ -4,9 +4,21 @@ echo "*********************************"
 echo "** lemmy-iai install script v1 **"
 echo "*********************************"
 
+printf "finding out the latest version number..."
+LAST=$(curl -s https://raw.github.com/laconbass/lemmy-iai/master/lemmy/version)
+printf ' done.\n'
+
+echo ""
+echo "This script will install lemmy-iai $LAST on the CWD."
+echo "The current working directory (CWD) is:"
+echo "    $(pwd)"
+
 KEYWORD="continue"
 while [ "$answer" != "$KEYWORD" ]; do
-  echo "Enter '$KEYWORD' to proceed with installation."
+  if [ "$answer" = "exit" ]; then
+    exit 1
+  fi
+  echo "Enter '$KEYWORD' to proceed with installation, 'exit' to abort."
   read answer
 done
 
