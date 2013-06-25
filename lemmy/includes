@@ -1,0 +1,13 @@
+LEMMY_DIRECTORY = lemmy
+
+#
+# conventions are the common names used for dirs and files
+#
+
+include $(LEMMY_DIRECTORY)/conventions/dirnames
+
+#
+# recipes are the tools itself
+#
+
+include $(LEMMY_DIRECTORY)/recipes/lemmy

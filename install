@@ -4,18 +4,21 @@ printf '\n%s\n' "lemmy-iai install script v1"
 
 INSTALL_TMP_DIR=lemmy-install-tmp
 LEMMY_REPO=https://github.com/laconbass/lemmy-iai.git
+LEMMY_DIRECTORY=lemmy
 
 printf '\n%s\n' "dowloading lemmy-iai..."
 printf '\t%s\n' "from $LEMMY_REPO"
 printf '\t%s\n\n' "to $INSTALL_TMP_DIR"
 git clone $LEMMY_REPO $INSTALL_TMP_DIR
 
-LEMMY_DIRECTORY=lemmy
-
 printf '\n%s\n' "moving lemmy files to the CWD"
-mv -f $INSTALL_TMP_DIR/$LEMMY_DIRECTORY ./
-mv -i $INSTALL_TMP_DIR/Makefile ./
+rm -rf $LEMMY_DIRECTORY
+mv $INSTALL_TMP_DIR/$LEMMY_DIRECTORY .
 
+printf '\n%s\n' "set include on Makefile"
+INCLUDE_FILE=$LEMMY_DIRECTORY/includes
+cat Makefile | grep -v "include $INCLUDE_FILE" | cat -s > Makefile
+printf '\n\ninclude %s # include lemmy\n' "$INCLUDE_FILE" >> Makefile
 
 printf '\n%s\n' "removing temporary installation directory..."
 rm -rf $INSTALL_TMP_DIR

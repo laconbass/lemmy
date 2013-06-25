@@ -1,0 +1,18 @@
+#
+# lemmy specific commands
+#
+
+lemmy-help:
+	@cat $(LEMMY_DIRECTORY)/HELP.md
+
+lemmy-version:
+	@cat $(LEMMY_DIRECTORY)/version
+
+lemmy-clean:
+	@rm -rf $(TMP_DIRECTORY)
+	@echo "deleted lemmy temporary files"
+
+lemmy-update:
+	@git clone https://github.com/laconbass/lemmy-iai.git
+
+.PHONY: lemmy-help lemmy-version lemmy-clean lemmy-update
