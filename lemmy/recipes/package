@@ -1,0 +1,30 @@
+#
+# package/project recipes
+#
+
+package.json:
+	@if [ -f "$(PACKAGE_FILE)" ]; then echo "$(PACKAGE_FILE) already exists";\
+	else \
+	  echo "write the package down" &&\
+	  echo "package.json content" > $(PACKAGE_FILE)\
+        ; fi
+
+Lemmyfile:
+	@if [ -f "$(LEMMY_FILE)" ]; then echo "$(LEMMY_FILE) already exists";\
+	else \
+	  echo "write the lemmy file" &&\
+	  echo "lemmy file content" > $(LEMMY_FILE)\
+	; fi
+
+
+ifeq "$(APP_ENVIRONMENT)" "production"
+dependencies:
+	@rm -rf $(DEPENDENCIES_DIRECTORY)
+	@npm install --production
+else
+dependencies:
+	@rm -rf $(DEPENDENCIES_DIRECTORY)
+	@npm install
+endif
+
+.PHONY: package.json dependencies

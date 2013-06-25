@@ -1,2 +1,8 @@
+# where the lemmy conf for each project is stored
+LEMMY_FILE = Lemmyfile
 # where the temporary files are stored
 TMP_DIRECTORY = $(LEMMY_DIRECTORY)_tmp
+
+# package & project
+PACKAGE_FILE = package.json
+DEPENDENCIES_DIRECTORY = node_modules

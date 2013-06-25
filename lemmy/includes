@@ -11,3 +11,4 @@ include $(LEMMY_DIRECTORY)/conventions/dirnames
 #
 
 include $(LEMMY_DIRECTORY)/recipes/lemmy
+include $(LEMMY_DIRECTORY)/recipes/package
