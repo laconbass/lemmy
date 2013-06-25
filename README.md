@@ -1,34 +1,47 @@
-# LEMMY. 
+# LEMMY-IAI
+
+## Installation
+
+lemmy-iai has a built in install script for quickeness.
+You can download and execute it as follows:
+
+    sh <(curl -s https://raw.github.com/laconbass/lemmy-iai/master/install)
+
+or
+
+    wget -O - https://raw.github.com/laconbass/lemmy-iai/master/install | sh
+
+# LEMMY.
 ## 49% Motherfucker | 51% Son of a Bitch JS/CS Express+Mocha+HTML5 boilerplate that kicks your ass.
 
 This bomber boilerplate is a humble tribute to __The Man__ himself, the Godfather of Heavy Metal, the Hellraiser: __[Lemmy Kilmister][0]__.
- 
-Perhaps you may have heard of him as the trust-worthy roadie of *[Jimi Hendrix][1]*, 
-the raw base of the 70's space rock powerhouse *[Hawkwind][2]* or, most 
-probably, as the relentless force behind the all-mighty *[Motörhead][3]*. If you have not had the distinct pleasure of listening to ripping, mean, and kick-ass rock'n'roll he makes you might want to check it out! Meanwhile, forget about the typical web framework development overkill and take Lemmy for a spin! It could be your rocking ace of spades! 
+
+Perhaps you may have heard of him as the trust-worthy roadie of *[Jimi Hendrix][1]*,
+the raw base of the 70's space rock powerhouse *[Hawkwind][2]* or, most
+probably, as the relentless force behind the all-mighty *[Motörhead][3]*. If you have not had the distinct pleasure of listening to ripping, mean, and kick-ass rock'n'roll he makes you might want to check it out! Meanwhile, forget about the typical web framework development overkill and take Lemmy for a spin! It could be your rocking ace of spades!
 
 
 ### Purpose
 
 The idea behind Lemmy is simple: __Express.js development on speed!__
 
-Designed from scratch to kick-start your *[Express][4]* application in 
-either *Javascript* or *[Coffee-Script][5]* in no time and agilize the 
+Designed from scratch to kick-start your *[Express][4]* application in
+either *Javascript* or *[Coffee-Script][5]* in no time and agilize the
 management of the most common tasks during the development, testing, and
 deployment of your project by just using Makefile and a couple of Bash commands
-available on your Linux/OSX system without imposing any convention or creating 
+available on your Linux/OSX system without imposing any convention or creating
 any web framework, Lemmy is the iron fist that can motorize your development.
 
-Dedicated to all the beer drinkers and Hell raisers out there! 	
+Dedicated to all the beer drinkers and Hell raisers out there!
 
 
 ### Pre-Requisites
 
 You have to use a UNIX-like or a BSD-like system that supports Makefiles and uses
-[Bash shell][6]. You also need [Git source code management system][7] and [Node.js][8] installed 
+[Bash shell][6]. You also need [Git source code management system][7] and [Node.js][8] installed
 on your machine. That's all you need!
 
-Optional: You might want to have a bottle of **Jack Daniel's** at hand! 
+Optional: You might want to have a bottle of **Jack Daniel's** at hand!
 
 ### Quick Start
 
@@ -66,7 +79,7 @@ The commands __Lemmy__ provides you are:
 * *app* : Generates a new Application file and its respective Test file into your project.
 * *layout* : Generates the layout and respective assets into your project or apps within the project.
 * *module* : Generates a new Module file and its respective Test file into your project.
-* *helper* : Generates a new Helper file and its respective Test file into your project. 
+* *helper* : Generates a new Helper file and its respective Test file into your project.
 * *middleware* : Generates a new Middleware file and its respective Test file into your project.
 * *route* : Generates a new Route Container file and its respective Test file into your project.
 * *controller* : Generates a new Controller file and its respective Test file (and views) into your project.
@@ -85,7 +98,7 @@ The commands __Lemmy__ provides you are:
 
 ### ToDos
 
-This is the list of all the required and/or wish 
+This is the list of all the required and/or wish
 features that will be implemented on __Lemmy__ in the near future, in random order:
 
 * Integrate [Mobile HTML5 boilerplate][29] as a layout.
@@ -106,8 +119,8 @@ added to this list by default.
 
 ### Thanks
 
-__Lemmy__ relies on the invaluable contribution done by the Open Source 
-community and, in particular, the immense contribution of certain individuals who have kick-started 
+__Lemmy__ relies on the invaluable contribution done by the Open Source
+community and, in particular, the immense contribution of certain individuals who have kick-started
 some of the greatest and most useful tools ever created for developers:
 
 * Javascript by [Brendan Eich][15]
@@ -135,22 +148,22 @@ Follow [Rock & Code][24] and/or [Javier Cicchelli][25] on Twitter for updates or
 
 Copyright (c) 2011-2012 Javier Cicchelli &lt;javier@rock-n-code.com&gt;
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this 
-software and associated documentation files (the 'Software'), to deal in the Software 
-without restriction, including without limitation the rights to use, copy, modify, 
-merge, publish, distribute, sublicense, and/or sell copies of the Software, and to 
-permit persons to whom the Software is furnished to do so, subject to the following 
+Permission is hereby granted, free of charge, to any person obtaining a copy of this
+software and associated documentation files (the 'Software'), to deal in the Software
+without restriction, including without limitation the rights to use, copy, modify,
+merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to the following
 conditions:
 
-The above copyright notice and this permission notice shall be included in all copies 
+The above copyright notice and this permission notice shall be included in all copies
 or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
-PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE 
-FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
-OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
-OTHER DEALINGS IN THE SOFTWARE. 
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
 
 [0]: http://en.wikipedia.org/wiki/Lemmy
 [1]: http://www.jimihendrix.com

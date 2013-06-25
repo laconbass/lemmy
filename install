@@ -12,8 +12,9 @@ git clone $LEMMY_REPO $INSTALL_TMP_DIR
 
 LEMMY_DIRECTORY=lemmy
 
-printf '\n%s\n' "moving lemmy files to $LEMMY_DIRECTORY"
-mv $INSTALL_TMP_DIR/$LEMMY_DIRECTORY ./$LEMMY_DIRECTORY
+printf '\n%s\n' "moving lemmy files to the CWD"
+mv -f $INSTALL_TMP_DIR/$LEMMY_DIRECTORY ./
+mv -i $INSTALL_TMP_DIR/Makefile ./
 
 
 printf '\n%s\n' "removing temporary installation directory..."
