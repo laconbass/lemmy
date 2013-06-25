@@ -1,0 +1,22 @@
+#!/bin/sh
+
+printf '\n%s\n' "lemmy-iai install script v1"
+
+INSTALL_TMP_DIR=lemmy-install-tmp
+LEMMY_REPO=https://github.com/laconbass/lemmy-iai.git
+
+printf '\n%s\n' "dowloading lemmy-iai..."
+printf '\t%s\n' "from $LEMMY_REPO"
+printf '\t%s\n\n' "to $INSTALL_TMP_DIR"
+git clone $LEMMY_REPO $INSTALL_TMP_DIR
+
+LEMMY_DIRECTORY=lemmy
+
+printf '\n%s\n' "moving lemmy files to $LEMMY_DIRECTORY"
+mv $INSTALL_TMP_DIR/$LEMMY_DIRECTORY ./$LEMMY_DIRECTORY
+
+
+printf '\n%s\n' "removing temporary installation directory..."
+rm -rf $INSTALL_TMP_DIR
+
+printf "\ndone.\n"
