@@ -16,7 +16,7 @@ echo "    $(pwd)"
 KEYWORD="continue"
 while [ "$answer" != "$KEYWORD" ]; do
   if [ "$answer" = "exit" ]; then
-    exit 1
+    exit 0
   fi
   echo "Enter '$KEYWORD' to proceed with installation, 'exit' to abort."
   read answer

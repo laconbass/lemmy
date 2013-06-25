@@ -12,11 +12,8 @@ lemmy-clean:
 	@rm -rf $(TMP_DIRECTORY)
 	@echo "deleted lemmy temporary files"
 
-lemmy-tmpdir:
-	@mkdir $(TMP_DIRECTORY)
-
 lemmy-update:
-	@make lemmy-tmpdir
+	@mkdir $(TMP_DIRECTORY)
 	@curl -s https://raw.github.com/laconbass/lemmy-iai/master/install\
  > $(TMP_DIRECTORY)/install.sh
 	@sh $(TMP_DIRECTORY)/install.sh
