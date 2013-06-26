@@ -1,0 +1,17 @@
+{
+  "name": "iai-lemmy",
+  "version": "0.0.0",
+  "description": "development toolbox for iai, strongly inspired by https://github.com/rock-n-code/lemmy",
+  "author": "lorenzogrv",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laconbass/lemmy-iai.git"
+  },
+  "directories": {
+    "bin": "bin"
+  },
+  "bin": {
+    "iai-catmod": "./bin/catmod"
+  }
+}
